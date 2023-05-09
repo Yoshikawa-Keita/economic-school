@@ -1,0 +1,47 @@
+version: "3.9"
+services:
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=secret
+      - POSTGRES_DB=economic_school
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - DB_SOURCE=postgresql://root:secret@postgres:5432/economic_school?sslmode=disable
+    depends_on:
+      - postgres
+    entrypoint:
+      [
+        "/app/wait-for.sh",
+        "postgres:5432",
+        "--",
+        "/app/start.sh"
+      ]
+    command: [ "/app/main" ]
+  minio:
+    image: minio/minio
+    ports:
+      - "9000:9000"
+    environment:
+      - MINIO_ROOT_USER=minioadmin
+      - MINIO_ROOT_PASSWORD=minioadmin
+    command: server /data
+    volumes:
+      - minio-data:/data
+volumes:
+  minio-data:
+#  pgadmin:
+#    image: dpage/pgadmin4:latest
+#    environment:
+#      - PGADMIN_DEFAULT_EMAIL=admin@example.com
+#      - PGADMIN_DEFAULT_PASSWORD=keita551201
+#    ports:
+#      - "5050:80"
+#    depends_on:
+#      - postgres
