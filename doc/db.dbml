@@ -50,3 +50,16 @@ Table sessions {
   expires_at timestamptz [not null]
   created_at timestamptz [not null, default: `now()`]
 }
+
+Table exams as E {
+  exam_id serial [pk]
+  university varchar [not null]
+  subject varchar [not null]
+  year int [not null]
+  question_num int [not null]
+  question_pdf_url varchar
+  answer_pdf_url varchar
+  video_url varchar
+  created_at timestamptz [not null, default: `now()`]
+}
+

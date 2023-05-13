@@ -11,6 +11,7 @@ import (
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -23,6 +24,11 @@ const (
 	EconomicSchool_UpdateUser_FullMethodName  = "/pb.EconomicSchool/UpdateUser"
 	EconomicSchool_LoginUser_FullMethodName   = "/pb.EconomicSchool/LoginUser"
 	EconomicSchool_VerifyEmail_FullMethodName = "/pb.EconomicSchool/VerifyEmail"
+	EconomicSchool_CreateExam_FullMethodName  = "/pb.EconomicSchool/CreateExam"
+	EconomicSchool_GetExam_FullMethodName     = "/pb.EconomicSchool/GetExam"
+	EconomicSchool_ListExams_FullMethodName   = "/pb.EconomicSchool/ListExams"
+	EconomicSchool_UpdateExam_FullMethodName  = "/pb.EconomicSchool/UpdateExam"
+	EconomicSchool_DeleteExam_FullMethodName  = "/pb.EconomicSchool/DeleteExam"
 )
 
 // EconomicSchoolClient is the client API for EconomicSchool service.
@@ -33,6 +39,11 @@ type EconomicSchoolClient interface {
 	UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*UpdateUserResponse, error)
 	LoginUser(ctx context.Context, in *LoginUserRequest, opts ...grpc.CallOption) (*LoginUserResponse, error)
 	VerifyEmail(ctx context.Context, in *VerifyEmailRequest, opts ...grpc.CallOption) (*VerifyEmailResponse, error)
+	CreateExam(ctx context.Context, in *CreateExamRequest, opts ...grpc.CallOption) (*Exam, error)
+	GetExam(ctx context.Context, in *GetExamRequest, opts ...grpc.CallOption) (*Exam, error)
+	ListExams(ctx context.Context, in *ListExamsRequest, opts ...grpc.CallOption) (*ListExamsResponse, error)
+	UpdateExam(ctx context.Context, in *UpdateExamRequest, opts ...grpc.CallOption) (*Exam, error)
+	DeleteExam(ctx context.Context, in *DeleteExamRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type economicSchoolClient struct {
@@ -79,6 +90,51 @@ func (c *economicSchoolClient) VerifyEmail(ctx context.Context, in *VerifyEmailR
 	return out, nil
 }
 
+func (c *economicSchoolClient) CreateExam(ctx context.Context, in *CreateExamRequest, opts ...grpc.CallOption) (*Exam, error) {
+	out := new(Exam)
+	err := c.cc.Invoke(ctx, EconomicSchool_CreateExam_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *economicSchoolClient) GetExam(ctx context.Context, in *GetExamRequest, opts ...grpc.CallOption) (*Exam, error) {
+	out := new(Exam)
+	err := c.cc.Invoke(ctx, EconomicSchool_GetExam_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *economicSchoolClient) ListExams(ctx context.Context, in *ListExamsRequest, opts ...grpc.CallOption) (*ListExamsResponse, error) {
+	out := new(ListExamsResponse)
+	err := c.cc.Invoke(ctx, EconomicSchool_ListExams_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *economicSchoolClient) UpdateExam(ctx context.Context, in *UpdateExamRequest, opts ...grpc.CallOption) (*Exam, error) {
+	out := new(Exam)
+	err := c.cc.Invoke(ctx, EconomicSchool_UpdateExam_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *economicSchoolClient) DeleteExam(ctx context.Context, in *DeleteExamRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, EconomicSchool_DeleteExam_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // EconomicSchoolServer is the server API for EconomicSchool service.
 // All implementations must embed UnimplementedEconomicSchoolServer
 // for forward compatibility
@@ -87,6 +143,11 @@ type EconomicSchoolServer interface {
 	UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error)
 	LoginUser(context.Context, *LoginUserRequest) (*LoginUserResponse, error)
 	VerifyEmail(context.Context, *VerifyEmailRequest) (*VerifyEmailResponse, error)
+	CreateExam(context.Context, *CreateExamRequest) (*Exam, error)
+	GetExam(context.Context, *GetExamRequest) (*Exam, error)
+	ListExams(context.Context, *ListExamsRequest) (*ListExamsResponse, error)
+	UpdateExam(context.Context, *UpdateExamRequest) (*Exam, error)
+	DeleteExam(context.Context, *DeleteExamRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedEconomicSchoolServer()
 }
 
@@ -105,6 +166,21 @@ func (UnimplementedEconomicSchoolServer) LoginUser(context.Context, *LoginUserRe
 }
 func (UnimplementedEconomicSchoolServer) VerifyEmail(context.Context, *VerifyEmailRequest) (*VerifyEmailResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method VerifyEmail not implemented")
+}
+func (UnimplementedEconomicSchoolServer) CreateExam(context.Context, *CreateExamRequest) (*Exam, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateExam not implemented")
+}
+func (UnimplementedEconomicSchoolServer) GetExam(context.Context, *GetExamRequest) (*Exam, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetExam not implemented")
+}
+func (UnimplementedEconomicSchoolServer) ListExams(context.Context, *ListExamsRequest) (*ListExamsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListExams not implemented")
+}
+func (UnimplementedEconomicSchoolServer) UpdateExam(context.Context, *UpdateExamRequest) (*Exam, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateExam not implemented")
+}
+func (UnimplementedEconomicSchoolServer) DeleteExam(context.Context, *DeleteExamRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteExam not implemented")
 }
 func (UnimplementedEconomicSchoolServer) mustEmbedUnimplementedEconomicSchoolServer() {}
 
@@ -191,6 +267,96 @@ func _EconomicSchool_VerifyEmail_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _EconomicSchool_CreateExam_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateExamRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EconomicSchoolServer).CreateExam(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: EconomicSchool_CreateExam_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EconomicSchoolServer).CreateExam(ctx, req.(*CreateExamRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _EconomicSchool_GetExam_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetExamRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EconomicSchoolServer).GetExam(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: EconomicSchool_GetExam_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EconomicSchoolServer).GetExam(ctx, req.(*GetExamRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _EconomicSchool_ListExams_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListExamsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EconomicSchoolServer).ListExams(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: EconomicSchool_ListExams_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EconomicSchoolServer).ListExams(ctx, req.(*ListExamsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _EconomicSchool_UpdateExam_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateExamRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EconomicSchoolServer).UpdateExam(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: EconomicSchool_UpdateExam_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EconomicSchoolServer).UpdateExam(ctx, req.(*UpdateExamRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _EconomicSchool_DeleteExam_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteExamRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EconomicSchoolServer).DeleteExam(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: EconomicSchool_DeleteExam_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EconomicSchoolServer).DeleteExam(ctx, req.(*DeleteExamRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // EconomicSchool_ServiceDesc is the grpc.ServiceDesc for EconomicSchool service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -213,6 +379,26 @@ var EconomicSchool_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "VerifyEmail",
 			Handler:    _EconomicSchool_VerifyEmail_Handler,
+		},
+		{
+			MethodName: "CreateExam",
+			Handler:    _EconomicSchool_CreateExam_Handler,
+		},
+		{
+			MethodName: "GetExam",
+			Handler:    _EconomicSchool_GetExam_Handler,
+		},
+		{
+			MethodName: "ListExams",
+			Handler:    _EconomicSchool_ListExams_Handler,
+		},
+		{
+			MethodName: "UpdateExam",
+			Handler:    _EconomicSchool_UpdateExam_Handler,
+		},
+		{
+			MethodName: "DeleteExam",
+			Handler:    _EconomicSchool_DeleteExam_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

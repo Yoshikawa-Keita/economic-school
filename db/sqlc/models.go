@@ -5,6 +5,7 @@
 package db
 
 import (
+	"database/sql"
 	"time"
 
 	"github.com/google/uuid"
@@ -16,6 +17,18 @@ type Account struct {
 	Balance   int64     `json:"balance"`
 	Currency  string    `json:"currency"`
 	CreatedAt time.Time `json:"created_at"`
+}
+
+type Exam struct {
+	ExamID         int32          `json:"exam_id"`
+	University     string         `json:"university"`
+	Subject        string         `json:"subject"`
+	Year           int32          `json:"year"`
+	QuestionNum    int32          `json:"question_num"`
+	QuestionPdfUrl sql.NullString `json:"question_pdf_url"`
+	AnswerPdfUrl   sql.NullString `json:"answer_pdf_url"`
+	VideoUrl       sql.NullString `json:"video_url"`
+	CreatedAt      time.Time      `json:"created_at"`
 }
 
 type Session struct {

@@ -1,8 +1,10 @@
 package val
 
 import (
+	"errors"
 	"fmt"
 	"net/mail"
+	"net/url"
 	"regexp"
 )
 
@@ -62,4 +64,12 @@ func ValidateEmailId(value int64) error {
 
 func ValidateSecretCode(value string) error {
 	return ValidateString(value, 32, 128)
+}
+
+func ValidateUrl(urlStr string) error {
+	_, err := url.ParseRequestURI(urlStr)
+	if err != nil {
+		return errors.New("Invalid URL format")
+	}
+	return nil
 }
