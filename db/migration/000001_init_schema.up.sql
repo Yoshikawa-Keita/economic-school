@@ -38,6 +38,18 @@ CREATE TABLE "sessions" (
                             "created_at" timestamptz NOT NULL DEFAULT (now())
 );
 
+CREATE TABLE "exams" (
+                         "exam_id" serial PRIMARY KEY,
+                         "university" varchar NOT NULL,
+                         "subject" varchar NOT NULL,
+                         "year" int NOT NULL,
+                         "question_num" int NOT NULL,
+                         "question_pdf_url" varchar,
+                         "answer_pdf_url" varchar,
+                         "video_url" varchar,
+                         "created_at" timestamptz NOT NULL DEFAULT (now())
+);
+
 CREATE INDEX ON "accounts" ("owner");
 
 CREATE UNIQUE INDEX ON "accounts" ("owner", "currency");

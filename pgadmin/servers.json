@@ -1,0 +1,17 @@
+{
+  "Servers": {
+    "1": {
+      "Name": "PostgreSQL",
+      "Group": "Servers",
+      "Host": "postgres",
+      "Port": 5432,
+      "Username": "root",
+      "Password": "secret",
+      "SSLMode": "prefer",
+      "MaintenanceDB": "economic_school",
+      "RestoreDB": "",
+      "RecoveryDB": "",
+      "SavePassword": true
+    }
+  }
+}

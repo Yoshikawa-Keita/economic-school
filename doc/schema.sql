@@ -1,6 +1,6 @@
 -- SQL dump generated using DBML (dbml-lang.org)
 -- Database: PostgreSQL
--- Generated at: 2023-05-08T11:23:26.945Z
+-- Generated at: 2023-05-11T16:40:53.153Z
 
 CREATE TABLE "users" (
   "username" varchar PRIMARY KEY,
@@ -20,7 +20,7 @@ CREATE TABLE "verify_emails" (
   "secret_code" varchar NOT NULL,
   "is_used" bool NOT NULL DEFAULT false,
   "created_at" timestamptz NOT NULL DEFAULT (now()),
-  "expired_at" timestamptz NOT NULL DEFAULT (now() + interval '30 minutes')
+  "expired_at" timestamptz NOT NULL DEFAULT (now() + interval '50 minutes')
 );
 
 CREATE TABLE "accounts" (
@@ -39,6 +39,18 @@ CREATE TABLE "sessions" (
   "client_ip" varchar NOT NULL,
   "is_blocked" boolean NOT NULL DEFAULT false,
   "expires_at" timestamptz NOT NULL,
+  "created_at" timestamptz NOT NULL DEFAULT (now())
+);
+
+CREATE TABLE "exams" (
+  "exam_id" serial PRIMARY KEY,
+  "university" varchar NOT NULL,
+  "subject" varchar NOT NULL,
+  "year" int NOT NULL,
+  "question_num" int NOT NULL,
+  "question_pdf_url" varchar,
+  "answer_pdf_url" varchar,
+  "video_url" varchar,
   "created_at" timestamptz NOT NULL DEFAULT (now())
 );
 

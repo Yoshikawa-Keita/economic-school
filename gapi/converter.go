@@ -16,3 +16,16 @@ func convertUser(user db.User) *pb.User {
 		CreatedAt:         timestamppb.New(user.CreatedAt),
 	}
 }
+
+func convertExam(dbExam db.Exam) *pb.Exam {
+	return &pb.Exam{
+		ExamId:         dbExam.ExamID,
+		University:     dbExam.University,
+		Subject:        dbExam.Subject,
+		Year:           dbExam.Year,
+		QuestionNum:    dbExam.QuestionNum,
+		QuestionPdfUrl: dbExam.QuestionPdfUrl.String,
+		AnswerPdfUrl:   dbExam.AnswerPdfUrl.String,
+		VideoUrl:       dbExam.VideoUrl.String,
+	}
+}
