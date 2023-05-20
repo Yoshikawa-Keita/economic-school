@@ -48,9 +48,11 @@ type User struct {
 	FullName          string    `json:"full_name"`
 	Email             string    `json:"email"`
 	UserType          int32     `json:"user_type"`
+	ProfileImageUrl   string    `json:"profile_image_url"`
 	IsEmailVerified   bool      `json:"is_email_verified"`
 	PasswordChangedAt time.Time `json:"password_changed_at"`
 	CreatedAt         time.Time `json:"created_at"`
+	Version           int32     `json:"version"`
 }
 
 type VerifyEmail struct {

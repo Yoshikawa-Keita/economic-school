@@ -4,9 +4,11 @@ INSERT INTO users (
     hashed_password,
     full_name,
     email,
-    user_type
+    user_type,
+    profile_image_url,
+    version
 ) VALUES (
-             $1, $2, $3, $4, $5
+             $1, $2, $3, $4, $5, $6, 0
          ) RETURNING *;
 
 -- name: GetUser :one
@@ -21,7 +23,9 @@ SET
     full_name = COALESCE(sqlc.narg(full_name), full_name),
     email = COALESCE(sqlc.narg(email), email),
     user_type = COALESCE(sqlc.narg(user_type), user_type),
-    is_email_verified = COALESCE(sqlc.narg(is_email_verified), is_email_verified)
+    profile_image_url = COALESCE(sqlc.narg(profile_image_url), profile_image_url),
+    is_email_verified = COALESCE(sqlc.narg(is_email_verified), is_email_verified),
+    version = version + 1
 WHERE
         username = sqlc.arg(username)
     RETURNING *;

@@ -4,9 +4,11 @@ CREATE TABLE "users" (
                          "full_name" varchar NOT NULL,
                          "email" varchar UNIQUE NOT NULL,
                          "user_type" int NOT NULL,
+                         "profile_image_url" varchar NOT NULL DEFAULT 'default_profile_image.jpg',
                          "is_email_verified" bool NOT NULL DEFAULT false,
                          "password_changed_at" timestamptz NOT NULL DEFAULT '0001-01-01 00:00:00Z',
-                         "created_at" timestamptz NOT NULL DEFAULT (now())
+                         "created_at" timestamptz NOT NULL DEFAULT (now()),
+                         "version" int NOT NULL
 );
 
 CREATE TABLE "verify_emails" (

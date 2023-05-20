@@ -16,18 +16,21 @@ INSERT INTO users (
     hashed_password,
     full_name,
     email,
-    user_type
+    user_type,
+    profile_image_url,
+    version
 ) VALUES (
-             $1, $2, $3, $4, $5
-         ) RETURNING username, hashed_password, full_name, email, user_type, is_email_verified, password_changed_at, created_at
+             $1, $2, $3, $4, $5, $6, 0
+         ) RETURNING username, hashed_password, full_name, email, user_type, profile_image_url, is_email_verified, password_changed_at, created_at, version
 `
 
 type CreateUserParams struct {
-	Username       string `json:"username"`
-	HashedPassword string `json:"hashed_password"`
-	FullName       string `json:"full_name"`
-	Email          string `json:"email"`
-	UserType       int32  `json:"user_type"`
+	Username        string `json:"username"`
+	HashedPassword  string `json:"hashed_password"`
+	FullName        string `json:"full_name"`
+	Email           string `json:"email"`
+	UserType        int32  `json:"user_type"`
+	ProfileImageUrl string `json:"profile_image_url"`
 }
 
 func (q *Queries) CreateUser(ctx context.Context, arg CreateUserParams) (User, error) {
@@ -37,6 +40,7 @@ func (q *Queries) CreateUser(ctx context.Context, arg CreateUserParams) (User, e
 		arg.FullName,
 		arg.Email,
 		arg.UserType,
+		arg.ProfileImageUrl,
 	)
 	var i User
 	err := row.Scan(
@@ -45,15 +49,17 @@ func (q *Queries) CreateUser(ctx context.Context, arg CreateUserParams) (User, e
 		&i.FullName,
 		&i.Email,
 		&i.UserType,
+		&i.ProfileImageUrl,
 		&i.IsEmailVerified,
 		&i.PasswordChangedAt,
 		&i.CreatedAt,
+		&i.Version,
 	)
 	return i, err
 }
 
 const getUser = `-- name: GetUser :one
-SELECT username, hashed_password, full_name, email, user_type, is_email_verified, password_changed_at, created_at FROM users
+SELECT username, hashed_password, full_name, email, user_type, profile_image_url, is_email_verified, password_changed_at, created_at, version FROM users
 WHERE username = $1 LIMIT 1
 `
 
@@ -66,9 +72,11 @@ func (q *Queries) GetUser(ctx context.Context, username string) (User, error) {
 		&i.FullName,
 		&i.Email,
 		&i.UserType,
+		&i.ProfileImageUrl,
 		&i.IsEmailVerified,
 		&i.PasswordChangedAt,
 		&i.CreatedAt,
+		&i.Version,
 	)
 	return i, err
 }
@@ -81,10 +89,12 @@ SET
     full_name = COALESCE($3, full_name),
     email = COALESCE($4, email),
     user_type = COALESCE($5, user_type),
-    is_email_verified = COALESCE($6, is_email_verified)
+    profile_image_url = COALESCE($6, profile_image_url),
+    is_email_verified = COALESCE($7, is_email_verified),
+    version = version + 1
 WHERE
-        username = $7
-    RETURNING username, hashed_password, full_name, email, user_type, is_email_verified, password_changed_at, created_at
+        username = $8
+    RETURNING username, hashed_password, full_name, email, user_type, profile_image_url, is_email_verified, password_changed_at, created_at, version
 `
 
 type UpdateUserParams struct {
@@ -93,6 +103,7 @@ type UpdateUserParams struct {
 	FullName          sql.NullString `json:"full_name"`
 	Email             sql.NullString `json:"email"`
 	UserType          sql.NullInt32  `json:"user_type"`
+	ProfileImageUrl   sql.NullString `json:"profile_image_url"`
 	IsEmailVerified   sql.NullBool   `json:"is_email_verified"`
 	Username          string         `json:"username"`
 }
@@ -104,6 +115,7 @@ func (q *Queries) UpdateUser(ctx context.Context, arg UpdateUserParams) (User, e
 		arg.FullName,
 		arg.Email,
 		arg.UserType,
+		arg.ProfileImageUrl,
 		arg.IsEmailVerified,
 		arg.Username,
 	)
@@ -114,9 +126,11 @@ func (q *Queries) UpdateUser(ctx context.Context, arg UpdateUserParams) (User, e
 		&i.FullName,
 		&i.Email,
 		&i.UserType,
+		&i.ProfileImageUrl,
 		&i.IsEmailVerified,
 		&i.PasswordChangedAt,
 		&i.CreatedAt,
+		&i.Version,
 	)
 	return i, err
 }

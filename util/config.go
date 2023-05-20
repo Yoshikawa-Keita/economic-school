@@ -6,19 +6,24 @@ import (
 )
 
 type Config struct {
-	Environment          string        `mapstructure:"ENVIRONMENT"`
-	DBDriver             string        `mapstructure:"DB_DRIVER"`
-	DBSource             string        `mapstructure:"DB_SOURCE"`
-	MigrationURL         string        `mapstructure:"MIGRATION_URL"`
-	RedisAddress         string        `mapstructure:"REDIS_ADDRESS"`
-	HTTPServerAddress    string        `mapstructure:"HTTP_SERVER_ADDRESS"`
-	GRPCServerAddress    string        `mapstructure:"GRPC_SERVER_ADDRESS"`
-	TokenSymmetricKey    string        `mapstructure:"TOKEN_SYMMETRIC_KEY"`
-	AccessTokenDuration  time.Duration `mapstructure:"ACCESS_TOKEN_DURATION"`
-	RefreshTokenDuration time.Duration `mapstructure:"REFRESH_TOKEN_DURATION"`
-	EmailSenderName      string        `mapstructure:"EMAIL_SENDER_NAME"`
-	EmailSenderAddress   string        `mapstructure:"EMAIL_SENDER_ADDRESS"`
-	EmailSenderPassword  string        `mapstructure:"EMAIL_SENDER_PASSWORD"`
+	Environment              string        `mapstructure:"ENVIRONMENT"`
+	DBDriver                 string        `mapstructure:"DB_DRIVER"`
+	DBSource                 string        `mapstructure:"DB_SOURCE"`
+	MigrationURL             string        `mapstructure:"MIGRATION_URL"`
+	RedisAddress             string        `mapstructure:"REDIS_ADDRESS"`
+	HTTPServerAddress        string        `mapstructure:"HTTP_SERVER_ADDRESS"`
+	GRPCServerAddress        string        `mapstructure:"GRPC_SERVER_ADDRESS"`
+	TokenSymmetricKey        string        `mapstructure:"TOKEN_SYMMETRIC_KEY"`
+	AccessTokenDuration      time.Duration `mapstructure:"ACCESS_TOKEN_DURATION"`
+	RefreshTokenDuration     time.Duration `mapstructure:"REFRESH_TOKEN_DURATION"`
+	EmailSenderName          string        `mapstructure:"EMAIL_SENDER_NAME"`
+	EmailSenderAddress       string        `mapstructure:"EMAIL_SENDER_ADDRESS"`
+	EmailSenderPassword      string        `mapstructure:"EMAIL_SENDER_PASSWORD"`
+	AwsRegion                string        `mapstructure:"AWS_REGION"`
+	S3BucketNameUserProfile  string        `mapstructure:"S3_BUCKET_NAME_USER_PROFILE"`
+	S3BucketNameTransferExam string        `mapstructure:"S3_BUCKET_NAME_TRANSFER_EXAM"`
+	AWSAccessKey             string        `mapstructure:"AWS_ACCESS_KEY"`
+	AWSSecretAccessKey       string        `mapstructure:"AWS_SECRET_ACCESS_KEY"`
 }
 
 func LoadConfig(path string) (config Config, err error) {

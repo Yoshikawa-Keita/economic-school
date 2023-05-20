@@ -12,9 +12,11 @@ Table users as U {
   full_name varchar [not null]
   email varchar [unique, not null]
   user_type int [not null]
+  profile_image_url varchar [not null, default:'default_profile_image.jpg']
   is_email_verified bool [not null, default: false]
   password_changed_at timestamptz [not null, default: '0001-01-01 00:00:00Z']
   created_at timestamptz [not null, default: `now()`]
+  version int [not null]
 }
 
 Table verify_emails {
