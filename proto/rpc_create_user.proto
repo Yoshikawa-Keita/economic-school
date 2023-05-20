@@ -12,6 +12,8 @@ message CreateUserRequest {
   string email = 3;
   int32 user_type = 4;
   string password = 5;
+  string profile_file = 6;
+  //bytes profile_file = 6;
 }
 
 message CreateUserResponse {

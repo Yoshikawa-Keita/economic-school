@@ -3,6 +3,7 @@ package gapi
 import (
 	db "economic-school/db/sqlc"
 	"economic-school/pb"
+	"economic-school/service"
 	"economic-school/token"
 	"economic-school/util"
 	"economic-school/worker"
@@ -16,6 +17,7 @@ type Server struct {
 	store           db.Store
 	tokenMaker      token.Maker
 	taskDistributor worker.TaskDistributor
+	s3Uploader      *service.S3Uploader
 }
 
 // NewServer creates a new gRPC server.
@@ -25,11 +27,17 @@ func NewServer(config util.Config, store db.Store, taskDistributor worker.TaskDi
 		return nil, fmt.Errorf("cannot create token maker: %w", err)
 	}
 
+	s3Uploader, err := service.NewS3Uploader(config)
+	if err != nil {
+		return nil, err
+	}
+
 	server := &Server{
 		config:          config,
 		store:           store,
 		tokenMaker:      tokenMaker,
 		taskDistributor: taskDistributor,
+		s3Uploader:      s3Uploader,
 	}
 
 	return server, nil
