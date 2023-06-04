@@ -13,11 +13,12 @@ import (
 // Server serves gRPC requests for our banking service.
 type Server struct {
 	pb.UnimplementedEconomicSchoolServer
-	config          util.Config
-	store           db.Store
-	tokenMaker      token.Maker
-	taskDistributor worker.TaskDistributor
-	s3Uploader      *service.S3Uploader
+	config           util.Config
+	store            db.Store
+	tokenMaker       token.Maker
+	taskDistributor  worker.TaskDistributor
+	s3Uploader       *service.S3Uploader
+	cloudFrontSigner *service.CloudFrontSigner
 }
 
 // NewServer creates a new gRPC server.
@@ -32,12 +33,18 @@ func NewServer(config util.Config, store db.Store, taskDistributor worker.TaskDi
 		return nil, err
 	}
 
+	cloudFrontSigner, err := service.NewCloudFrontSigner(config)
+	if err != nil {
+		return nil, err
+	}
+	//fmt.Println(cloudFrontSigner)
 	server := &Server{
-		config:          config,
-		store:           store,
-		tokenMaker:      tokenMaker,
-		taskDistributor: taskDistributor,
-		s3Uploader:      s3Uploader,
+		config:           config,
+		store:            store,
+		tokenMaker:       tokenMaker,
+		taskDistributor:  taskDistributor,
+		s3Uploader:       s3Uploader,
+		cloudFrontSigner: cloudFrontSigner,
 	}
 
 	return server, nil

@@ -11,7 +11,7 @@ Table users as U {
   hashed_password varchar [not null]
   full_name varchar [not null]
   email varchar [unique, not null]
-  user_type int [not null]
+  user_type int [not null, default: 1]
   profile_image_url varchar [not null, default:'default_profile_image.jpg']
   is_email_verified bool [not null, default: false]
   password_changed_at timestamptz [not null, default: '0001-01-01 00:00:00Z']
@@ -26,7 +26,7 @@ Table verify_emails {
   secret_code varchar [not null]
   is_used bool [not null, default: false]
   created_at timestamptz [not null, default: `now()`]
-  expired_at timestamptz [not null, default: `now() + interval '50 minutes'`]
+  expired_at timestamptz [not null, default: `now() + interval '24 hours'`]
 }
 
 Table accounts as A {
@@ -62,6 +62,7 @@ Table exams as E {
   question_pdf_url varchar
   answer_pdf_url varchar
   video_url varchar
+  critique_url varchar
   created_at timestamptz [not null, default: `now()`]
 }
 

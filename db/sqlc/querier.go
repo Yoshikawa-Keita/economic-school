@@ -25,8 +25,16 @@ type Querier interface {
 	GetSession(ctx context.Context, id uuid.UUID) (Session, error)
 	GetUser(ctx context.Context, username string) (User, error)
 	ListAccounts(ctx context.Context, arg ListAccountsParams) ([]Account, error)
-	ListExams(ctx context.Context) ([]Exam, error)
+	ListExams(ctx context.Context, arg ListExamsParams) ([]Exam, error)
 	UpdateAccount(ctx context.Context, arg UpdateAccountParams) (Account, error)
+	// -- name: ListExams :many
+	// SELECT *
+	// FROM exams
+	// WHERE
+	//     university = sqlc.narg('university')
+	//     AND subject = sqlc.narg('subject')
+	//     AND year = sqlc.narg('year')
+	// ORDER BY exam_id;
 	UpdateExam(ctx context.Context, arg UpdateExamParams) (Exam, error)
 	UpdateUser(ctx context.Context, arg UpdateUserParams) (User, error)
 	UpdateVerifyEmail(ctx context.Context, arg UpdateVerifyEmailParams) (VerifyEmail, error)

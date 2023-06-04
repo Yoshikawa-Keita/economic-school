@@ -12,10 +12,10 @@ import (
 
 const createExam = `-- name: CreateExam :one
 INSERT INTO exams (
-    university, subject, year, question_num, question_pdf_url, answer_pdf_url, video_url
+    university, subject, year, question_num, question_pdf_url, answer_pdf_url, video_url, critique_url
 ) VALUES (
-             $1, $2, $3, $4, $5, $6, $7
-         ) RETURNING exam_id, university, subject, year, question_num, question_pdf_url, answer_pdf_url, video_url, created_at
+             $1, $2, $3, $4, $5, $6, $7, $8
+         ) RETURNING exam_id, university, subject, year, question_num, question_pdf_url, answer_pdf_url, video_url, critique_url, created_at
 `
 
 type CreateExamParams struct {
@@ -26,6 +26,7 @@ type CreateExamParams struct {
 	QuestionPdfUrl sql.NullString `json:"question_pdf_url"`
 	AnswerPdfUrl   sql.NullString `json:"answer_pdf_url"`
 	VideoUrl       sql.NullString `json:"video_url"`
+	CritiqueUrl    sql.NullString `json:"critique_url"`
 }
 
 func (q *Queries) CreateExam(ctx context.Context, arg CreateExamParams) (Exam, error) {
@@ -37,6 +38,7 @@ func (q *Queries) CreateExam(ctx context.Context, arg CreateExamParams) (Exam, e
 		arg.QuestionPdfUrl,
 		arg.AnswerPdfUrl,
 		arg.VideoUrl,
+		arg.CritiqueUrl,
 	)
 	var i Exam
 	err := row.Scan(
@@ -48,6 +50,7 @@ func (q *Queries) CreateExam(ctx context.Context, arg CreateExamParams) (Exam, e
 		&i.QuestionPdfUrl,
 		&i.AnswerPdfUrl,
 		&i.VideoUrl,
+		&i.CritiqueUrl,
 		&i.CreatedAt,
 	)
 	return i, err
@@ -63,7 +66,7 @@ func (q *Queries) DeleteExam(ctx context.Context, examID int32) error {
 }
 
 const getExam = `-- name: GetExam :one
-SELECT exam_id, university, subject, year, question_num, question_pdf_url, answer_pdf_url, video_url, created_at FROM exams WHERE exam_id = $1
+SELECT exam_id, university, subject, year, question_num, question_pdf_url, answer_pdf_url, video_url, critique_url, created_at FROM exams WHERE exam_id = $1
 `
 
 func (q *Queries) GetExam(ctx context.Context, examID int32) (Exam, error) {
@@ -78,17 +81,30 @@ func (q *Queries) GetExam(ctx context.Context, examID int32) (Exam, error) {
 		&i.QuestionPdfUrl,
 		&i.AnswerPdfUrl,
 		&i.VideoUrl,
+		&i.CritiqueUrl,
 		&i.CreatedAt,
 	)
 	return i, err
 }
 
 const listExams = `-- name: ListExams :many
-SELECT exam_id, university, subject, year, question_num, question_pdf_url, answer_pdf_url, video_url, created_at FROM exams ORDER BY exam_id
+SELECT exam_id, university, subject, year, question_num, question_pdf_url, answer_pdf_url, video_url, critique_url, created_at
+FROM exams
+WHERE
+    (university = coalesce($1, university))
+  AND (subject = coalesce($2, subject))
+  AND (year = coalesce($3, year))
+ORDER BY year DESC, question_num ASC
 `
 
-func (q *Queries) ListExams(ctx context.Context) ([]Exam, error) {
-	rows, err := q.db.QueryContext(ctx, listExams)
+type ListExamsParams struct {
+	University sql.NullString `json:"university"`
+	Subject    sql.NullString `json:"subject"`
+	Year       sql.NullInt32  `json:"year"`
+}
+
+func (q *Queries) ListExams(ctx context.Context, arg ListExamsParams) ([]Exam, error) {
+	rows, err := q.db.QueryContext(ctx, listExams, arg.University, arg.Subject, arg.Year)
 	if err != nil {
 		return nil, err
 	}
@@ -105,6 +121,7 @@ func (q *Queries) ListExams(ctx context.Context) ([]Exam, error) {
 			&i.QuestionPdfUrl,
 			&i.AnswerPdfUrl,
 			&i.VideoUrl,
+			&i.CritiqueUrl,
 			&i.CreatedAt,
 		); err != nil {
 			return nil, err
@@ -121,6 +138,8 @@ func (q *Queries) ListExams(ctx context.Context) ([]Exam, error) {
 }
 
 const updateExam = `-- name: UpdateExam :one
+
+
 UPDATE exams SET
                  university = COALESCE($2, university),
                  subject = COALESCE($3, subject),
@@ -128,9 +147,10 @@ UPDATE exams SET
                  question_num = COALESCE($5, question_num),
                  question_pdf_url = COALESCE($6, question_pdf_url),
                  answer_pdf_url = COALESCE($7, answer_pdf_url),
-                 video_url = COALESCE($8, video_url)
+                 video_url = COALESCE($8, video_url),
+                 critique_url = COALESCE($9, critique_url)
 WHERE exam_id = $1
-    RETURNING exam_id, university, subject, year, question_num, question_pdf_url, answer_pdf_url, video_url, created_at
+    RETURNING exam_id, university, subject, year, question_num, question_pdf_url, answer_pdf_url, video_url, critique_url, created_at
 `
 
 type UpdateExamParams struct {
@@ -142,8 +162,19 @@ type UpdateExamParams struct {
 	QuestionPdfUrl sql.NullString `json:"question_pdf_url"`
 	AnswerPdfUrl   sql.NullString `json:"answer_pdf_url"`
 	VideoUrl       sql.NullString `json:"video_url"`
+	CritiqueUrl    sql.NullString `json:"critique_url"`
 }
 
+// -- name: ListExams :many
+// SELECT *
+// FROM exams
+// WHERE
+//
+//	university = sqlc.narg('university')
+//	AND subject = sqlc.narg('subject')
+//	AND year = sqlc.narg('year')
+//
+// ORDER BY exam_id;
 func (q *Queries) UpdateExam(ctx context.Context, arg UpdateExamParams) (Exam, error) {
 	row := q.db.QueryRowContext(ctx, updateExam,
 		arg.ExamID,
@@ -154,6 +185,7 @@ func (q *Queries) UpdateExam(ctx context.Context, arg UpdateExamParams) (Exam, e
 		arg.QuestionPdfUrl,
 		arg.AnswerPdfUrl,
 		arg.VideoUrl,
+		arg.CritiqueUrl,
 	)
 	var i Exam
 	err := row.Scan(
@@ -165,6 +197,7 @@ func (q *Queries) UpdateExam(ctx context.Context, arg UpdateExamParams) (Exam, e
 		&i.QuestionPdfUrl,
 		&i.AnswerPdfUrl,
 		&i.VideoUrl,
+		&i.CritiqueUrl,
 		&i.CreatedAt,
 	)
 	return i, err

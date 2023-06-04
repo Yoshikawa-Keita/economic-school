@@ -31,17 +31,24 @@ func (server *Server) CreateUser(ctx context.Context, req *pb.CreateUserRequest)
 		return nil, status.Errorf(codes.Internal, "failed to hash password: %s", err)
 	}
 
+	profileImageUrl := req.GetUsername() + ".jpg"
+	if req.GetProfileFile() == "" {
+		profileImageUrl = "default_image.png"
+	}
+
 	arg := db.CreateUserTxParams{
 		CreateUserParams: db.CreateUserParams{
 			Username:        req.GetUsername(),
 			HashedPassword:  hashedPassword,
 			FullName:        req.GetFullName(),
-			UserType:        req.GetUserType(),
+			UserType:        1,
 			Email:           req.GetEmail(),
-			ProfileImageUrl: req.GetUsername() + ".jpg",
+			ProfileImageUrl: profileImageUrl,
 		},
 		UploadImage: func() error {
-			//profileImage := req.GetProfileFile()
+			if req.GetProfileFile() == "" {
+				return nil
+			}
 			profileImageBase64 := req.GetProfileFile()
 			profileImage, err := base64.StdEncoding.DecodeString(profileImageBase64)
 			if err != nil {

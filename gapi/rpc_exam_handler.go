@@ -68,7 +68,21 @@ func (server *Server) GetExam(ctx context.Context, req *pb.GetExamRequest) (*pb.
 }
 
 func (server *Server) ListExams(ctx context.Context, req *pb.ListExamsRequest) (*pb.ListExamsResponse, error) {
-	exams, err := server.store.ListExams(ctx)
+	arg := db.ListExamsParams{
+		University: sql.NullString{
+			String: req.GetUniversity(),
+			Valid:  req.University != nil && *req.University != "",
+		},
+		Subject: sql.NullString{
+			String: req.GetSubject(),
+			Valid:  req.Subject != nil && *req.Subject != "",
+		},
+		Year: sql.NullInt32{
+			Int32: req.GetYear(),
+			Valid: req.Year != nil && *req.Year != 0,
+		},
+	}
+	exams, err := server.store.ListExams(ctx, arg)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "failed to list exams: %s", err)
 	}
