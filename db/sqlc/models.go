@@ -28,6 +28,7 @@ type Exam struct {
 	QuestionPdfUrl sql.NullString `json:"question_pdf_url"`
 	AnswerPdfUrl   sql.NullString `json:"answer_pdf_url"`
 	VideoUrl       sql.NullString `json:"video_url"`
+	CritiqueUrl    sql.NullString `json:"critique_url"`
 	CreatedAt      time.Time      `json:"created_at"`
 }
 

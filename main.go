@@ -18,6 +18,7 @@ import (
 	"economic-school/gapi"
 	"economic-school/pb"
 	"economic-school/util"
+	"github.com/rs/cors"
 	"github.com/rs/zerolog/log"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
@@ -125,6 +126,14 @@ func runGatewayServer(config util.Config, store db.Store, taskDistributor worker
 	mux := http.NewServeMux()
 	mux.Handle("/", grpcMux)
 
+	// Create a new CORS handler
+	corsHandler := cors.New(cors.Options{
+		AllowedOrigins:   []string{"http://localhost:3000", "https://economicschool.com"}, // Allow all origins
+		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+		AllowedHeaders:   []string{"*"},
+		AllowCredentials: true,
+	})
+
 	listener, err := net.Listen("tcp", config.HTTPServerAddress)
 	if err != nil {
 		log.Fatal().Err(err).Msg("cannot create listener")
@@ -132,7 +141,7 @@ func runGatewayServer(config util.Config, store db.Store, taskDistributor worker
 
 	log.Info().Msgf("start HTTP gateway server at %s", listener.Addr().String())
 	handler := gapi.HttpLogger(mux)
-	err = http.Serve(listener, handler)
+	err = http.Serve(listener, corsHandler.Handler(handler))
 	if err != nil {
 		log.Fatal().Err(err).Msg("cannot start HTTP gateway server")
 	}

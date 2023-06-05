@@ -27,7 +27,8 @@ func (server *Server) LoginUser(ctx context.Context, req *pb.LoginUserRequest) (
 		}
 		return nil, status.Errorf(codes.Internal, "failed to find user")
 	}
-
+	fmt.Println("------getUser------")
+	fmt.Println(user.UserType)
 	err = util.CheckPassword(req.Password, user.HashedPassword)
 	if err != nil {
 		return nil, status.Errorf(codes.NotFound, "incorrect password")
@@ -71,7 +72,8 @@ func (server *Server) LoginUser(ctx context.Context, req *pb.LoginUserRequest) (
 		AccessTokenExpiresAt:  timestamppb.New(accessPayload.ExpiredAt),
 		RefreshTokenExpiresAt: timestamppb.New(refreshPayload.ExpiredAt),
 	}
-	fmt.Println(rsp.User)
+	fmt.Println(rsp.User.UserType)
+	fmt.Println(rsp)
 	return rsp, nil
 }
 

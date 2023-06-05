@@ -83,7 +83,7 @@ service EconomicSchool {
   }
   rpc ListExams (ListExamsRequest) returns (ListExamsResponse) {
     option (google.api.http) = {
-      get: "/v1/exams"
+      get: "/v1/list_exams"
     };
   }
   rpc UpdateExam (UpdateExamRequest) returns (Exam) {
@@ -96,6 +96,13 @@ service EconomicSchool {
   rpc DeleteExam (DeleteExamRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
       delete: "/v1/exams/{exam_id}"
+    };
+  }
+
+  rpc GetSignedUrl (GetSignedUrlRequest) returns (GetSignedUrlResponse) {
+    option (google.api.http) = {
+      post: "/v1/signed-url"
+      body: "*"
     };
   }
 

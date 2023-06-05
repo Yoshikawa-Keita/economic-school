@@ -41,6 +41,10 @@ func (server *Server) UpdateUser(ctx context.Context, req *pb.UpdateUserRequest)
 				String: req.GetEmail(),
 				Valid:  req.Email != nil,
 			},
+			ProfileImageUrl: sql.NullString{
+				String: req.GetUsername() + ".jpg",
+				Valid:  req.ProfileImage != nil,
+			},
 		},
 		UpdateImage: func(user db.User) error {
 			if req.GetProfileImage() == "" {

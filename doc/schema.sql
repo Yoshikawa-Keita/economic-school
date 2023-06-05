@@ -1,13 +1,13 @@
 -- SQL dump generated using DBML (dbml-lang.org)
 -- Database: PostgreSQL
--- Generated at: 2023-05-20T13:20:49.103Z
+-- Generated at: 2023-05-28T10:56:28.605Z
 
 CREATE TABLE "users" (
   "username" varchar PRIMARY KEY,
   "hashed_password" varchar NOT NULL,
   "full_name" varchar NOT NULL,
   "email" varchar UNIQUE NOT NULL,
-  "user_type" int NOT NULL,
+  "user_type" int NOT NULL DEFAULT 1,
   "profile_image_url" varchar NOT NULL DEFAULT 'default_profile_image.jpg',
   "is_email_verified" bool NOT NULL DEFAULT false,
   "password_changed_at" timestamptz NOT NULL DEFAULT '0001-01-01 00:00:00Z',
@@ -22,7 +22,7 @@ CREATE TABLE "verify_emails" (
   "secret_code" varchar NOT NULL,
   "is_used" bool NOT NULL DEFAULT false,
   "created_at" timestamptz NOT NULL DEFAULT (now()),
-  "expired_at" timestamptz NOT NULL DEFAULT (now() + interval '50 minutes')
+  "expired_at" timestamptz NOT NULL DEFAULT (now() + interval '24 hours')
 );
 
 CREATE TABLE "accounts" (
@@ -53,6 +53,7 @@ CREATE TABLE "exams" (
   "question_pdf_url" varchar,
   "answer_pdf_url" varchar,
   "video_url" varchar,
+  "critique_url" varchar,
   "created_at" timestamptz NOT NULL DEFAULT (now())
 );
 

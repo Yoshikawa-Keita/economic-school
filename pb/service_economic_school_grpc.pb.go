@@ -20,15 +20,16 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	EconomicSchool_CreateUser_FullMethodName  = "/pb.EconomicSchool/CreateUser"
-	EconomicSchool_UpdateUser_FullMethodName  = "/pb.EconomicSchool/UpdateUser"
-	EconomicSchool_LoginUser_FullMethodName   = "/pb.EconomicSchool/LoginUser"
-	EconomicSchool_VerifyEmail_FullMethodName = "/pb.EconomicSchool/VerifyEmail"
-	EconomicSchool_CreateExam_FullMethodName  = "/pb.EconomicSchool/CreateExam"
-	EconomicSchool_GetExam_FullMethodName     = "/pb.EconomicSchool/GetExam"
-	EconomicSchool_ListExams_FullMethodName   = "/pb.EconomicSchool/ListExams"
-	EconomicSchool_UpdateExam_FullMethodName  = "/pb.EconomicSchool/UpdateExam"
-	EconomicSchool_DeleteExam_FullMethodName  = "/pb.EconomicSchool/DeleteExam"
+	EconomicSchool_CreateUser_FullMethodName   = "/pb.EconomicSchool/CreateUser"
+	EconomicSchool_UpdateUser_FullMethodName   = "/pb.EconomicSchool/UpdateUser"
+	EconomicSchool_LoginUser_FullMethodName    = "/pb.EconomicSchool/LoginUser"
+	EconomicSchool_VerifyEmail_FullMethodName  = "/pb.EconomicSchool/VerifyEmail"
+	EconomicSchool_CreateExam_FullMethodName   = "/pb.EconomicSchool/CreateExam"
+	EconomicSchool_GetExam_FullMethodName      = "/pb.EconomicSchool/GetExam"
+	EconomicSchool_ListExams_FullMethodName    = "/pb.EconomicSchool/ListExams"
+	EconomicSchool_UpdateExam_FullMethodName   = "/pb.EconomicSchool/UpdateExam"
+	EconomicSchool_DeleteExam_FullMethodName   = "/pb.EconomicSchool/DeleteExam"
+	EconomicSchool_GetSignedUrl_FullMethodName = "/pb.EconomicSchool/GetSignedUrl"
 )
 
 // EconomicSchoolClient is the client API for EconomicSchool service.
@@ -44,6 +45,7 @@ type EconomicSchoolClient interface {
 	ListExams(ctx context.Context, in *ListExamsRequest, opts ...grpc.CallOption) (*ListExamsResponse, error)
 	UpdateExam(ctx context.Context, in *UpdateExamRequest, opts ...grpc.CallOption) (*Exam, error)
 	DeleteExam(ctx context.Context, in *DeleteExamRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	GetSignedUrl(ctx context.Context, in *GetSignedUrlRequest, opts ...grpc.CallOption) (*GetSignedUrlResponse, error)
 }
 
 type economicSchoolClient struct {
@@ -135,6 +137,15 @@ func (c *economicSchoolClient) DeleteExam(ctx context.Context, in *DeleteExamReq
 	return out, nil
 }
 
+func (c *economicSchoolClient) GetSignedUrl(ctx context.Context, in *GetSignedUrlRequest, opts ...grpc.CallOption) (*GetSignedUrlResponse, error) {
+	out := new(GetSignedUrlResponse)
+	err := c.cc.Invoke(ctx, EconomicSchool_GetSignedUrl_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // EconomicSchoolServer is the server API for EconomicSchool service.
 // All implementations must embed UnimplementedEconomicSchoolServer
 // for forward compatibility
@@ -148,6 +159,7 @@ type EconomicSchoolServer interface {
 	ListExams(context.Context, *ListExamsRequest) (*ListExamsResponse, error)
 	UpdateExam(context.Context, *UpdateExamRequest) (*Exam, error)
 	DeleteExam(context.Context, *DeleteExamRequest) (*emptypb.Empty, error)
+	GetSignedUrl(context.Context, *GetSignedUrlRequest) (*GetSignedUrlResponse, error)
 	mustEmbedUnimplementedEconomicSchoolServer()
 }
 
@@ -181,6 +193,9 @@ func (UnimplementedEconomicSchoolServer) UpdateExam(context.Context, *UpdateExam
 }
 func (UnimplementedEconomicSchoolServer) DeleteExam(context.Context, *DeleteExamRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteExam not implemented")
+}
+func (UnimplementedEconomicSchoolServer) GetSignedUrl(context.Context, *GetSignedUrlRequest) (*GetSignedUrlResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetSignedUrl not implemented")
 }
 func (UnimplementedEconomicSchoolServer) mustEmbedUnimplementedEconomicSchoolServer() {}
 
@@ -357,6 +372,24 @@ func _EconomicSchool_DeleteExam_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _EconomicSchool_GetSignedUrl_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSignedUrlRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EconomicSchoolServer).GetSignedUrl(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: EconomicSchool_GetSignedUrl_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EconomicSchoolServer).GetSignedUrl(ctx, req.(*GetSignedUrlRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // EconomicSchool_ServiceDesc is the grpc.ServiceDesc for EconomicSchool service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -399,6 +432,10 @@ var EconomicSchool_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteExam",
 			Handler:    _EconomicSchool_DeleteExam_Handler,
+		},
+		{
+			MethodName: "GetSignedUrl",
+			Handler:    _EconomicSchool_GetSignedUrl_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

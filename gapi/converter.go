@@ -30,5 +30,6 @@ func convertExam(dbExam db.Exam) *pb.Exam {
 		QuestionPdfUrl: dbExam.QuestionPdfUrl.String,
 		AnswerPdfUrl:   dbExam.AnswerPdfUrl.String,
 		VideoUrl:       dbExam.VideoUrl.String,
+		CritiqueUrl:    dbExam.CritiqueUrl.String,
 	}
 }

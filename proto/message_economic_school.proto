@@ -15,6 +15,7 @@ message Exam {
   string question_pdf_url = 6;
   string answer_pdf_url = 7;
   string video_url = 8;
+  string critique_url = 9;
 }
 
 message CreateExamRequest {
@@ -25,6 +26,7 @@ message CreateExamRequest {
   string question_pdf_url = 5;
   string answer_pdf_url = 6;
   string video_url = 7;
+  string critique_url = 8;
 }
 
 message GetExamRequest {
@@ -32,6 +34,9 @@ message GetExamRequest {
 }
 
 message ListExamsRequest {
+  optional string university = 1;
+  optional string subject  = 2;
+  optional int32 year = 3;
 }
 
 message ListExamsResponse {
@@ -45,4 +50,12 @@ message UpdateExamRequest {
 
 message DeleteExamRequest {
   int32 exam_id = 1;
+}
+
+message GetSignedUrlRequest {
+  string file_path = 1;
+}
+
+message GetSignedUrlResponse {
+  string signed_url = 1;
 }

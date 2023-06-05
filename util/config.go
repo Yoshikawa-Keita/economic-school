@@ -22,6 +22,8 @@ type Config struct {
 	AwsRegion                string        `mapstructure:"AWS_REGION"`
 	S3BucketNameUserProfile  string        `mapstructure:"S3_BUCKET_NAME_USER_PROFILE"`
 	S3BucketNameTransferExam string        `mapstructure:"S3_BUCKET_NAME_TRANSFER_EXAM"`
+	CloudFrontKeyId          string        `mapstructure:"CLOUD_FRONT_KEY_ID"`
+	CloudFrontPrivateKey     string        `mapstructure:"CLOUD_FRONT_PRIVATE_KEY"`
 	AWSAccessKey             string        `mapstructure:"AWS_ACCESS_KEY"`
 	AWSSecretAccessKey       string        `mapstructure:"AWS_SECRET_ACCESS_KEY"`
 }
