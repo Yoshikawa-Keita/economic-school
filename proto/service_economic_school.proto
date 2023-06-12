@@ -59,6 +59,17 @@ service EconomicSchool {
     };
   }
 
+  rpc RenewAccessToken (RenewAccessTokenRequest) returns (RenewAccessTokenResponse) {
+    option (google.api.http) = {
+      post: "/v1/renew_access_token"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Use this API to renew access token";
+      summary: "Renew access token";
+    };
+  }
+
   rpc VerifyEmail (VerifyEmailRequest) returns (VerifyEmailResponse) {
     option (google.api.http) = {
       post: "/v1/verify_email"
