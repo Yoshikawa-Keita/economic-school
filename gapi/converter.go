@@ -33,3 +33,14 @@ func convertExam(dbExam db.Exam) *pb.Exam {
 		CritiqueUrl:    dbExam.CritiqueUrl.String,
 	}
 }
+
+func convertUserExam(userExam db.UserExam) *pb.UserExam {
+
+	return &pb.UserExam{
+		Username:    userExam.Username,
+		ExamId:      userExam.ExamID,
+		University:  userExam.University,
+		IsCompleted: userExam.IsCompleted,
+		CompletedAt: timestamppb.New(userExam.CompletedAt.Time),
+	}
+}

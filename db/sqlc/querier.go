@@ -22,10 +22,14 @@ type Querier interface {
 	GetAccount(ctx context.Context, id int64) (Account, error)
 	GetAccountForUpdate(ctx context.Context, id int64) (Account, error)
 	GetExam(ctx context.Context, examID int32) (Exam, error)
+	GetExamCountByUniversity(ctx context.Context) ([]GetExamCountByUniversityRow, error)
 	GetSession(ctx context.Context, id uuid.UUID) (Session, error)
 	GetUser(ctx context.Context, username string) (User, error)
+	GetUserExam(ctx context.Context, arg GetUserExamParams) (UserExam, error)
 	ListAccounts(ctx context.Context, arg ListAccountsParams) ([]Account, error)
+	ListCompletedUserExams(ctx context.Context, username string) ([]UserExam, error)
 	ListExams(ctx context.Context, arg ListExamsParams) ([]Exam, error)
+	ListUniversities(ctx context.Context) ([]string, error)
 	UpdateAccount(ctx context.Context, arg UpdateAccountParams) (Account, error)
 	// -- name: ListExams :many
 	// SELECT *
@@ -38,6 +42,7 @@ type Querier interface {
 	UpdateExam(ctx context.Context, arg UpdateExamParams) (Exam, error)
 	UpdateUser(ctx context.Context, arg UpdateUserParams) (User, error)
 	UpdateVerifyEmail(ctx context.Context, arg UpdateVerifyEmailParams) (VerifyEmail, error)
+	UpsertUserExam(ctx context.Context, arg UpsertUserExamParams) (UserExam, error)
 }
 
 var _ Querier = (*Queries)(nil)

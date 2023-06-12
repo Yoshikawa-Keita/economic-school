@@ -1,9 +1,9 @@
+DROP TABLE IF EXISTS user_exams;
 DROP TABLE IF EXISTS exams;
 DROP TABLE IF EXISTS entries;
 DROP TABLE IF EXISTS transfers;
 DROP TABLE IF EXISTS accounts;
 DROP TABLE IF EXISTS "verify_emails" CASCADE;
-
 
 ALTER TABLE IF EXISTS "accounts" DROP CONSTRAINT IF EXISTS "owner_currency_key";
 ALTER TABLE IF EXISTS "accounts" DROP CONSTRAINT IF EXISTS "accounts_owner_fkey";
