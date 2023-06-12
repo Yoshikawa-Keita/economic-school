@@ -66,12 +66,12 @@ func HttpLogger(handler http.Handler) http.Handler {
 		}
 		handler.ServeHTTP(rec, req)
 		duration := time.Since(startTime)
-
 		logger := log.Info()
-		if rec.StatusCode != http.StatusOK {
+		if rec.StatusCode != http.StatusOK && rec.StatusCode != http.StatusUnauthorized {
+			// Log all non-OK statuses, excluding Unauthorized, at the "error" level.
 			logger = log.Error().Bytes("body", rec.Body)
-		}
 
+		}
 		logger.Str("protocol", "http").
 			Str("method", req.Method).
 			Str("path", req.RequestURI).
@@ -79,5 +79,6 @@ func HttpLogger(handler http.Handler) http.Handler {
 			Str("status_text", http.StatusText(rec.StatusCode)).
 			Dur("duration", duration).
 			Msg("received a HTTP request")
+
 	})
 }

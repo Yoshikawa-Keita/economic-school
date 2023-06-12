@@ -1045,6 +1045,108 @@ func (x *GetExamCountByUniversityResponse) GetExamCountByUniversity() []*ExamCou
 	return nil
 }
 
+type RenewAccessTokenRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	RefreshToken string `protobuf:"bytes,1,opt,name=refresh_token,json=refreshToken,proto3" json:"refresh_token,omitempty"`
+}
+
+func (x *RenewAccessTokenRequest) Reset() {
+	*x = RenewAccessTokenRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_message_economic_school_proto_msgTypes[17]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *RenewAccessTokenRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RenewAccessTokenRequest) ProtoMessage() {}
+
+func (x *RenewAccessTokenRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_message_economic_school_proto_msgTypes[17]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RenewAccessTokenRequest.ProtoReflect.Descriptor instead.
+func (*RenewAccessTokenRequest) Descriptor() ([]byte, []int) {
+	return file_message_economic_school_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *RenewAccessTokenRequest) GetRefreshToken() string {
+	if x != nil {
+		return x.RefreshToken
+	}
+	return ""
+}
+
+type RenewAccessTokenResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	AccessToken          string                 `protobuf:"bytes,1,opt,name=access_token,json=accessToken,proto3" json:"access_token,omitempty"`
+	AccessTokenExpiresAt *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=access_token_expires_at,json=accessTokenExpiresAt,proto3" json:"access_token_expires_at,omitempty"`
+}
+
+func (x *RenewAccessTokenResponse) Reset() {
+	*x = RenewAccessTokenResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_message_economic_school_proto_msgTypes[18]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *RenewAccessTokenResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RenewAccessTokenResponse) ProtoMessage() {}
+
+func (x *RenewAccessTokenResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_message_economic_school_proto_msgTypes[18]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RenewAccessTokenResponse.ProtoReflect.Descriptor instead.
+func (*RenewAccessTokenResponse) Descriptor() ([]byte, []int) {
+	return file_message_economic_school_proto_rawDescGZIP(), []int{18}
+}
+
+func (x *RenewAccessTokenResponse) GetAccessToken() string {
+	if x != nil {
+		return x.AccessToken
+	}
+	return ""
+}
+
+func (x *RenewAccessTokenResponse) GetAccessTokenExpiresAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.AccessTokenExpiresAt
+	}
+	return nil
+}
+
 var File_message_economic_school_proto protoreflect.FileDescriptor
 
 var file_message_economic_school_proto_rawDesc = []byte{
@@ -1175,8 +1277,22 @@ var file_message_economic_school_proto_rawDesc = []byte{
 	0x2e, 0x70, 0x62, 0x2e, 0x45, 0x78, 0x61, 0x6d, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x42, 0x79, 0x55,
 	0x6e, 0x69, 0x76, 0x65, 0x72, 0x73, 0x69, 0x74, 0x79, 0x52, 0x15, 0x65, 0x78, 0x61, 0x6d, 0x43,
 	0x6f, 0x75, 0x6e, 0x74, 0x42, 0x79, 0x55, 0x6e, 0x69, 0x76, 0x65, 0x72, 0x73, 0x69, 0x74, 0x79,
-	0x42, 0x14, 0x5a, 0x12, 0x65, 0x63, 0x6f, 0x6e, 0x6f, 0x6d, 0x69, 0x63, 0x2d, 0x73, 0x63, 0x68,
-	0x6f, 0x6f, 0x6c, 0x2f, 0x70, 0x62, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x22, 0x3e, 0x0a, 0x17, 0x52, 0x65, 0x6e, 0x65, 0x77, 0x41, 0x63, 0x63, 0x65, 0x73, 0x73, 0x54,
+	0x6f, 0x6b, 0x65, 0x6e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x23, 0x0a, 0x0d, 0x72,
+	0x65, 0x66, 0x72, 0x65, 0x73, 0x68, 0x5f, 0x74, 0x6f, 0x6b, 0x65, 0x6e, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x0c, 0x72, 0x65, 0x66, 0x72, 0x65, 0x73, 0x68, 0x54, 0x6f, 0x6b, 0x65, 0x6e,
+	0x22, 0x90, 0x01, 0x0a, 0x18, 0x52, 0x65, 0x6e, 0x65, 0x77, 0x41, 0x63, 0x63, 0x65, 0x73, 0x73,
+	0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x21, 0x0a,
+	0x0c, 0x61, 0x63, 0x63, 0x65, 0x73, 0x73, 0x5f, 0x74, 0x6f, 0x6b, 0x65, 0x6e, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x0b, 0x61, 0x63, 0x63, 0x65, 0x73, 0x73, 0x54, 0x6f, 0x6b, 0x65, 0x6e,
+	0x12, 0x51, 0x0a, 0x17, 0x61, 0x63, 0x63, 0x65, 0x73, 0x73, 0x5f, 0x74, 0x6f, 0x6b, 0x65, 0x6e,
+	0x5f, 0x65, 0x78, 0x70, 0x69, 0x72, 0x65, 0x73, 0x5f, 0x61, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28,
+	0x0b, 0x32, 0x1a, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f,
+	0x62, 0x75, 0x66, 0x2e, 0x54, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x52, 0x14, 0x61,
+	0x63, 0x63, 0x65, 0x73, 0x73, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x45, 0x78, 0x70, 0x69, 0x72, 0x65,
+	0x73, 0x41, 0x74, 0x42, 0x14, 0x5a, 0x12, 0x65, 0x63, 0x6f, 0x6e, 0x6f, 0x6d, 0x69, 0x63, 0x2d,
+	0x73, 0x63, 0x68, 0x6f, 0x6f, 0x6c, 0x2f, 0x70, 0x62, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f,
+	0x33,
 }
 
 var (
@@ -1191,7 +1307,7 @@ func file_message_economic_school_proto_rawDescGZIP() []byte {
 	return file_message_economic_school_proto_rawDescData
 }
 
-var file_message_economic_school_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
+var file_message_economic_school_proto_msgTypes = make([]protoimpl.MessageInfo, 19)
 var file_message_economic_school_proto_goTypes = []interface{}{
 	(*Exam)(nil),                             // 0: pb.Exam
 	(*CreateExamRequest)(nil),                // 1: pb.CreateExamRequest
@@ -1210,21 +1326,24 @@ var file_message_economic_school_proto_goTypes = []interface{}{
 	(*ListUniversitiesResponse)(nil),         // 14: pb.ListUniversitiesResponse
 	(*ExamCountByUniversity)(nil),            // 15: pb.ExamCountByUniversity
 	(*GetExamCountByUniversityResponse)(nil), // 16: pb.GetExamCountByUniversityResponse
-	(*fieldmaskpb.FieldMask)(nil),            // 17: google.protobuf.FieldMask
-	(*timestamppb.Timestamp)(nil),            // 18: google.protobuf.Timestamp
+	(*RenewAccessTokenRequest)(nil),          // 17: pb.RenewAccessTokenRequest
+	(*RenewAccessTokenResponse)(nil),         // 18: pb.RenewAccessTokenResponse
+	(*fieldmaskpb.FieldMask)(nil),            // 19: google.protobuf.FieldMask
+	(*timestamppb.Timestamp)(nil),            // 20: google.protobuf.Timestamp
 }
 var file_message_economic_school_proto_depIdxs = []int32{
 	0,  // 0: pb.ListExamsResponse.exams:type_name -> pb.Exam
 	0,  // 1: pb.UpdateExamRequest.exam:type_name -> pb.Exam
-	17, // 2: pb.UpdateExamRequest.update_mask:type_name -> google.protobuf.FieldMask
-	18, // 3: pb.UserExam.completed_at:type_name -> google.protobuf.Timestamp
+	19, // 2: pb.UpdateExamRequest.update_mask:type_name -> google.protobuf.FieldMask
+	20, // 3: pb.UserExam.completed_at:type_name -> google.protobuf.Timestamp
 	11, // 4: pb.ListCompletedUserExamsResponse.user_exams:type_name -> pb.UserExam
 	15, // 5: pb.GetExamCountByUniversityResponse.examCountByUniversity:type_name -> pb.ExamCountByUniversity
-	6,  // [6:6] is the sub-list for method output_type
-	6,  // [6:6] is the sub-list for method input_type
-	6,  // [6:6] is the sub-list for extension type_name
-	6,  // [6:6] is the sub-list for extension extendee
-	0,  // [0:6] is the sub-list for field type_name
+	20, // 6: pb.RenewAccessTokenResponse.access_token_expires_at:type_name -> google.protobuf.Timestamp
+	7,  // [7:7] is the sub-list for method output_type
+	7,  // [7:7] is the sub-list for method input_type
+	7,  // [7:7] is the sub-list for extension type_name
+	7,  // [7:7] is the sub-list for extension extendee
+	0,  // [0:7] is the sub-list for field type_name
 }
 
 func init() { file_message_economic_school_proto_init() }
@@ -1437,6 +1556,30 @@ func file_message_economic_school_proto_init() {
 				return nil
 			}
 		}
+		file_message_economic_school_proto_msgTypes[17].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*RenewAccessTokenRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_message_economic_school_proto_msgTypes[18].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*RenewAccessTokenResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	file_message_economic_school_proto_msgTypes[3].OneofWrappers = []interface{}{}
 	type x struct{}
@@ -1445,7 +1588,7 @@ func file_message_economic_school_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_message_economic_school_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   17,
+			NumMessages:   19,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

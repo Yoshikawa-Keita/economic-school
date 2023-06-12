@@ -5,7 +5,6 @@ import (
 	"database/sql"
 	db "economic-school/db/sqlc"
 	"economic-school/pb"
-	"fmt"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 	"time"
@@ -54,7 +53,6 @@ func (server *Server) GetUserExam(ctx context.Context, req *pb.GetUserExamReques
 		Username: req.GetUsername(),
 		ExamID:   req.GetExamId(),
 	}
-	fmt.Println("req:", req)
 	userExam, err := server.store.GetUserExam(ctx, arg)
 	if err != nil {
 		if err == sql.ErrNoRows {
@@ -85,7 +83,6 @@ func (server *Server) ListCompletedUserExams(ctx context.Context, req *pb.ListCo
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "failed to list completed user exams: %s", err)
 	}
-	fmt.Println("User exams", userExams)
 	responseExams := make([]*pb.UserExam, len(userExams))
 	for i, userExam := range userExams {
 		responseExams[i] = convertUserExam(userExam)
