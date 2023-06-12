@@ -87,6 +87,40 @@ func (q *Queries) GetExam(ctx context.Context, examID int32) (Exam, error) {
 	return i, err
 }
 
+const getExamCountByUniversity = `-- name: GetExamCountByUniversity :many
+SELECT university, COUNT(*) as count
+FROM exams
+GROUP BY university
+`
+
+type GetExamCountByUniversityRow struct {
+	University string `json:"university"`
+	Count      int64  `json:"count"`
+}
+
+func (q *Queries) GetExamCountByUniversity(ctx context.Context) ([]GetExamCountByUniversityRow, error) {
+	rows, err := q.db.QueryContext(ctx, getExamCountByUniversity)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	items := []GetExamCountByUniversityRow{}
+	for rows.Next() {
+		var i GetExamCountByUniversityRow
+		if err := rows.Scan(&i.University, &i.Count); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
 const listExams = `-- name: ListExams :many
 SELECT exam_id, university, subject, year, question_num, question_pdf_url, answer_pdf_url, video_url, critique_url, created_at
 FROM exams
@@ -127,6 +161,33 @@ func (q *Queries) ListExams(ctx context.Context, arg ListExamsParams) ([]Exam, e
 			return nil, err
 		}
 		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const listUniversities = `-- name: ListUniversities :many
+SELECT DISTINCT university FROM exams
+`
+
+func (q *Queries) ListUniversities(ctx context.Context) ([]string, error) {
+	rows, err := q.db.QueryContext(ctx, listUniversities)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	items := []string{}
+	for rows.Next() {
+		var university string
+		if err := rows.Scan(&university); err != nil {
+			return nil, err
+		}
+		items = append(items, university)
 	}
 	if err := rows.Close(); err != nil {
 		return nil, err

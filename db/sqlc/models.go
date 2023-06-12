@@ -56,6 +56,14 @@ type User struct {
 	Version           int32     `json:"version"`
 }
 
+type UserExam struct {
+	Username    string       `json:"username"`
+	ExamID      int32        `json:"exam_id"`
+	University  string       `json:"university"`
+	IsCompleted bool         `json:"is_completed"`
+	CompletedAt sql.NullTime `json:"completed_at"`
+}
+
 type VerifyEmail struct {
 	ID         int64     `json:"id"`
 	Username   string    `json:"username"`

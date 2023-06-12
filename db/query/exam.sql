@@ -42,3 +42,12 @@ WHERE exam_id = $1
     RETURNING *;
 -- name: DeleteExam :exec
 DELETE FROM exams WHERE exam_id = $1;
+
+-- name: ListUniversities :many
+SELECT DISTINCT university FROM exams;
+
+-- name: GetExamCountByUniversity :many
+SELECT university, COUNT(*) as count
+FROM exams
+GROUP BY university;
+

@@ -11,6 +11,7 @@ import (
 	"google.golang.org/genproto/googleapis/rpc/errdetails"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
+	"google.golang.org/protobuf/types/known/emptypb"
 )
 
 func (server *Server) CreateExam(ctx context.Context, req *pb.CreateExamRequest) (*pb.Exam, error) {
@@ -134,6 +135,36 @@ func (server *Server) DeleteExam(ctx context.Context, req *pb.DeleteExamRequest)
 		return nil, status.Errorf(codes.Internal, "failed to delete exam: %s", err)
 	}
 	return &empty.Empty{}, nil
+}
+
+func (server *Server) ListUniversities(ctx context.Context, req *emptypb.Empty) (*pb.ListUniversitiesResponse, error) {
+	universities, err := server.store.ListUniversities(ctx)
+	if err != nil {
+		return nil, status.Errorf(codes.Internal, "failed to list distinct universities: %s", err)
+	}
+
+	rsp := &pb.ListUniversitiesResponse{
+		Universities: universities,
+	}
+	return rsp, nil
+}
+
+func (server *Server) GetExamCountByUniversity(ctx context.Context, req *emptypb.Empty) (*pb.GetExamCountByUniversityResponse, error) {
+	examCounts, err := server.store.GetExamCountByUniversity(ctx)
+	if err != nil {
+		return nil, status.Errorf(codes.Internal, "failed to get exam count by university: %s", err)
+	}
+
+	rsp := &pb.GetExamCountByUniversityResponse{
+		ExamCountByUniversity: make([]*pb.ExamCountByUniversity, len(examCounts)),
+	}
+	for i, count := range examCounts {
+		rsp.ExamCountByUniversity[i] = &pb.ExamCountByUniversity{
+			University: count.University,
+			Count:      count.Count,
+		}
+	}
+	return rsp, nil
 }
 
 func validateUpdateExamRequest(req *pb.UpdateExamRequest) []*errdetails.BadRequest_FieldViolation {

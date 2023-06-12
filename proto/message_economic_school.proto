@@ -5,6 +5,7 @@ package pb;
 option go_package = "economic-school/pb";
 
 import "google/protobuf/field_mask.proto";
+import "google/protobuf/timestamp.proto";
 
 message Exam {
   int32 exam_id = 1;
@@ -59,3 +60,47 @@ message GetSignedUrlRequest {
 message GetSignedUrlResponse {
   string signed_url = 1;
 }
+
+message UpsertUserExamRequest {
+  string username = 1;
+  int32 exam_id = 2;
+  string university = 3;
+  bool is_completed = 4;
+}
+
+message GetUserExamRequest {
+  string username = 1;
+  int32 exam_id = 2;
+}
+
+message UserExam {
+  string username = 1;
+  int32 exam_id = 2;
+  string university = 3;
+  bool is_completed = 4;
+  google.protobuf.Timestamp completed_at = 5;
+}
+
+message ListCompletedUserExamsRequest {
+  string username = 1;
+  string university = 2;
+}
+
+message ListCompletedUserExamsResponse {
+  repeated UserExam user_exams = 1;
+}
+
+message ListUniversitiesResponse {
+  repeated string universities = 1;
+}
+
+message ExamCountByUniversity {
+  string university = 1;
+  int64 count = 2;
+}
+
+message GetExamCountByUniversityResponse {
+  repeated ExamCountByUniversity examCountByUniversity = 1;
+}
+
+

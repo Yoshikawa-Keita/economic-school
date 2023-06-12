@@ -106,4 +106,55 @@ service EconomicSchool {
     };
   }
 
+  rpc UpsertUserExam (UpsertUserExamRequest) returns (UserExam) {
+    option (google.api.http) = {
+      post: "/v1/upsert_user_exam"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Use this API to insert or update a user's exam status";
+      summary: "Insert or update user's exam";
+    };
+  }
+
+  rpc GetUserExam (GetUserExamRequest) returns (UserExam) {
+    option (google.api.http) = {
+      get: "/v1/get_user_exam/{username}/{exam_id}"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Use this API to retrieve a user's exam status";
+      summary: "Retrieve user's exam";
+    };
+  }
+
+  rpc ListCompletedUserExams (ListCompletedUserExamsRequest) returns (ListCompletedUserExamsResponse) {
+    option (google.api.http) = {
+      get: "/v1/list_completed_user_exams/{username}"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Use this API to retrieve a list of completed user's exams";
+      summary: "List completed user's exams";
+    };
+  }
+
+  rpc ListUniversities(google.protobuf.Empty) returns (ListUniversitiesResponse) {
+    option (google.api.http) = {
+      get: "/v1/list_universities"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Use this API to retrieve a list of universities";
+      summary: "List universities";
+    };
+  }
+
+  rpc GetExamCountByUniversity(google.protobuf.Empty) returns (GetExamCountByUniversityResponse) {
+    option (google.api.http) = {
+      get: "/v1/get_exam_count_by_university"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Use this API to retrieve a list of universities with the count of exams for each university";
+      summary: "Get exam count by university";
+    };
+  }
+
 }

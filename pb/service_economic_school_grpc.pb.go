@@ -20,16 +20,21 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	EconomicSchool_CreateUser_FullMethodName   = "/pb.EconomicSchool/CreateUser"
-	EconomicSchool_UpdateUser_FullMethodName   = "/pb.EconomicSchool/UpdateUser"
-	EconomicSchool_LoginUser_FullMethodName    = "/pb.EconomicSchool/LoginUser"
-	EconomicSchool_VerifyEmail_FullMethodName  = "/pb.EconomicSchool/VerifyEmail"
-	EconomicSchool_CreateExam_FullMethodName   = "/pb.EconomicSchool/CreateExam"
-	EconomicSchool_GetExam_FullMethodName      = "/pb.EconomicSchool/GetExam"
-	EconomicSchool_ListExams_FullMethodName    = "/pb.EconomicSchool/ListExams"
-	EconomicSchool_UpdateExam_FullMethodName   = "/pb.EconomicSchool/UpdateExam"
-	EconomicSchool_DeleteExam_FullMethodName   = "/pb.EconomicSchool/DeleteExam"
-	EconomicSchool_GetSignedUrl_FullMethodName = "/pb.EconomicSchool/GetSignedUrl"
+	EconomicSchool_CreateUser_FullMethodName               = "/pb.EconomicSchool/CreateUser"
+	EconomicSchool_UpdateUser_FullMethodName               = "/pb.EconomicSchool/UpdateUser"
+	EconomicSchool_LoginUser_FullMethodName                = "/pb.EconomicSchool/LoginUser"
+	EconomicSchool_VerifyEmail_FullMethodName              = "/pb.EconomicSchool/VerifyEmail"
+	EconomicSchool_CreateExam_FullMethodName               = "/pb.EconomicSchool/CreateExam"
+	EconomicSchool_GetExam_FullMethodName                  = "/pb.EconomicSchool/GetExam"
+	EconomicSchool_ListExams_FullMethodName                = "/pb.EconomicSchool/ListExams"
+	EconomicSchool_UpdateExam_FullMethodName               = "/pb.EconomicSchool/UpdateExam"
+	EconomicSchool_DeleteExam_FullMethodName               = "/pb.EconomicSchool/DeleteExam"
+	EconomicSchool_GetSignedUrl_FullMethodName             = "/pb.EconomicSchool/GetSignedUrl"
+	EconomicSchool_UpsertUserExam_FullMethodName           = "/pb.EconomicSchool/UpsertUserExam"
+	EconomicSchool_GetUserExam_FullMethodName              = "/pb.EconomicSchool/GetUserExam"
+	EconomicSchool_ListCompletedUserExams_FullMethodName   = "/pb.EconomicSchool/ListCompletedUserExams"
+	EconomicSchool_ListUniversities_FullMethodName         = "/pb.EconomicSchool/ListUniversities"
+	EconomicSchool_GetExamCountByUniversity_FullMethodName = "/pb.EconomicSchool/GetExamCountByUniversity"
 )
 
 // EconomicSchoolClient is the client API for EconomicSchool service.
@@ -46,6 +51,11 @@ type EconomicSchoolClient interface {
 	UpdateExam(ctx context.Context, in *UpdateExamRequest, opts ...grpc.CallOption) (*Exam, error)
 	DeleteExam(ctx context.Context, in *DeleteExamRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	GetSignedUrl(ctx context.Context, in *GetSignedUrlRequest, opts ...grpc.CallOption) (*GetSignedUrlResponse, error)
+	UpsertUserExam(ctx context.Context, in *UpsertUserExamRequest, opts ...grpc.CallOption) (*UserExam, error)
+	GetUserExam(ctx context.Context, in *GetUserExamRequest, opts ...grpc.CallOption) (*UserExam, error)
+	ListCompletedUserExams(ctx context.Context, in *ListCompletedUserExamsRequest, opts ...grpc.CallOption) (*ListCompletedUserExamsResponse, error)
+	ListUniversities(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*ListUniversitiesResponse, error)
+	GetExamCountByUniversity(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetExamCountByUniversityResponse, error)
 }
 
 type economicSchoolClient struct {
@@ -146,6 +156,51 @@ func (c *economicSchoolClient) GetSignedUrl(ctx context.Context, in *GetSignedUr
 	return out, nil
 }
 
+func (c *economicSchoolClient) UpsertUserExam(ctx context.Context, in *UpsertUserExamRequest, opts ...grpc.CallOption) (*UserExam, error) {
+	out := new(UserExam)
+	err := c.cc.Invoke(ctx, EconomicSchool_UpsertUserExam_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *economicSchoolClient) GetUserExam(ctx context.Context, in *GetUserExamRequest, opts ...grpc.CallOption) (*UserExam, error) {
+	out := new(UserExam)
+	err := c.cc.Invoke(ctx, EconomicSchool_GetUserExam_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *economicSchoolClient) ListCompletedUserExams(ctx context.Context, in *ListCompletedUserExamsRequest, opts ...grpc.CallOption) (*ListCompletedUserExamsResponse, error) {
+	out := new(ListCompletedUserExamsResponse)
+	err := c.cc.Invoke(ctx, EconomicSchool_ListCompletedUserExams_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *economicSchoolClient) ListUniversities(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*ListUniversitiesResponse, error) {
+	out := new(ListUniversitiesResponse)
+	err := c.cc.Invoke(ctx, EconomicSchool_ListUniversities_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *economicSchoolClient) GetExamCountByUniversity(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetExamCountByUniversityResponse, error) {
+	out := new(GetExamCountByUniversityResponse)
+	err := c.cc.Invoke(ctx, EconomicSchool_GetExamCountByUniversity_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // EconomicSchoolServer is the server API for EconomicSchool service.
 // All implementations must embed UnimplementedEconomicSchoolServer
 // for forward compatibility
@@ -160,6 +215,11 @@ type EconomicSchoolServer interface {
 	UpdateExam(context.Context, *UpdateExamRequest) (*Exam, error)
 	DeleteExam(context.Context, *DeleteExamRequest) (*emptypb.Empty, error)
 	GetSignedUrl(context.Context, *GetSignedUrlRequest) (*GetSignedUrlResponse, error)
+	UpsertUserExam(context.Context, *UpsertUserExamRequest) (*UserExam, error)
+	GetUserExam(context.Context, *GetUserExamRequest) (*UserExam, error)
+	ListCompletedUserExams(context.Context, *ListCompletedUserExamsRequest) (*ListCompletedUserExamsResponse, error)
+	ListUniversities(context.Context, *emptypb.Empty) (*ListUniversitiesResponse, error)
+	GetExamCountByUniversity(context.Context, *emptypb.Empty) (*GetExamCountByUniversityResponse, error)
 	mustEmbedUnimplementedEconomicSchoolServer()
 }
 
@@ -196,6 +256,21 @@ func (UnimplementedEconomicSchoolServer) DeleteExam(context.Context, *DeleteExam
 }
 func (UnimplementedEconomicSchoolServer) GetSignedUrl(context.Context, *GetSignedUrlRequest) (*GetSignedUrlResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetSignedUrl not implemented")
+}
+func (UnimplementedEconomicSchoolServer) UpsertUserExam(context.Context, *UpsertUserExamRequest) (*UserExam, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpsertUserExam not implemented")
+}
+func (UnimplementedEconomicSchoolServer) GetUserExam(context.Context, *GetUserExamRequest) (*UserExam, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserExam not implemented")
+}
+func (UnimplementedEconomicSchoolServer) ListCompletedUserExams(context.Context, *ListCompletedUserExamsRequest) (*ListCompletedUserExamsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListCompletedUserExams not implemented")
+}
+func (UnimplementedEconomicSchoolServer) ListUniversities(context.Context, *emptypb.Empty) (*ListUniversitiesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListUniversities not implemented")
+}
+func (UnimplementedEconomicSchoolServer) GetExamCountByUniversity(context.Context, *emptypb.Empty) (*GetExamCountByUniversityResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetExamCountByUniversity not implemented")
 }
 func (UnimplementedEconomicSchoolServer) mustEmbedUnimplementedEconomicSchoolServer() {}
 
@@ -390,6 +465,96 @@ func _EconomicSchool_GetSignedUrl_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _EconomicSchool_UpsertUserExam_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpsertUserExamRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EconomicSchoolServer).UpsertUserExam(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: EconomicSchool_UpsertUserExam_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EconomicSchoolServer).UpsertUserExam(ctx, req.(*UpsertUserExamRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _EconomicSchool_GetUserExam_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserExamRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EconomicSchoolServer).GetUserExam(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: EconomicSchool_GetUserExam_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EconomicSchoolServer).GetUserExam(ctx, req.(*GetUserExamRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _EconomicSchool_ListCompletedUserExams_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListCompletedUserExamsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EconomicSchoolServer).ListCompletedUserExams(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: EconomicSchool_ListCompletedUserExams_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EconomicSchoolServer).ListCompletedUserExams(ctx, req.(*ListCompletedUserExamsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _EconomicSchool_ListUniversities_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(emptypb.Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EconomicSchoolServer).ListUniversities(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: EconomicSchool_ListUniversities_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EconomicSchoolServer).ListUniversities(ctx, req.(*emptypb.Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _EconomicSchool_GetExamCountByUniversity_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(emptypb.Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EconomicSchoolServer).GetExamCountByUniversity(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: EconomicSchool_GetExamCountByUniversity_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EconomicSchoolServer).GetExamCountByUniversity(ctx, req.(*emptypb.Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // EconomicSchool_ServiceDesc is the grpc.ServiceDesc for EconomicSchool service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -436,6 +601,26 @@ var EconomicSchool_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetSignedUrl",
 			Handler:    _EconomicSchool_GetSignedUrl_Handler,
+		},
+		{
+			MethodName: "UpsertUserExam",
+			Handler:    _EconomicSchool_UpsertUserExam_Handler,
+		},
+		{
+			MethodName: "GetUserExam",
+			Handler:    _EconomicSchool_GetUserExam_Handler,
+		},
+		{
+			MethodName: "ListCompletedUserExams",
+			Handler:    _EconomicSchool_ListCompletedUserExams_Handler,
+		},
+		{
+			MethodName: "ListUniversities",
+			Handler:    _EconomicSchool_ListUniversities_Handler,
+		},
+		{
+			MethodName: "GetExamCountByUniversity",
+			Handler:    _EconomicSchool_GetExamCountByUniversity_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

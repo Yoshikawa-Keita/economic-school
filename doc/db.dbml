@@ -66,3 +66,11 @@ Table exams as E {
   created_at timestamptz [not null, default: `now()`]
 }
 
+Table user_exams as UE {
+  username varchar [ref: > users.username, pk]
+  exam_id int [ref: > exams.exam_id, pk]
+  university varchar [not null]
+  is_completed bool [not null, default: true]
+  completed_at timestamptz [default: `now()`]
+}
+
