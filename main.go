@@ -13,6 +13,7 @@ import (
 	"github.com/hibiken/asynq"
 	_ "github.com/lib/pq"
 	"github.com/rs/zerolog"
+	"net/url"
 	"os"
 
 	db "economic-school/db/sqlc"
@@ -40,8 +41,9 @@ func main() {
 	username := os.Getenv("username")
 	host := os.Getenv("host")
 	password := os.Getenv("password")
+	encodedPassword := url.QueryEscape(password)
 
-	dbSource := fmt.Sprintf("postgresql://%s:%s@%s/%s?sslmode=require", username, password, host, dbname)
+	dbSource := fmt.Sprintf("postgresql://%s:%s@%s/%s?sslmode=require", username, encodedPassword, host, dbname)
 	if config.Environment == "development" {
 		dbSource = config.DBSource
 	}
