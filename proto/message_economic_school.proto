@@ -7,6 +7,10 @@ option go_package = "economic-school/pb";
 import "google/protobuf/field_mask.proto";
 import "google/protobuf/timestamp.proto";
 
+message HealthCheckResponse {
+  string status = 1;
+}
+
 message Exam {
   int32 exam_id = 1;
   string university = 2;
