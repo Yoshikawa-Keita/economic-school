@@ -20,6 +20,7 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
+	EconomicSchool_HealthCheck_FullMethodName              = "/pb.EconomicSchool/HealthCheck"
 	EconomicSchool_CreateUser_FullMethodName               = "/pb.EconomicSchool/CreateUser"
 	EconomicSchool_UpdateUser_FullMethodName               = "/pb.EconomicSchool/UpdateUser"
 	EconomicSchool_LoginUser_FullMethodName                = "/pb.EconomicSchool/LoginUser"
@@ -42,6 +43,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type EconomicSchoolClient interface {
+	HealthCheck(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*HealthCheckResponse, error)
 	CreateUser(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*CreateUserResponse, error)
 	UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*UpdateUserResponse, error)
 	LoginUser(ctx context.Context, in *LoginUserRequest, opts ...grpc.CallOption) (*LoginUserResponse, error)
@@ -66,6 +68,15 @@ type economicSchoolClient struct {
 
 func NewEconomicSchoolClient(cc grpc.ClientConnInterface) EconomicSchoolClient {
 	return &economicSchoolClient{cc}
+}
+
+func (c *economicSchoolClient) HealthCheck(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*HealthCheckResponse, error) {
+	out := new(HealthCheckResponse)
+	err := c.cc.Invoke(ctx, EconomicSchool_HealthCheck_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *economicSchoolClient) CreateUser(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*CreateUserResponse, error) {
@@ -216,6 +227,7 @@ func (c *economicSchoolClient) GetExamCountByUniversity(ctx context.Context, in 
 // All implementations must embed UnimplementedEconomicSchoolServer
 // for forward compatibility
 type EconomicSchoolServer interface {
+	HealthCheck(context.Context, *emptypb.Empty) (*HealthCheckResponse, error)
 	CreateUser(context.Context, *CreateUserRequest) (*CreateUserResponse, error)
 	UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error)
 	LoginUser(context.Context, *LoginUserRequest) (*LoginUserResponse, error)
@@ -239,6 +251,9 @@ type EconomicSchoolServer interface {
 type UnimplementedEconomicSchoolServer struct {
 }
 
+func (UnimplementedEconomicSchoolServer) HealthCheck(context.Context, *emptypb.Empty) (*HealthCheckResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method HealthCheck not implemented")
+}
 func (UnimplementedEconomicSchoolServer) CreateUser(context.Context, *CreateUserRequest) (*CreateUserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateUser not implemented")
 }
@@ -298,6 +313,24 @@ type UnsafeEconomicSchoolServer interface {
 
 func RegisterEconomicSchoolServer(s grpc.ServiceRegistrar, srv EconomicSchoolServer) {
 	s.RegisterService(&EconomicSchool_ServiceDesc, srv)
+}
+
+func _EconomicSchool_HealthCheck_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(emptypb.Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EconomicSchoolServer).HealthCheck(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: EconomicSchool_HealthCheck_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EconomicSchoolServer).HealthCheck(ctx, req.(*emptypb.Empty))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _EconomicSchool_CreateUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -595,6 +628,10 @@ var EconomicSchool_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "pb.EconomicSchool",
 	HandlerType: (*EconomicSchoolServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "HealthCheck",
+			Handler:    _EconomicSchool_HealthCheck_Handler,
+		},
 		{
 			MethodName: "CreateUser",
 			Handler:    _EconomicSchool_CreateUser_Handler,
