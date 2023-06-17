@@ -5,6 +5,7 @@ import (
 	"database/sql"
 	"economic-school/mail"
 	"economic-school/worker"
+	"fmt"
 	"github.com/golang-migrate/migrate/v4"
 	_ "github.com/golang-migrate/migrate/v4/database/postgres"
 	_ "github.com/golang-migrate/migrate/v4/source/file"
@@ -35,11 +36,21 @@ func main() {
 	if config.Environment == "development" {
 		log.Logger = log.Output(zerolog.ConsoleWriter{Out: os.Stderr})
 	}
-	conn, err := sql.Open(config.DBDriver, config.DBSource)
+	dbname := os.Getenv("dbname")
+	username := os.Getenv("username")
+	host := os.Getenv("host")
+	password := os.Getenv("password")
+
+	dbSource := fmt.Sprintf("postgresql://%s:%s@%s/%s?sslmode=require", username, password, host, dbname)
+	if config.Environment == "development" {
+		dbSource = config.DBSource
+	}
+	log.Info().Msg(dbSource)
+	conn, err := sql.Open(config.DBDriver, dbSource)
 	if err != nil {
 		log.Fatal().Err(err).Msg("cannot connect to db")
 	}
-	runDBMigration(config.MigrationURL, config.DBSource)
+	runDBMigration(config.MigrationURL, dbSource)
 
 	store := db.NewStore(conn)
 	redisOpt := asynq.RedisClientOpt{
