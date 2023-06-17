@@ -59,6 +59,12 @@ func (rec *ResponseRecorder) Write(body []byte) (int, error) {
 
 func HttpLogger(handler http.Handler) http.Handler {
 	return http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+
+		// If the path is "/api/not_logged", skip logging and return.
+		if req.RequestURI == "/health" {
+			handler.ServeHTTP(res, req)
+			return
+		}
 		startTime := time.Now()
 		rec := &ResponseRecorder{
 			ResponseWriter: res,
