@@ -47,7 +47,6 @@ func main() {
 	if config.Environment == "development" {
 		dbSource = config.DBSource
 	}
-	log.Info().Msg(dbSource)
 	conn, err := sql.Open(config.DBDriver, dbSource)
 	if err != nil {
 		log.Fatal().Err(err).Msg("cannot connect to db")
@@ -61,8 +60,8 @@ func main() {
 
 	taskDistributor := worker.NewRedisTaskDistributor(redisOpt)
 	//go runTaskProcessor(config, redisOpt, store)
-	go runGatewayServer(config, store, taskDistributor)
-	runGrpcServer(config, store, taskDistributor)
+	runGatewayServer(config, store, taskDistributor)
+	//runGrpcServer(config, store, taskDistributor)
 
 }
 
