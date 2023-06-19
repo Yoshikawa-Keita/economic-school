@@ -20,8 +20,10 @@ type Config struct {
 	EmailSenderAddress       string        `mapstructure:"EMAIL_SENDER_ADDRESS"`
 	EmailSenderPassword      string        `mapstructure:"EMAIL_SENDER_PASSWORD"`
 	AwsRegion                string        `mapstructure:"AWS_REGION"`
+	AwsAccount               string        `mapstructure:"AWS_ACCOUNT"`
 	S3BucketNameUserProfile  string        `mapstructure:"S3_BUCKET_NAME_USER_PROFILE"`
 	S3BucketNameTransferExam string        `mapstructure:"S3_BUCKET_NAME_TRANSFER_EXAM"`
+	SQSEmailSendingQueue     string        `mapstructure:"SQS_EMAIL_SENDING_QUEUE"`
 	CloudFrontKeyId          string        `mapstructure:"CLOUD_FRONT_KEY_ID"`
 	CloudFrontPrivateKey     string        `mapstructure:"CLOUD_FRONT_PRIVATE_KEY"`
 	AWSAccessKey             string        `mapstructure:"AWS_ACCESS_KEY"`
