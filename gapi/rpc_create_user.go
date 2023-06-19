@@ -5,20 +5,20 @@ import (
 	"context"
 	db "economic-school/db/sqlc"
 	"economic-school/pb"
+	"economic-school/service"
 	"economic-school/util"
 	"economic-school/val"
-	"economic-school/worker"
 	"encoding/base64"
 	"fmt"
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/s3"
-	"github.com/hibiken/asynq"
 	"github.com/lib/pq"
+	"github.com/rs/zerolog/log"
 	"google.golang.org/genproto/googleapis/rpc/errdetails"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
-	"time"
+	"strconv"
 )
 
 func (server *Server) CreateUser(ctx context.Context, req *pb.CreateUserRequest) (*pb.CreateUserResponse, error) {
@@ -55,17 +55,6 @@ func (server *Server) CreateUser(ctx context.Context, req *pb.CreateUserRequest)
 				return fmt.Errorf("failed to decode profile image: %w", err)
 			}
 			// TODO 想定外の形式のファイルがきた時の対策をすべき
-			//// Detect the content type of the image
-			//contentType := http.DetectContentType(profileImage)
-			//
-			//// Get the file extension for this content type
-			//extensions, err := mime.ExtensionsByType(contentType)
-			//if err != nil || len(extensions) == 0 {
-			//	return fmt.Errorf("could not determine file extension for content type %s: %w", contentType, err)
-			//}
-
-			// Create the key using the username and the appropriate file extension
-			//key := req.Username + extensions[0]
 			key := req.Username + ".jpg"
 
 			// Upload profile image to S3
@@ -77,16 +66,34 @@ func (server *Server) CreateUser(ctx context.Context, req *pb.CreateUserRequest)
 			return nil
 		},
 		AfterCreate: func(user db.User) error {
-			taskPayload := &worker.PayloadSendVerifyEmail{
-				Username: user.Username,
+			verifyEmail, err := server.store.CreateVerifyEmail(ctx, db.CreateVerifyEmailParams{
+				Username:   user.Username,
+				Email:      user.Email,
+				SecretCode: util.RandomString(32),
+			})
+			if err != nil {
+				return fmt.Errorf("failed to create verify email: %w", err)
 			}
-			opts := []asynq.Option{
-				asynq.MaxRetry(10),
-				asynq.ProcessIn(10 * time.Second),
-				asynq.Queue(worker.QueueCritical),
+			message := map[string]string{
+				"Username":   user.Username,
+				"Email":      user.Email,
+				"Email_id":   strconv.FormatInt(verifyEmail.ID, 10),
+				"SecretCode": verifyEmail.SecretCode,
 			}
 
-			return server.taskDistributor.DistributeTaskSendVerifyEmail(ctx, taskPayload, opts...)
+			config, err := util.LoadConfig("..")
+			if err != nil {
+				return fmt.Errorf("failed to load config: %w", err)
+			}
+
+			// Send the message to SQS
+			err = service.SendMessageToSQS(config, config.SQSEmailSendingQueue, message)
+			if err != nil {
+				return fmt.Errorf("failed to send message to SQS: %w", err)
+			}
+			log.Info().Str("email", user.Email).Msg("sending verification message to email-sending-queue")
+
+			return nil
 		},
 	}
 
