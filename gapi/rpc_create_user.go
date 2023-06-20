@@ -66,33 +66,6 @@ func (server *Server) CreateUser(ctx context.Context, req *pb.CreateUserRequest)
 			return nil
 		},
 		AfterCreate: func(user db.User) error {
-			verifyEmail, err := server.store.CreateVerifyEmail(ctx, db.CreateVerifyEmailParams{
-				Username:   user.Username,
-				Email:      user.Email,
-				SecretCode: util.RandomString(32),
-			})
-			if err != nil {
-				return fmt.Errorf("failed to create verify email: %w", err)
-			}
-			message := map[string]string{
-				"Username":   user.Username,
-				"Email":      user.Email,
-				"Email_id":   strconv.FormatInt(verifyEmail.ID, 10),
-				"SecretCode": verifyEmail.SecretCode,
-			}
-
-			config, err := util.LoadConfig("..")
-			if err != nil {
-				return fmt.Errorf("failed to load config: %w", err)
-			}
-
-			// Send the message to SQS
-			err = service.SendMessageToSQS(config, config.SQSEmailSendingQueue, message)
-			if err != nil {
-				return fmt.Errorf("failed to send message to SQS: %w", err)
-			}
-			log.Info().Str("email", user.Email).Msg("sending verification message to email-sending-queue")
-
 			return nil
 		},
 	}
@@ -107,6 +80,34 @@ func (server *Server) CreateUser(ctx context.Context, req *pb.CreateUserRequest)
 		}
 		return nil, status.Errorf(codes.Internal, "failed to create user: %s", err)
 	}
+	user := txResult.User
+
+	verifyEmail, err := server.store.CreateVerifyEmail(ctx, db.CreateVerifyEmailParams{
+		Username:   user.Username,
+		Email:      user.Email,
+		SecretCode: util.RandomString(32),
+	})
+	if err != nil {
+		return nil, fmt.Errorf("failed to create verify email: %w", err)
+	}
+	message := map[string]string{
+		"Username":   user.Username,
+		"Email":      user.Email,
+		"Email_id":   strconv.FormatInt(verifyEmail.ID, 10),
+		"SecretCode": verifyEmail.SecretCode,
+	}
+
+	config, err := util.LoadConfig("..")
+	if err != nil {
+		return nil, fmt.Errorf("failed to load config: %w", err)
+	}
+
+	// Send the message to SQS
+	err = service.SendMessageToSQS(config, config.SQSEmailSendingQueue, message)
+	if err != nil {
+		return nil, fmt.Errorf("failed to send message to SQS: %w", err)
+	}
+	log.Info().Str("email", user.Email).Msg("sending verification message to email-sending-queue")
 
 	rsp := &pb.CreateUserResponse{
 		User: convertUser(txResult.User),
