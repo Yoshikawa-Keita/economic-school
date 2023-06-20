@@ -28,6 +28,8 @@ type Config struct {
 	CloudFrontPrivateKey     string        `mapstructure:"CLOUD_FRONT_PRIVATE_KEY"`
 	AWSAccessKey             string        `mapstructure:"AWS_ACCESS_KEY"`
 	AWSSecretAccessKey       string        `mapstructure:"AWS_SECRET_ACCESS_KEY"`
+	FrontEndSubDomain        string        `mapstructure:"FRONTEND_SUB_DOMAIN"`
+	FrontEndDomain           string        `mapstructure:"FRONTEND_DOMAIN"`
 }
 
 func LoadConfig(path string) (config Config, err error) {
