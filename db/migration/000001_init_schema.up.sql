@@ -62,6 +62,21 @@ CREATE TABLE "user_exams" (
                               PRIMARY KEY ("username", "exam_id")
 );
 
+CREATE TABLE "global_ranking" (
+                                  "username" varchar PRIMARY KEY,
+                                  "num_completed_exams" int NOT NULL,
+                                  "ranking_date" varchar NOT NULL,
+                                  "created_at" timestamptz NOT NULL DEFAULT (now())
+);
+
+CREATE TABLE "university_ranking" (
+                                      "username" varchar,
+                                      "university" varchar NOT NULL,
+                                      "num_completed_exams" int NOT NULL,
+                                      "ranking_date" varchar NOT NULL,
+                                      "created_at" timestamptz NOT NULL DEFAULT (now()),
+                                      PRIMARY KEY ("university", "username", "ranking_date")
+);
 
 ALTER TABLE "verify_emails" ADD FOREIGN KEY ("username") REFERENCES "users" ("username");
 
@@ -72,6 +87,10 @@ ALTER TABLE "sessions" ADD FOREIGN KEY ("username") REFERENCES "users" ("usernam
 ALTER TABLE "user_exams" ADD FOREIGN KEY ("username") REFERENCES "users" ("username");
 
 ALTER TABLE "user_exams" ADD FOREIGN KEY ("exam_id") REFERENCES "exams" ("exam_id");
+
+ALTER TABLE "global_ranking" ADD FOREIGN KEY ("username") REFERENCES "users" ("username");
+
+ALTER TABLE "university_ranking" ADD FOREIGN KEY ("username") REFERENCES "users" ("username");
 
 --------- 以下で初期データをinsertする
 

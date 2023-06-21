@@ -68,3 +68,23 @@ Table user_exams as UE {
   completed_at timestamptz [default: `now()`]
 }
 
+Table global_ranking as GR {
+  username varchar [ref: > users.username, pk]
+  num_completed_exams int [not null]
+  ranking_date varchar [not null]
+  created_at timestamptz [not null, default: `now()`]
+}
+
+Table university_ranking as UR {
+  username varchar [ref: > users.username]
+  university varchar [not null]
+  num_completed_exams int [not null]
+  ranking_date varchar [not null]
+  created_at timestamptz [not null, default: `now()`]
+
+  Indexes {
+    (university, username, ranking_date) [pk]
+  }
+}
+
+
