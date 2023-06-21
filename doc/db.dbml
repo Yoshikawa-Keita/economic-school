@@ -29,17 +29,11 @@ Table verify_emails {
   expired_at timestamptz [not null, default: `now() + interval '24 hours'`]
 }
 
-Table accounts as A {
+Table email_logs as EL {
   id bigserial [pk]
-  owner varchar [ref: > U.username, not null]
-  balance bigint [not null]
-  currency varchar [not null]
+  email varchar [not null]
+  bounce_count int
   created_at timestamptz [not null, default: `now()`]
-
-  Indexes {
-    owner
-    (owner, currency) [unique]
-  }
 }
 
 Table sessions {
