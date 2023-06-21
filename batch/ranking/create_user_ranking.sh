@@ -4,11 +4,11 @@
 DATE=$(date "+%Y%m%d")
 
 # Set the database connection details
-DB_HOST=$host # update here
-DB_PORT="your_db_port" # update if you have a secret for this
-DB_NAME=$dbname # update here
-DB_USER=$username # update here
-DB_PASS=$password # update here
+DB_HOST=$host
+DB_PORT=$port
+DB_NAME=$dbname
+DB_USER=$username
+DB_PASS=$password
 
 # Create the overall ranking
 psql -h $DB_HOST -p $DB_PORT -U $DB_USER -d $DB_NAME -c "

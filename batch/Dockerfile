@@ -10,7 +10,7 @@ WORKDIR /app
 COPY . .
 
 # Make the batch script executable
-RUN chmod +x create_user_ranking.sh batch_script.sh
+RUN chmod +x *.sh
 
 # Command to run the batch script
 CMD ["./batch_script.sh"]
