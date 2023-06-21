@@ -21,13 +21,13 @@ CREATE TABLE "verify_emails" (
                                  "expired_at" timestamptz NOT NULL DEFAULT (now() + interval '24 hours')
 );
 
-CREATE TABLE "accounts" (
-                            "id" bigserial PRIMARY KEY,
-                            "owner" varchar NOT NULL,
-                            "balance" bigint NOT NULL,
-                            "currency" varchar NOT NULL,
-                            "created_at" timestamptz NOT NULL DEFAULT (now())
+CREATE TABLE "email_logs" (
+                              "id" bigserial PRIMARY KEY,
+                              "email" varchar NOT NULL,
+                              "bounce_count" int,
+                              "created_at" timestamptz NOT NULL DEFAULT (now())
 );
+
 
 CREATE TABLE "sessions" (
                             "id" uuid PRIMARY KEY,
@@ -62,13 +62,10 @@ CREATE TABLE "user_exams" (
                               PRIMARY KEY ("username", "exam_id")
 );
 
-CREATE INDEX ON "accounts" ("owner");
-
-CREATE UNIQUE INDEX ON "accounts" ("owner", "currency");
 
 ALTER TABLE "verify_emails" ADD FOREIGN KEY ("username") REFERENCES "users" ("username");
 
-ALTER TABLE "accounts" ADD FOREIGN KEY ("owner") REFERENCES "users" ("username");
+ALTER TABLE "email_logs" ADD FOREIGN KEY ("username") REFERENCES "users" ("username");
 
 ALTER TABLE "sessions" ADD FOREIGN KEY ("username") REFERENCES "users" ("username");
 

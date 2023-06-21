@@ -1,6 +1,6 @@
 -- SQL dump generated using DBML (dbml-lang.org)
 -- Database: PostgreSQL
--- Generated at: 2023-06-08T18:35:06.047Z
+-- Generated at: 2023-06-21T16:15:15.613Z
 
 CREATE TABLE "users" (
   "username" varchar PRIMARY KEY,
@@ -25,11 +25,10 @@ CREATE TABLE "verify_emails" (
   "expired_at" timestamptz NOT NULL DEFAULT (now() + interval '24 hours')
 );
 
-CREATE TABLE "accounts" (
+CREATE TABLE "email_logs" (
   "id" bigserial PRIMARY KEY,
-  "owner" varchar NOT NULL,
-  "balance" bigint NOT NULL,
-  "currency" varchar NOT NULL,
+  "email" varchar NOT NULL,
+  "bounce_count" int,
   "created_at" timestamptz NOT NULL DEFAULT (now())
 );
 
@@ -66,13 +65,7 @@ CREATE TABLE "user_exams" (
   PRIMARY KEY ("username", "exam_id")
 );
 
-CREATE INDEX ON "accounts" ("owner");
-
-CREATE UNIQUE INDEX ON "accounts" ("owner", "currency");
-
 ALTER TABLE "verify_emails" ADD FOREIGN KEY ("username") REFERENCES "users" ("username");
-
-ALTER TABLE "accounts" ADD FOREIGN KEY ("owner") REFERENCES "users" ("username");
 
 ALTER TABLE "sessions" ADD FOREIGN KEY ("username") REFERENCES "users" ("username");
 
