@@ -3,6 +3,9 @@ FROM alpine:latest
 # Install bash
 RUN apk add --no-cache bash
 
+# Install bash and PostgreSQL client
+RUN apk add --no-cache bash postgresql-client
+
 # Set the working directory in the container to /app
 WORKDIR /app
 
