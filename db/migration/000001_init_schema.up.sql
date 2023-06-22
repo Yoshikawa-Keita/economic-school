@@ -80,8 +80,6 @@ CREATE TABLE "university_ranking" (
 
 ALTER TABLE "verify_emails" ADD FOREIGN KEY ("username") REFERENCES "users" ("username");
 
-ALTER TABLE "email_logs" ADD FOREIGN KEY ("username") REFERENCES "users" ("username");
-
 ALTER TABLE "sessions" ADD FOREIGN KEY ("username") REFERENCES "users" ("username");
 
 ALTER TABLE "user_exams" ADD FOREIGN KEY ("username") REFERENCES "users" ("username");
