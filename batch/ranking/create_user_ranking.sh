@@ -10,11 +10,11 @@ DB_NAME=$dbname
 DB_USER=$username
 DB_PASS=$password
 
-echo DB_HOST
-echo DB_PORT
-echo DB_NAME
-echo DB_USER
-echo DB_PASS
+echo $DB_HOST
+echo $DB_PORT
+echo $DB_NAME
+echo $DB_USER
+echo $DB_PASS
 
 # Create the overall ranking
 psql -h "${DB_HOST}" -p "${DB_PORT}" -U "${DB_USER}" -d "${DB_NAME}" -c "
