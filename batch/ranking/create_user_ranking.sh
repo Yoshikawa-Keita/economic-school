@@ -12,7 +12,7 @@ DB_PASS=$password
 export PGPASSWORD=$DB_PASS
 
 # Create the overall ranking
-psql -h "${DB_HOST}" -p "${DB_PORT}" -U "${DB_USER}" -d "${DB_NAME}" -c "
+psql -h "${DB_HOST}" -p "${DB_PORT}" -U "${DB_USER}" -d "${DB_NAME}" -v ON_ERROR_STOP=1 -c "
 INSERT INTO global_ranking (username, num_completed_exams, ranking_date)
 SELECT username, COUNT(*), '$DATE'
 FROM user_exams
@@ -21,7 +21,7 @@ GROUP BY username
 "
 
 # Create the university-specific ranking
-psql -h $DB_HOST -p $DB_PORT -U $DB_USER -d $DB_NAME -c "
+psql -h $DB_HOST -p $DB_PORT -U $DB_USER -d $DB_NAME -v ON_ERROR_STOP=1 -c "
 INSERT INTO university_ranking (username, university, num_completed_exams, ranking_date)
 SELECT username, university, COUNT(*), '$DATE'
 FROM user_exams
