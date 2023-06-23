@@ -18,6 +18,7 @@ SELECT username, COUNT(*), '$DATE'
 FROM user_exams
 WHERE is_completed = true
 GROUP BY username
+ORDER BY COUNT(*) DESC
 "
 
 # Create the university-specific ranking
@@ -27,4 +28,5 @@ SELECT username, university, COUNT(*), '$DATE'
 FROM user_exams
 WHERE is_completed = true
 GROUP BY username, university
+ORDER BY COUNT(*) DESC
 "
