@@ -52,7 +52,7 @@ psql -h "${DB_HOST}" -p "${DB_PORT}" -U "${DB_USER}" -d "${DB_NAME}" -v ON_ERROR
 INSERT INTO weekly_global_ranking (username, completed_exams_count, ranking_date)
 SELECT username, COUNT(*), '$DATE_TO'
 FROM user_exams
-WHERE is_completed = true AND date(completed_at) BETWEEN '$DATE_FROM' AND '$DATE_TO'
+WHERE is_completed = true AND completed_at BETWEEN TO_TIMESTAMP($DATE_FROM, 'YYYYMMDD') AND (TO_TIMESTAMP($DATE_TO, 'YYYYMMDD') + INTERVAL '1 day')
 GROUP BY username
 ORDER BY COUNT(*) DESC
 "
@@ -67,7 +67,7 @@ psql -h $DB_HOST -p $DB_PORT -U $DB_USER -d $DB_NAME -v ON_ERROR_STOP=1 -c "
 INSERT INTO weekly_university_ranking (username, university, completed_exams_count, ranking_date)
 SELECT username, university, COUNT(*), '$DATE_TO'
 FROM user_exams
-WHERE is_completed = true AND date(completed_at) BETWEEN '$DATE_FROM' AND '$DATE_TO'
+WHERE is_completed = true AND completed_at BETWEEN TO_TIMESTAMP($DATE_FROM, 'YYYYMMDD') AND (TO_TIMESTAMP($DATE_TO, 'YYYYMMDD') + INTERVAL '1 day')
 GROUP BY username, university
 ORDER BY COUNT(*) DESC
 "
