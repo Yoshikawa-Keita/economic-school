@@ -1194,6 +1194,494 @@ func (x *RenewAccessTokenResponse) GetAccessTokenExpiresAt() *timestamppb.Timest
 	return nil
 }
 
+type GetGlobalRankingResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Rankings []*GlobalRanking `protobuf:"bytes,1,rep,name=rankings,proto3" json:"rankings,omitempty"`
+}
+
+func (x *GetGlobalRankingResponse) Reset() {
+	*x = GetGlobalRankingResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_message_economic_school_proto_msgTypes[20]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetGlobalRankingResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetGlobalRankingResponse) ProtoMessage() {}
+
+func (x *GetGlobalRankingResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_message_economic_school_proto_msgTypes[20]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetGlobalRankingResponse.ProtoReflect.Descriptor instead.
+func (*GetGlobalRankingResponse) Descriptor() ([]byte, []int) {
+	return file_message_economic_school_proto_rawDescGZIP(), []int{20}
+}
+
+func (x *GetGlobalRankingResponse) GetRankings() []*GlobalRanking {
+	if x != nil {
+		return x.Rankings
+	}
+	return nil
+}
+
+type GetWeeklyGlobalRankingResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Rankings []*WeeklyGlobalRanking `protobuf:"bytes,1,rep,name=rankings,proto3" json:"rankings,omitempty"`
+}
+
+func (x *GetWeeklyGlobalRankingResponse) Reset() {
+	*x = GetWeeklyGlobalRankingResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_message_economic_school_proto_msgTypes[21]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetWeeklyGlobalRankingResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetWeeklyGlobalRankingResponse) ProtoMessage() {}
+
+func (x *GetWeeklyGlobalRankingResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_message_economic_school_proto_msgTypes[21]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetWeeklyGlobalRankingResponse.ProtoReflect.Descriptor instead.
+func (*GetWeeklyGlobalRankingResponse) Descriptor() ([]byte, []int) {
+	return file_message_economic_school_proto_rawDescGZIP(), []int{21}
+}
+
+func (x *GetWeeklyGlobalRankingResponse) GetRankings() []*WeeklyGlobalRanking {
+	if x != nil {
+		return x.Rankings
+	}
+	return nil
+}
+
+type GlobalRanking struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Username          string                 `protobuf:"bytes,1,opt,name=username,proto3" json:"username,omitempty"`
+	NumCompletedExams int32                  `protobuf:"varint,2,opt,name=num_completed_exams,json=numCompletedExams,proto3" json:"num_completed_exams,omitempty"`
+	RankingDate       string                 `protobuf:"bytes,3,opt,name=ranking_date,json=rankingDate,proto3" json:"ranking_date,omitempty"`
+	CreatedAt         *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+}
+
+func (x *GlobalRanking) Reset() {
+	*x = GlobalRanking{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_message_economic_school_proto_msgTypes[22]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GlobalRanking) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GlobalRanking) ProtoMessage() {}
+
+func (x *GlobalRanking) ProtoReflect() protoreflect.Message {
+	mi := &file_message_economic_school_proto_msgTypes[22]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GlobalRanking.ProtoReflect.Descriptor instead.
+func (*GlobalRanking) Descriptor() ([]byte, []int) {
+	return file_message_economic_school_proto_rawDescGZIP(), []int{22}
+}
+
+func (x *GlobalRanking) GetUsername() string {
+	if x != nil {
+		return x.Username
+	}
+	return ""
+}
+
+func (x *GlobalRanking) GetNumCompletedExams() int32 {
+	if x != nil {
+		return x.NumCompletedExams
+	}
+	return 0
+}
+
+func (x *GlobalRanking) GetRankingDate() string {
+	if x != nil {
+		return x.RankingDate
+	}
+	return ""
+}
+
+func (x *GlobalRanking) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
+}
+
+type WeeklyGlobalRanking struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Username            string                 `protobuf:"bytes,1,opt,name=username,proto3" json:"username,omitempty"`
+	CompletedExamsCount int32                  `protobuf:"varint,2,opt,name=completed_exams_count,json=completedExamsCount,proto3" json:"completed_exams_count,omitempty"`
+	RankingDate         string                 `protobuf:"bytes,3,opt,name=ranking_date,json=rankingDate,proto3" json:"ranking_date,omitempty"`
+	CreatedAt           *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+}
+
+func (x *WeeklyGlobalRanking) Reset() {
+	*x = WeeklyGlobalRanking{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_message_economic_school_proto_msgTypes[23]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *WeeklyGlobalRanking) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*WeeklyGlobalRanking) ProtoMessage() {}
+
+func (x *WeeklyGlobalRanking) ProtoReflect() protoreflect.Message {
+	mi := &file_message_economic_school_proto_msgTypes[23]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use WeeklyGlobalRanking.ProtoReflect.Descriptor instead.
+func (*WeeklyGlobalRanking) Descriptor() ([]byte, []int) {
+	return file_message_economic_school_proto_rawDescGZIP(), []int{23}
+}
+
+func (x *WeeklyGlobalRanking) GetUsername() string {
+	if x != nil {
+		return x.Username
+	}
+	return ""
+}
+
+func (x *WeeklyGlobalRanking) GetCompletedExamsCount() int32 {
+	if x != nil {
+		return x.CompletedExamsCount
+	}
+	return 0
+}
+
+func (x *WeeklyGlobalRanking) GetRankingDate() string {
+	if x != nil {
+		return x.RankingDate
+	}
+	return ""
+}
+
+func (x *WeeklyGlobalRanking) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
+}
+
+type GetUniversityRankingResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Rankings []*UniversityRanking `protobuf:"bytes,1,rep,name=rankings,proto3" json:"rankings,omitempty"`
+}
+
+func (x *GetUniversityRankingResponse) Reset() {
+	*x = GetUniversityRankingResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_message_economic_school_proto_msgTypes[24]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetUniversityRankingResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetUniversityRankingResponse) ProtoMessage() {}
+
+func (x *GetUniversityRankingResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_message_economic_school_proto_msgTypes[24]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetUniversityRankingResponse.ProtoReflect.Descriptor instead.
+func (*GetUniversityRankingResponse) Descriptor() ([]byte, []int) {
+	return file_message_economic_school_proto_rawDescGZIP(), []int{24}
+}
+
+func (x *GetUniversityRankingResponse) GetRankings() []*UniversityRanking {
+	if x != nil {
+		return x.Rankings
+	}
+	return nil
+}
+
+type GetWeeklyUniversityRankingResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Rankings []*WeeklyUniversityRanking `protobuf:"bytes,1,rep,name=rankings,proto3" json:"rankings,omitempty"`
+}
+
+func (x *GetWeeklyUniversityRankingResponse) Reset() {
+	*x = GetWeeklyUniversityRankingResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_message_economic_school_proto_msgTypes[25]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetWeeklyUniversityRankingResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetWeeklyUniversityRankingResponse) ProtoMessage() {}
+
+func (x *GetWeeklyUniversityRankingResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_message_economic_school_proto_msgTypes[25]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetWeeklyUniversityRankingResponse.ProtoReflect.Descriptor instead.
+func (*GetWeeklyUniversityRankingResponse) Descriptor() ([]byte, []int) {
+	return file_message_economic_school_proto_rawDescGZIP(), []int{25}
+}
+
+func (x *GetWeeklyUniversityRankingResponse) GetRankings() []*WeeklyUniversityRanking {
+	if x != nil {
+		return x.Rankings
+	}
+	return nil
+}
+
+type UniversityRanking struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Username          string                 `protobuf:"bytes,1,opt,name=username,proto3" json:"username,omitempty"`
+	University        string                 `protobuf:"bytes,2,opt,name=university,proto3" json:"university,omitempty"`
+	NumCompletedExams int32                  `protobuf:"varint,3,opt,name=num_completed_exams,json=numCompletedExams,proto3" json:"num_completed_exams,omitempty"`
+	RankingDate       string                 `protobuf:"bytes,4,opt,name=ranking_date,json=rankingDate,proto3" json:"ranking_date,omitempty"`
+	CreatedAt         *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+}
+
+func (x *UniversityRanking) Reset() {
+	*x = UniversityRanking{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_message_economic_school_proto_msgTypes[26]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *UniversityRanking) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UniversityRanking) ProtoMessage() {}
+
+func (x *UniversityRanking) ProtoReflect() protoreflect.Message {
+	mi := &file_message_economic_school_proto_msgTypes[26]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UniversityRanking.ProtoReflect.Descriptor instead.
+func (*UniversityRanking) Descriptor() ([]byte, []int) {
+	return file_message_economic_school_proto_rawDescGZIP(), []int{26}
+}
+
+func (x *UniversityRanking) GetUsername() string {
+	if x != nil {
+		return x.Username
+	}
+	return ""
+}
+
+func (x *UniversityRanking) GetUniversity() string {
+	if x != nil {
+		return x.University
+	}
+	return ""
+}
+
+func (x *UniversityRanking) GetNumCompletedExams() int32 {
+	if x != nil {
+		return x.NumCompletedExams
+	}
+	return 0
+}
+
+func (x *UniversityRanking) GetRankingDate() string {
+	if x != nil {
+		return x.RankingDate
+	}
+	return ""
+}
+
+func (x *UniversityRanking) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
+}
+
+type WeeklyUniversityRanking struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Username            string                 `protobuf:"bytes,1,opt,name=username,proto3" json:"username,omitempty"`
+	University          string                 `protobuf:"bytes,2,opt,name=university,proto3" json:"university,omitempty"`
+	CompletedExamsCount int32                  `protobuf:"varint,3,opt,name=completed_exams_count,json=completedExamsCount,proto3" json:"completed_exams_count,omitempty"`
+	RankingDate         string                 `protobuf:"bytes,4,opt,name=ranking_date,json=rankingDate,proto3" json:"ranking_date,omitempty"`
+	CreatedAt           *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+}
+
+func (x *WeeklyUniversityRanking) Reset() {
+	*x = WeeklyUniversityRanking{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_message_economic_school_proto_msgTypes[27]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *WeeklyUniversityRanking) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*WeeklyUniversityRanking) ProtoMessage() {}
+
+func (x *WeeklyUniversityRanking) ProtoReflect() protoreflect.Message {
+	mi := &file_message_economic_school_proto_msgTypes[27]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use WeeklyUniversityRanking.ProtoReflect.Descriptor instead.
+func (*WeeklyUniversityRanking) Descriptor() ([]byte, []int) {
+	return file_message_economic_school_proto_rawDescGZIP(), []int{27}
+}
+
+func (x *WeeklyUniversityRanking) GetUsername() string {
+	if x != nil {
+		return x.Username
+	}
+	return ""
+}
+
+func (x *WeeklyUniversityRanking) GetUniversity() string {
+	if x != nil {
+		return x.University
+	}
+	return ""
+}
+
+func (x *WeeklyUniversityRanking) GetCompletedExamsCount() int32 {
+	if x != nil {
+		return x.CompletedExamsCount
+	}
+	return 0
+}
+
+func (x *WeeklyUniversityRanking) GetRankingDate() string {
+	if x != nil {
+		return x.RankingDate
+	}
+	return ""
+}
+
+func (x *WeeklyUniversityRanking) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
+}
+
 var File_message_economic_school_proto protoreflect.FileDescriptor
 
 var file_message_economic_school_proto_rawDesc = []byte{
@@ -1340,6 +1828,80 @@ var file_message_economic_school_proto_rawDesc = []byte{
 	0x32, 0x1a, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62,
 	0x75, 0x66, 0x2e, 0x54, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x52, 0x14, 0x61, 0x63,
 	0x63, 0x65, 0x73, 0x73, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x45, 0x78, 0x70, 0x69, 0x72, 0x65, 0x73,
+	0x41, 0x74, 0x22, 0x49, 0x0a, 0x18, 0x47, 0x65, 0x74, 0x47, 0x6c, 0x6f, 0x62, 0x61, 0x6c, 0x52,
+	0x61, 0x6e, 0x6b, 0x69, 0x6e, 0x67, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x2d,
+	0x0a, 0x08, 0x72, 0x61, 0x6e, 0x6b, 0x69, 0x6e, 0x67, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b,
+	0x32, 0x11, 0x2e, 0x70, 0x62, 0x2e, 0x47, 0x6c, 0x6f, 0x62, 0x61, 0x6c, 0x52, 0x61, 0x6e, 0x6b,
+	0x69, 0x6e, 0x67, 0x52, 0x08, 0x72, 0x61, 0x6e, 0x6b, 0x69, 0x6e, 0x67, 0x73, 0x22, 0x55, 0x0a,
+	0x1e, 0x47, 0x65, 0x74, 0x57, 0x65, 0x65, 0x6b, 0x6c, 0x79, 0x47, 0x6c, 0x6f, 0x62, 0x61, 0x6c,
+	0x52, 0x61, 0x6e, 0x6b, 0x69, 0x6e, 0x67, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12,
+	0x33, 0x0a, 0x08, 0x72, 0x61, 0x6e, 0x6b, 0x69, 0x6e, 0x67, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28,
+	0x0b, 0x32, 0x17, 0x2e, 0x70, 0x62, 0x2e, 0x57, 0x65, 0x65, 0x6b, 0x6c, 0x79, 0x47, 0x6c, 0x6f,
+	0x62, 0x61, 0x6c, 0x52, 0x61, 0x6e, 0x6b, 0x69, 0x6e, 0x67, 0x52, 0x08, 0x72, 0x61, 0x6e, 0x6b,
+	0x69, 0x6e, 0x67, 0x73, 0x22, 0xb9, 0x01, 0x0a, 0x0d, 0x47, 0x6c, 0x6f, 0x62, 0x61, 0x6c, 0x52,
+	0x61, 0x6e, 0x6b, 0x69, 0x6e, 0x67, 0x12, 0x1a, 0x0a, 0x08, 0x75, 0x73, 0x65, 0x72, 0x6e, 0x61,
+	0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x75, 0x73, 0x65, 0x72, 0x6e, 0x61,
+	0x6d, 0x65, 0x12, 0x2e, 0x0a, 0x13, 0x6e, 0x75, 0x6d, 0x5f, 0x63, 0x6f, 0x6d, 0x70, 0x6c, 0x65,
+	0x74, 0x65, 0x64, 0x5f, 0x65, 0x78, 0x61, 0x6d, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x05, 0x52,
+	0x11, 0x6e, 0x75, 0x6d, 0x43, 0x6f, 0x6d, 0x70, 0x6c, 0x65, 0x74, 0x65, 0x64, 0x45, 0x78, 0x61,
+	0x6d, 0x73, 0x12, 0x21, 0x0a, 0x0c, 0x72, 0x61, 0x6e, 0x6b, 0x69, 0x6e, 0x67, 0x5f, 0x64, 0x61,
+	0x74, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x72, 0x61, 0x6e, 0x6b, 0x69, 0x6e,
+	0x67, 0x44, 0x61, 0x74, 0x65, 0x12, 0x39, 0x0a, 0x0a, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64,
+	0x5f, 0x61, 0x74, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x67, 0x6f, 0x6f, 0x67,
+	0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x54, 0x69, 0x6d, 0x65,
+	0x73, 0x74, 0x61, 0x6d, 0x70, 0x52, 0x09, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74,
+	0x22, 0xc3, 0x01, 0x0a, 0x13, 0x57, 0x65, 0x65, 0x6b, 0x6c, 0x79, 0x47, 0x6c, 0x6f, 0x62, 0x61,
+	0x6c, 0x52, 0x61, 0x6e, 0x6b, 0x69, 0x6e, 0x67, 0x12, 0x1a, 0x0a, 0x08, 0x75, 0x73, 0x65, 0x72,
+	0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x75, 0x73, 0x65, 0x72,
+	0x6e, 0x61, 0x6d, 0x65, 0x12, 0x32, 0x0a, 0x15, 0x63, 0x6f, 0x6d, 0x70, 0x6c, 0x65, 0x74, 0x65,
+	0x64, 0x5f, 0x65, 0x78, 0x61, 0x6d, 0x73, 0x5f, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x02, 0x20,
+	0x01, 0x28, 0x05, 0x52, 0x13, 0x63, 0x6f, 0x6d, 0x70, 0x6c, 0x65, 0x74, 0x65, 0x64, 0x45, 0x78,
+	0x61, 0x6d, 0x73, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x21, 0x0a, 0x0c, 0x72, 0x61, 0x6e, 0x6b,
+	0x69, 0x6e, 0x67, 0x5f, 0x64, 0x61, 0x74, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b,
+	0x72, 0x61, 0x6e, 0x6b, 0x69, 0x6e, 0x67, 0x44, 0x61, 0x74, 0x65, 0x12, 0x39, 0x0a, 0x0a, 0x63,
+	0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0b, 0x32,
+	0x1a, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75,
+	0x66, 0x2e, 0x54, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x52, 0x09, 0x63, 0x72, 0x65,
+	0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x22, 0x51, 0x0a, 0x1c, 0x47, 0x65, 0x74, 0x55, 0x6e, 0x69,
+	0x76, 0x65, 0x72, 0x73, 0x69, 0x74, 0x79, 0x52, 0x61, 0x6e, 0x6b, 0x69, 0x6e, 0x67, 0x52, 0x65,
+	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x31, 0x0a, 0x08, 0x72, 0x61, 0x6e, 0x6b, 0x69, 0x6e,
+	0x67, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x15, 0x2e, 0x70, 0x62, 0x2e, 0x55, 0x6e,
+	0x69, 0x76, 0x65, 0x72, 0x73, 0x69, 0x74, 0x79, 0x52, 0x61, 0x6e, 0x6b, 0x69, 0x6e, 0x67, 0x52,
+	0x08, 0x72, 0x61, 0x6e, 0x6b, 0x69, 0x6e, 0x67, 0x73, 0x22, 0x5d, 0x0a, 0x22, 0x47, 0x65, 0x74,
+	0x57, 0x65, 0x65, 0x6b, 0x6c, 0x79, 0x55, 0x6e, 0x69, 0x76, 0x65, 0x72, 0x73, 0x69, 0x74, 0x79,
+	0x52, 0x61, 0x6e, 0x6b, 0x69, 0x6e, 0x67, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12,
+	0x37, 0x0a, 0x08, 0x72, 0x61, 0x6e, 0x6b, 0x69, 0x6e, 0x67, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28,
+	0x0b, 0x32, 0x1b, 0x2e, 0x70, 0x62, 0x2e, 0x57, 0x65, 0x65, 0x6b, 0x6c, 0x79, 0x55, 0x6e, 0x69,
+	0x76, 0x65, 0x72, 0x73, 0x69, 0x74, 0x79, 0x52, 0x61, 0x6e, 0x6b, 0x69, 0x6e, 0x67, 0x52, 0x08,
+	0x72, 0x61, 0x6e, 0x6b, 0x69, 0x6e, 0x67, 0x73, 0x22, 0xdd, 0x01, 0x0a, 0x11, 0x55, 0x6e, 0x69,
+	0x76, 0x65, 0x72, 0x73, 0x69, 0x74, 0x79, 0x52, 0x61, 0x6e, 0x6b, 0x69, 0x6e, 0x67, 0x12, 0x1a,
+	0x0a, 0x08, 0x75, 0x73, 0x65, 0x72, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x08, 0x75, 0x73, 0x65, 0x72, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x1e, 0x0a, 0x0a, 0x75, 0x6e,
+	0x69, 0x76, 0x65, 0x72, 0x73, 0x69, 0x74, 0x79, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a,
+	0x75, 0x6e, 0x69, 0x76, 0x65, 0x72, 0x73, 0x69, 0x74, 0x79, 0x12, 0x2e, 0x0a, 0x13, 0x6e, 0x75,
+	0x6d, 0x5f, 0x63, 0x6f, 0x6d, 0x70, 0x6c, 0x65, 0x74, 0x65, 0x64, 0x5f, 0x65, 0x78, 0x61, 0x6d,
+	0x73, 0x18, 0x03, 0x20, 0x01, 0x28, 0x05, 0x52, 0x11, 0x6e, 0x75, 0x6d, 0x43, 0x6f, 0x6d, 0x70,
+	0x6c, 0x65, 0x74, 0x65, 0x64, 0x45, 0x78, 0x61, 0x6d, 0x73, 0x12, 0x21, 0x0a, 0x0c, 0x72, 0x61,
+	0x6e, 0x6b, 0x69, 0x6e, 0x67, 0x5f, 0x64, 0x61, 0x74, 0x65, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x0b, 0x72, 0x61, 0x6e, 0x6b, 0x69, 0x6e, 0x67, 0x44, 0x61, 0x74, 0x65, 0x12, 0x39, 0x0a,
+	0x0a, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x05, 0x20, 0x01, 0x28,
+	0x0b, 0x32, 0x1a, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f,
+	0x62, 0x75, 0x66, 0x2e, 0x54, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x52, 0x09, 0x63,
+	0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x22, 0xe7, 0x01, 0x0a, 0x17, 0x57, 0x65, 0x65,
+	0x6b, 0x6c, 0x79, 0x55, 0x6e, 0x69, 0x76, 0x65, 0x72, 0x73, 0x69, 0x74, 0x79, 0x52, 0x61, 0x6e,
+	0x6b, 0x69, 0x6e, 0x67, 0x12, 0x1a, 0x0a, 0x08, 0x75, 0x73, 0x65, 0x72, 0x6e, 0x61, 0x6d, 0x65,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x75, 0x73, 0x65, 0x72, 0x6e, 0x61, 0x6d, 0x65,
+	0x12, 0x1e, 0x0a, 0x0a, 0x75, 0x6e, 0x69, 0x76, 0x65, 0x72, 0x73, 0x69, 0x74, 0x79, 0x18, 0x02,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x75, 0x6e, 0x69, 0x76, 0x65, 0x72, 0x73, 0x69, 0x74, 0x79,
+	0x12, 0x32, 0x0a, 0x15, 0x63, 0x6f, 0x6d, 0x70, 0x6c, 0x65, 0x74, 0x65, 0x64, 0x5f, 0x65, 0x78,
+	0x61, 0x6d, 0x73, 0x5f, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x03, 0x20, 0x01, 0x28, 0x05, 0x52,
+	0x13, 0x63, 0x6f, 0x6d, 0x70, 0x6c, 0x65, 0x74, 0x65, 0x64, 0x45, 0x78, 0x61, 0x6d, 0x73, 0x43,
+	0x6f, 0x75, 0x6e, 0x74, 0x12, 0x21, 0x0a, 0x0c, 0x72, 0x61, 0x6e, 0x6b, 0x69, 0x6e, 0x67, 0x5f,
+	0x64, 0x61, 0x74, 0x65, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x72, 0x61, 0x6e, 0x6b,
+	0x69, 0x6e, 0x67, 0x44, 0x61, 0x74, 0x65, 0x12, 0x39, 0x0a, 0x0a, 0x63, 0x72, 0x65, 0x61, 0x74,
+	0x65, 0x64, 0x5f, 0x61, 0x74, 0x18, 0x05, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x67, 0x6f,
+	0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x54, 0x69,
+	0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x52, 0x09, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64,
 	0x41, 0x74, 0x42, 0x14, 0x5a, 0x12, 0x65, 0x63, 0x6f, 0x6e, 0x6f, 0x6d, 0x69, 0x63, 0x2d, 0x73,
 	0x63, 0x68, 0x6f, 0x6f, 0x6c, 0x2f, 0x70, 0x62, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
@@ -1356,44 +1918,60 @@ func file_message_economic_school_proto_rawDescGZIP() []byte {
 	return file_message_economic_school_proto_rawDescData
 }
 
-var file_message_economic_school_proto_msgTypes = make([]protoimpl.MessageInfo, 20)
+var file_message_economic_school_proto_msgTypes = make([]protoimpl.MessageInfo, 28)
 var file_message_economic_school_proto_goTypes = []interface{}{
-	(*HealthCheckResponse)(nil),              // 0: pb.HealthCheckResponse
-	(*Exam)(nil),                             // 1: pb.Exam
-	(*CreateExamRequest)(nil),                // 2: pb.CreateExamRequest
-	(*GetExamRequest)(nil),                   // 3: pb.GetExamRequest
-	(*ListExamsRequest)(nil),                 // 4: pb.ListExamsRequest
-	(*ListExamsResponse)(nil),                // 5: pb.ListExamsResponse
-	(*UpdateExamRequest)(nil),                // 6: pb.UpdateExamRequest
-	(*DeleteExamRequest)(nil),                // 7: pb.DeleteExamRequest
-	(*GetSignedUrlRequest)(nil),              // 8: pb.GetSignedUrlRequest
-	(*GetSignedUrlResponse)(nil),             // 9: pb.GetSignedUrlResponse
-	(*UpsertUserExamRequest)(nil),            // 10: pb.UpsertUserExamRequest
-	(*GetUserExamRequest)(nil),               // 11: pb.GetUserExamRequest
-	(*UserExam)(nil),                         // 12: pb.UserExam
-	(*ListCompletedUserExamsRequest)(nil),    // 13: pb.ListCompletedUserExamsRequest
-	(*ListCompletedUserExamsResponse)(nil),   // 14: pb.ListCompletedUserExamsResponse
-	(*ListUniversitiesResponse)(nil),         // 15: pb.ListUniversitiesResponse
-	(*ExamCountByUniversity)(nil),            // 16: pb.ExamCountByUniversity
-	(*GetExamCountByUniversityResponse)(nil), // 17: pb.GetExamCountByUniversityResponse
-	(*RenewAccessTokenRequest)(nil),          // 18: pb.RenewAccessTokenRequest
-	(*RenewAccessTokenResponse)(nil),         // 19: pb.RenewAccessTokenResponse
-	(*fieldmaskpb.FieldMask)(nil),            // 20: google.protobuf.FieldMask
-	(*timestamppb.Timestamp)(nil),            // 21: google.protobuf.Timestamp
+	(*HealthCheckResponse)(nil),                // 0: pb.HealthCheckResponse
+	(*Exam)(nil),                               // 1: pb.Exam
+	(*CreateExamRequest)(nil),                  // 2: pb.CreateExamRequest
+	(*GetExamRequest)(nil),                     // 3: pb.GetExamRequest
+	(*ListExamsRequest)(nil),                   // 4: pb.ListExamsRequest
+	(*ListExamsResponse)(nil),                  // 5: pb.ListExamsResponse
+	(*UpdateExamRequest)(nil),                  // 6: pb.UpdateExamRequest
+	(*DeleteExamRequest)(nil),                  // 7: pb.DeleteExamRequest
+	(*GetSignedUrlRequest)(nil),                // 8: pb.GetSignedUrlRequest
+	(*GetSignedUrlResponse)(nil),               // 9: pb.GetSignedUrlResponse
+	(*UpsertUserExamRequest)(nil),              // 10: pb.UpsertUserExamRequest
+	(*GetUserExamRequest)(nil),                 // 11: pb.GetUserExamRequest
+	(*UserExam)(nil),                           // 12: pb.UserExam
+	(*ListCompletedUserExamsRequest)(nil),      // 13: pb.ListCompletedUserExamsRequest
+	(*ListCompletedUserExamsResponse)(nil),     // 14: pb.ListCompletedUserExamsResponse
+	(*ListUniversitiesResponse)(nil),           // 15: pb.ListUniversitiesResponse
+	(*ExamCountByUniversity)(nil),              // 16: pb.ExamCountByUniversity
+	(*GetExamCountByUniversityResponse)(nil),   // 17: pb.GetExamCountByUniversityResponse
+	(*RenewAccessTokenRequest)(nil),            // 18: pb.RenewAccessTokenRequest
+	(*RenewAccessTokenResponse)(nil),           // 19: pb.RenewAccessTokenResponse
+	(*GetGlobalRankingResponse)(nil),           // 20: pb.GetGlobalRankingResponse
+	(*GetWeeklyGlobalRankingResponse)(nil),     // 21: pb.GetWeeklyGlobalRankingResponse
+	(*GlobalRanking)(nil),                      // 22: pb.GlobalRanking
+	(*WeeklyGlobalRanking)(nil),                // 23: pb.WeeklyGlobalRanking
+	(*GetUniversityRankingResponse)(nil),       // 24: pb.GetUniversityRankingResponse
+	(*GetWeeklyUniversityRankingResponse)(nil), // 25: pb.GetWeeklyUniversityRankingResponse
+	(*UniversityRanking)(nil),                  // 26: pb.UniversityRanking
+	(*WeeklyUniversityRanking)(nil),            // 27: pb.WeeklyUniversityRanking
+	(*fieldmaskpb.FieldMask)(nil),              // 28: google.protobuf.FieldMask
+	(*timestamppb.Timestamp)(nil),              // 29: google.protobuf.Timestamp
 }
 var file_message_economic_school_proto_depIdxs = []int32{
 	1,  // 0: pb.ListExamsResponse.exams:type_name -> pb.Exam
 	1,  // 1: pb.UpdateExamRequest.exam:type_name -> pb.Exam
-	20, // 2: pb.UpdateExamRequest.update_mask:type_name -> google.protobuf.FieldMask
-	21, // 3: pb.UserExam.completed_at:type_name -> google.protobuf.Timestamp
+	28, // 2: pb.UpdateExamRequest.update_mask:type_name -> google.protobuf.FieldMask
+	29, // 3: pb.UserExam.completed_at:type_name -> google.protobuf.Timestamp
 	12, // 4: pb.ListCompletedUserExamsResponse.user_exams:type_name -> pb.UserExam
 	16, // 5: pb.GetExamCountByUniversityResponse.examCountByUniversity:type_name -> pb.ExamCountByUniversity
-	21, // 6: pb.RenewAccessTokenResponse.access_token_expires_at:type_name -> google.protobuf.Timestamp
-	7,  // [7:7] is the sub-list for method output_type
-	7,  // [7:7] is the sub-list for method input_type
-	7,  // [7:7] is the sub-list for extension type_name
-	7,  // [7:7] is the sub-list for extension extendee
-	0,  // [0:7] is the sub-list for field type_name
+	29, // 6: pb.RenewAccessTokenResponse.access_token_expires_at:type_name -> google.protobuf.Timestamp
+	22, // 7: pb.GetGlobalRankingResponse.rankings:type_name -> pb.GlobalRanking
+	23, // 8: pb.GetWeeklyGlobalRankingResponse.rankings:type_name -> pb.WeeklyGlobalRanking
+	29, // 9: pb.GlobalRanking.created_at:type_name -> google.protobuf.Timestamp
+	29, // 10: pb.WeeklyGlobalRanking.created_at:type_name -> google.protobuf.Timestamp
+	26, // 11: pb.GetUniversityRankingResponse.rankings:type_name -> pb.UniversityRanking
+	27, // 12: pb.GetWeeklyUniversityRankingResponse.rankings:type_name -> pb.WeeklyUniversityRanking
+	29, // 13: pb.UniversityRanking.created_at:type_name -> google.protobuf.Timestamp
+	29, // 14: pb.WeeklyUniversityRanking.created_at:type_name -> google.protobuf.Timestamp
+	15, // [15:15] is the sub-list for method output_type
+	15, // [15:15] is the sub-list for method input_type
+	15, // [15:15] is the sub-list for extension type_name
+	15, // [15:15] is the sub-list for extension extendee
+	0,  // [0:15] is the sub-list for field type_name
 }
 
 func init() { file_message_economic_school_proto_init() }
@@ -1642,6 +2220,102 @@ func file_message_economic_school_proto_init() {
 				return nil
 			}
 		}
+		file_message_economic_school_proto_msgTypes[20].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetGlobalRankingResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_message_economic_school_proto_msgTypes[21].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetWeeklyGlobalRankingResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_message_economic_school_proto_msgTypes[22].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GlobalRanking); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_message_economic_school_proto_msgTypes[23].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*WeeklyGlobalRanking); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_message_economic_school_proto_msgTypes[24].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetUniversityRankingResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_message_economic_school_proto_msgTypes[25].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetWeeklyUniversityRankingResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_message_economic_school_proto_msgTypes[26].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*UniversityRanking); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_message_economic_school_proto_msgTypes[27].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*WeeklyUniversityRanking); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	file_message_economic_school_proto_msgTypes[4].OneofWrappers = []interface{}{}
 	type x struct{}
@@ -1650,7 +2324,7 @@ func file_message_economic_school_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_message_economic_school_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   20,
+			NumMessages:   28,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

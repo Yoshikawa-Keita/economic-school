@@ -1,6 +1,6 @@
 -- SQL dump generated using DBML (dbml-lang.org)
 -- Database: PostgreSQL
--- Generated at: 2023-06-21T17:10:18.549Z
+-- Generated at: 2023-06-23T17:10:04.097Z
 
 CREATE TABLE "users" (
   "username" varchar PRIMARY KEY,
@@ -81,6 +81,23 @@ CREATE TABLE "university_ranking" (
   PRIMARY KEY ("university", "username", "ranking_date")
 );
 
+CREATE TABLE "weekly_global_ranking" (
+  "username" varchar,
+  "completed_exams_count" int NOT NULL,
+  "ranking_date" varchar NOT NULL,
+  "created_at" timestamptz NOT NULL DEFAULT (now()),
+  PRIMARY KEY ("username", "ranking_date")
+);
+
+CREATE TABLE "weekly_university_ranking" (
+  "username" varchar,
+  "university" varchar NOT NULL,
+  "completed_exams_count" int NOT NULL,
+  "ranking_date" varchar NOT NULL,
+  "created_at" timestamptz NOT NULL DEFAULT (now()),
+  PRIMARY KEY ("university", "username", "ranking_date")
+);
+
 ALTER TABLE "verify_emails" ADD FOREIGN KEY ("username") REFERENCES "users" ("username");
 
 ALTER TABLE "sessions" ADD FOREIGN KEY ("username") REFERENCES "users" ("username");
@@ -92,3 +109,7 @@ ALTER TABLE "user_exams" ADD FOREIGN KEY ("exam_id") REFERENCES "exams" ("exam_i
 ALTER TABLE "global_ranking" ADD FOREIGN KEY ("username") REFERENCES "users" ("username");
 
 ALTER TABLE "university_ranking" ADD FOREIGN KEY ("username") REFERENCES "users" ("username");
+
+ALTER TABLE "weekly_global_ranking" ADD FOREIGN KEY ("username") REFERENCES "users" ("username");
+
+ALTER TABLE "weekly_university_ranking" ADD FOREIGN KEY ("username") REFERENCES "users" ("username");

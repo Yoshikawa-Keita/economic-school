@@ -11,12 +11,11 @@ import (
 	"github.com/google/uuid"
 )
 
-type Account struct {
-	ID        int64     `json:"id"`
-	Owner     string    `json:"owner"`
-	Balance   int64     `json:"balance"`
-	Currency  string    `json:"currency"`
-	CreatedAt time.Time `json:"created_at"`
+type EmailLog struct {
+	ID          int64         `json:"id"`
+	Email       string        `json:"email"`
+	BounceCount sql.NullInt32 `json:"bounce_count"`
+	CreatedAt   time.Time     `json:"created_at"`
 }
 
 type Exam struct {
@@ -32,6 +31,13 @@ type Exam struct {
 	CreatedAt      time.Time      `json:"created_at"`
 }
 
+type GlobalRanking struct {
+	Username          string    `json:"username"`
+	NumCompletedExams int32     `json:"num_completed_exams"`
+	RankingDate       string    `json:"ranking_date"`
+	CreatedAt         time.Time `json:"created_at"`
+}
+
 type Session struct {
 	ID           uuid.UUID `json:"id"`
 	Username     string    `json:"username"`
@@ -41,6 +47,14 @@ type Session struct {
 	IsBlocked    bool      `json:"is_blocked"`
 	ExpiresAt    time.Time `json:"expires_at"`
 	CreatedAt    time.Time `json:"created_at"`
+}
+
+type UniversityRanking struct {
+	Username          string    `json:"username"`
+	University        string    `json:"university"`
+	NumCompletedExams int32     `json:"num_completed_exams"`
+	RankingDate       string    `json:"ranking_date"`
+	CreatedAt         time.Time `json:"created_at"`
 }
 
 type User struct {
@@ -72,4 +86,19 @@ type VerifyEmail struct {
 	IsUsed     bool      `json:"is_used"`
 	CreatedAt  time.Time `json:"created_at"`
 	ExpiredAt  time.Time `json:"expired_at"`
+}
+
+type WeeklyGlobalRanking struct {
+	Username            string    `json:"username"`
+	CompletedExamsCount int32     `json:"completed_exams_count"`
+	RankingDate         string    `json:"ranking_date"`
+	CreatedAt           time.Time `json:"created_at"`
+}
+
+type WeeklyUniversityRanking struct {
+	Username            string    `json:"username"`
+	University          string    `json:"university"`
+	CompletedExamsCount int32     `json:"completed_exams_count"`
+	RankingDate         string    `json:"ranking_date"`
+	CreatedAt           time.Time `json:"created_at"`
 }

@@ -11,26 +11,23 @@ import (
 )
 
 type Querier interface {
-	AddAccountBalance(ctx context.Context, arg AddAccountBalanceParams) (Account, error)
-	CreateAccount(ctx context.Context, arg CreateAccountParams) (Account, error)
 	CreateExam(ctx context.Context, arg CreateExamParams) (Exam, error)
 	CreateSession(ctx context.Context, arg CreateSessionParams) (Session, error)
 	CreateUser(ctx context.Context, arg CreateUserParams) (User, error)
 	CreateVerifyEmail(ctx context.Context, arg CreateVerifyEmailParams) (VerifyEmail, error)
-	DeleteAccount(ctx context.Context, id int64) error
 	DeleteExam(ctx context.Context, examID int32) error
-	GetAccount(ctx context.Context, id int64) (Account, error)
-	GetAccountForUpdate(ctx context.Context, id int64) (Account, error)
 	GetExam(ctx context.Context, examID int32) (Exam, error)
 	GetExamCountByUniversity(ctx context.Context) ([]GetExamCountByUniversityRow, error)
+	GetGlobalRanking(ctx context.Context) ([]GlobalRanking, error)
 	GetSession(ctx context.Context, id uuid.UUID) (Session, error)
+	GetUniversityRanking(ctx context.Context) ([]UniversityRanking, error)
 	GetUser(ctx context.Context, username string) (User, error)
 	GetUserExam(ctx context.Context, arg GetUserExamParams) (UserExam, error)
-	ListAccounts(ctx context.Context, arg ListAccountsParams) ([]Account, error)
+	GetWeeklyGlobalRanking(ctx context.Context) ([]WeeklyGlobalRanking, error)
+	GetWeeklyUniversityRanking(ctx context.Context) ([]WeeklyUniversityRanking, error)
 	ListCompletedUserExams(ctx context.Context, username string) ([]UserExam, error)
 	ListExams(ctx context.Context, arg ListExamsParams) ([]Exam, error)
 	ListUniversities(ctx context.Context) ([]string, error)
-	UpdateAccount(ctx context.Context, arg UpdateAccountParams) (Account, error)
 	// -- name: ListExams :many
 	// SELECT *
 	// FROM exams

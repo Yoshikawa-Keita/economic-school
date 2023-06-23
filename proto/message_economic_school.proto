@@ -116,4 +116,49 @@ message RenewAccessTokenResponse {
   google.protobuf.Timestamp access_token_expires_at = 2;
 }
 
+message GetGlobalRankingResponse {
+  repeated GlobalRanking rankings = 1;
+}
+
+message GetWeeklyGlobalRankingResponse {
+  repeated WeeklyGlobalRanking rankings = 1;
+}
+
+message GlobalRanking {
+  string username = 1;
+  int32 num_completed_exams = 2;
+  string ranking_date = 3;
+  google.protobuf.Timestamp created_at = 4;
+}
+
+message WeeklyGlobalRanking {
+  string username = 1;
+  int32 completed_exams_count = 2;
+  string ranking_date = 3;
+  google.protobuf.Timestamp created_at = 4;
+}
+
+message GetUniversityRankingResponse {
+  repeated UniversityRanking rankings = 1;
+}
+
+message GetWeeklyUniversityRankingResponse {
+  repeated WeeklyUniversityRanking rankings = 1;
+}
+
+message UniversityRanking {
+  string username = 1;
+  string university = 2;
+  int32 num_completed_exams = 3;
+  string ranking_date = 4;
+  google.protobuf.Timestamp created_at = 5;
+}
+
+message WeeklyUniversityRanking {
+  string username = 1;
+  string university = 2;
+  int32 completed_exams_count = 3;
+  string ranking_date = 4;
+  google.protobuf.Timestamp created_at = 5;
+}
 

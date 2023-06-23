@@ -174,4 +174,43 @@ service EconomicSchool {
     };
   }
 
+  rpc GetGlobalRanking(google.protobuf.Empty) returns (GetGlobalRankingResponse) {
+    option (google.api.http) = {
+      get: "/v1/get_global_ranking"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Use this API to retrieve the global ranking";
+      summary: "Get global ranking";
+    };
+  }
+
+  rpc GetWeeklyGlobalRanking(google.protobuf.Empty) returns (GetWeeklyGlobalRankingResponse) {
+    option (google.api.http) = {
+      get: "/v1/get_weekly_global_ranking"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Use this API to retrieve the weekly global ranking";
+      summary: "Get weekly global ranking";
+    };
+  }
+
+  rpc GetUniversityRanking(google.protobuf.Empty) returns (GetUniversityRankingResponse) {
+    option (google.api.http) = {
+      get: "/v1/get_university_ranking"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Use this API to retrieve the university ranking";
+      summary: "Get university ranking";
+    };
+  }
+
+  rpc GetWeeklyUniversityRanking(google.protobuf.Empty) returns (GetWeeklyUniversityRankingResponse) {
+    option (google.api.http) = {
+      get: "/v1/get_weekly_university_ranking"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Use this API to retrieve the weekly university ranking";
+      summary: "Get weekly university ranking";
+    };
+  }
 }

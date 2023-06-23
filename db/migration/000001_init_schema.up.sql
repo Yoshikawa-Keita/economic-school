@@ -78,6 +78,23 @@ CREATE TABLE "university_ranking" (
                                       PRIMARY KEY ("university", "username", "ranking_date")
 );
 
+CREATE TABLE "weekly_global_ranking" (
+                                         "username" varchar,
+                                         "completed_exams_count" int NOT NULL,
+                                         "ranking_date" varchar NOT NULL,
+                                         "created_at" timestamptz NOT NULL DEFAULT (now()),
+                                         PRIMARY KEY ("username", "ranking_date")
+);
+
+CREATE TABLE "weekly_university_ranking" (
+                                             "username" varchar,
+                                             "university" varchar NOT NULL,
+                                             "completed_exams_count" int NOT NULL,
+                                             "ranking_date" varchar NOT NULL,
+                                             "created_at" timestamptz NOT NULL DEFAULT (now()),
+                                             PRIMARY KEY ("university", "username", "ranking_date")
+);
+
 ALTER TABLE "verify_emails" ADD FOREIGN KEY ("username") REFERENCES "users" ("username");
 
 ALTER TABLE "sessions" ADD FOREIGN KEY ("username") REFERENCES "users" ("username");
@@ -89,6 +106,10 @@ ALTER TABLE "user_exams" ADD FOREIGN KEY ("exam_id") REFERENCES "exams" ("exam_i
 ALTER TABLE "global_ranking" ADD FOREIGN KEY ("username") REFERENCES "users" ("username");
 
 ALTER TABLE "university_ranking" ADD FOREIGN KEY ("username") REFERENCES "users" ("username");
+
+ALTER TABLE "weekly_global_ranking" ADD FOREIGN KEY ("username") REFERENCES "users" ("username");
+
+ALTER TABLE "weekly_university_ranking" ADD FOREIGN KEY ("username") REFERENCES "users" ("username");
 
 --------- 以下で初期データをinsertする
 
@@ -389,17 +410,17 @@ INSERT INTO "exams" ("university", "subject", "year", "question_num", "question_
 
 -- user exam
 
-INSERT INTO "user_exams" ("username", "exam_id", "university", "is_completed", "completed_at") VALUES ('aran', 1, 'kyoto', true, '2023-06-01 00:00:00+00');
-INSERT INTO "user_exams" ("username", "exam_id", "university", "is_completed", "completed_at") VALUES ('aran', 2, 'nagoya', true, '2023-06-02 00:00:00+00');
-INSERT INTO "user_exams" ("username", "exam_id", "university", "is_completed", "completed_at") VALUES ('aran', 3, 'yokohama', true, '2023-06-03 00:00:00+00');
-INSERT INTO "user_exams" ("username", "exam_id", "university", "is_completed", "completed_at") VALUES ('aran', 4, 'kyoto', true, '2023-06-04 00:00:00+00');
-INSERT INTO "user_exams" ("username", "exam_id", "university", "is_completed", "completed_at") VALUES ('aran', 5, 'nagoya', true, '2023-06-05 00:00:00+00');
-INSERT INTO "user_exams" ("username", "exam_id", "university", "is_completed", "completed_at") VALUES ('aran', 6, 'yokohama', true, '2023-06-06 00:00:00+00');
-INSERT INTO "user_exams" ("username", "exam_id", "university", "is_completed", "completed_at") VALUES ('aran', 7, 'kyoto', true, '2023-06-07 00:00:00+00');
-INSERT INTO "user_exams" ("username", "exam_id", "university", "is_completed", "completed_at") VALUES ('aran', 8, 'nagoya', true, '2023-06-08 00:00:00+00');
-INSERT INTO "user_exams" ("username", "exam_id", "university", "is_completed", "completed_at") VALUES ('aran', 9, 'yokohama', true, '2023-06-09 00:00:00+00');
-INSERT INTO "user_exams" ("username", "exam_id", "university", "is_completed", "completed_at") VALUES ('aran2', 10, 'kyoto', true, '2023-06-10 00:00:00+00');
-INSERT INTO "user_exams" ("username", "exam_id", "university", "is_completed", "completed_at") VALUES ('aran2', 11, 'nagoya', true, '2023-06-11 00:00:00+00');
-INSERT INTO "user_exams" ("username", "exam_id", "university", "is_completed", "completed_at") VALUES ('aran2', 12, 'yokohama', true, '2023-06-12 00:00:00+00');
-INSERT INTO "user_exams" ("username", "exam_id", "university", "is_completed", "completed_at") VALUES ('aran3', 13, 'kyoto', true, '2023-06-13 00:00:00+00');
+INSERT INTO "user_exams" ("username", "exam_id", "university", "is_completed", "completed_at") VALUES ('aran', 1, 'kyoto', true, '2023-06-24 00:00:00+00');
+INSERT INTO "user_exams" ("username", "exam_id", "university", "is_completed", "completed_at") VALUES ('aran', 2, 'nagoya', true, '2023-06-24 00:00:00+00');
+INSERT INTO "user_exams" ("username", "exam_id", "university", "is_completed", "completed_at") VALUES ('aran', 3, 'yokohama', true, '2023-06-24 00:00:00+00');
+INSERT INTO "user_exams" ("username", "exam_id", "university", "is_completed", "completed_at") VALUES ('aran', 4, 'kyoto', true, '2023-06-24 00:00:00+00');
+INSERT INTO "user_exams" ("username", "exam_id", "university", "is_completed", "completed_at") VALUES ('aran', 5, 'nagoya', true, '2023-06-24 00:00:00+00');
+INSERT INTO "user_exams" ("username", "exam_id", "university", "is_completed", "completed_at") VALUES ('aran', 6, 'yokohama', true, '2023-06-24 00:00:00+00');
+INSERT INTO "user_exams" ("username", "exam_id", "university", "is_completed", "completed_at") VALUES ('aran', 7, 'kyoto', true, '2023-06-24 00:00:00+00');
+INSERT INTO "user_exams" ("username", "exam_id", "university", "is_completed", "completed_at") VALUES ('aran', 8, 'nagoya', true, '2023-06-24 00:00:00+00');
+INSERT INTO "user_exams" ("username", "exam_id", "university", "is_completed", "completed_at") VALUES ('aran', 9, 'yokohama', true, '2023-06-24 00:00:00+00');
+INSERT INTO "user_exams" ("username", "exam_id", "university", "is_completed", "completed_at") VALUES ('aran2', 10, 'kyoto', true, '2023-06-24 00:00:00+00');
+INSERT INTO "user_exams" ("username", "exam_id", "university", "is_completed", "completed_at") VALUES ('aran2', 11, 'nagoya', true, '2023-06-24 00:00:00+00');
+INSERT INTO "user_exams" ("username", "exam_id", "university", "is_completed", "completed_at") VALUES ('aran2', 12, 'yokohama', true, '2023-06-24 00:00:00+00');
+INSERT INTO "user_exams" ("username", "exam_id", "university", "is_completed", "completed_at") VALUES ('aran3', 13, 'kyoto', true, '2023-06-24 00:00:00+00');
 
