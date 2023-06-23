@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Set the date
-DATE_FROM=$(date -d '7 days ago' "+%Y%m%d")
 DATE_TO=$(date "+%Y%m%d")
+DATE_FROM=$(date -d "$DATE_TO -7 days" "+%Y%m%d")
 
 # Set the database connection details
 DB_HOST=$host
