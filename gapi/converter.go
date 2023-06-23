@@ -44,3 +44,41 @@ func convertUserExam(userExam db.UserExam) *pb.UserExam {
 		CompletedAt: timestamppb.New(userExam.CompletedAt.Time),
 	}
 }
+
+func convertGlobalRanking(ranking db.GlobalRanking) *pb.GlobalRanking {
+	return &pb.GlobalRanking{
+		Username:          ranking.Username,
+		NumCompletedExams: ranking.NumCompletedExams,
+		RankingDate:       ranking.RankingDate,
+		CreatedAt:         timestamppb.New(ranking.CreatedAt),
+	}
+}
+
+func convertWeeklyGlobalRanking(ranking db.WeeklyGlobalRanking) *pb.WeeklyGlobalRanking {
+	return &pb.WeeklyGlobalRanking{
+		Username:            ranking.Username,
+		CompletedExamsCount: ranking.CompletedExamsCount,
+		RankingDate:         ranking.RankingDate,
+		CreatedAt:           timestamppb.New(ranking.CreatedAt),
+	}
+}
+
+func convertUniversityRanking(ranking db.UniversityRanking) *pb.UniversityRanking {
+	return &pb.UniversityRanking{
+		Username:          ranking.Username,
+		University:        ranking.University,
+		NumCompletedExams: ranking.NumCompletedExams,
+		RankingDate:       ranking.RankingDate,
+		CreatedAt:         timestamppb.New(ranking.CreatedAt),
+	}
+}
+
+func convertWeeklyUniversityRanking(ranking db.WeeklyUniversityRanking) *pb.WeeklyUniversityRanking {
+	return &pb.WeeklyUniversityRanking{
+		Username:            ranking.Username,
+		University:          ranking.University,
+		CompletedExamsCount: ranking.CompletedExamsCount,
+		RankingDate:         ranking.RankingDate,
+		CreatedAt:           timestamppb.New(ranking.CreatedAt),
+	}
+}

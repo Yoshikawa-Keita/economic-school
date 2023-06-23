@@ -20,23 +20,27 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	EconomicSchool_HealthCheck_FullMethodName              = "/pb.EconomicSchool/HealthCheck"
-	EconomicSchool_CreateUser_FullMethodName               = "/pb.EconomicSchool/CreateUser"
-	EconomicSchool_UpdateUser_FullMethodName               = "/pb.EconomicSchool/UpdateUser"
-	EconomicSchool_LoginUser_FullMethodName                = "/pb.EconomicSchool/LoginUser"
-	EconomicSchool_RenewAccessToken_FullMethodName         = "/pb.EconomicSchool/RenewAccessToken"
-	EconomicSchool_VerifyEmail_FullMethodName              = "/pb.EconomicSchool/VerifyEmail"
-	EconomicSchool_CreateExam_FullMethodName               = "/pb.EconomicSchool/CreateExam"
-	EconomicSchool_GetExam_FullMethodName                  = "/pb.EconomicSchool/GetExam"
-	EconomicSchool_ListExams_FullMethodName                = "/pb.EconomicSchool/ListExams"
-	EconomicSchool_UpdateExam_FullMethodName               = "/pb.EconomicSchool/UpdateExam"
-	EconomicSchool_DeleteExam_FullMethodName               = "/pb.EconomicSchool/DeleteExam"
-	EconomicSchool_GetSignedUrl_FullMethodName             = "/pb.EconomicSchool/GetSignedUrl"
-	EconomicSchool_UpsertUserExam_FullMethodName           = "/pb.EconomicSchool/UpsertUserExam"
-	EconomicSchool_GetUserExam_FullMethodName              = "/pb.EconomicSchool/GetUserExam"
-	EconomicSchool_ListCompletedUserExams_FullMethodName   = "/pb.EconomicSchool/ListCompletedUserExams"
-	EconomicSchool_ListUniversities_FullMethodName         = "/pb.EconomicSchool/ListUniversities"
-	EconomicSchool_GetExamCountByUniversity_FullMethodName = "/pb.EconomicSchool/GetExamCountByUniversity"
+	EconomicSchool_HealthCheck_FullMethodName                = "/pb.EconomicSchool/HealthCheck"
+	EconomicSchool_CreateUser_FullMethodName                 = "/pb.EconomicSchool/CreateUser"
+	EconomicSchool_UpdateUser_FullMethodName                 = "/pb.EconomicSchool/UpdateUser"
+	EconomicSchool_LoginUser_FullMethodName                  = "/pb.EconomicSchool/LoginUser"
+	EconomicSchool_RenewAccessToken_FullMethodName           = "/pb.EconomicSchool/RenewAccessToken"
+	EconomicSchool_VerifyEmail_FullMethodName                = "/pb.EconomicSchool/VerifyEmail"
+	EconomicSchool_CreateExam_FullMethodName                 = "/pb.EconomicSchool/CreateExam"
+	EconomicSchool_GetExam_FullMethodName                    = "/pb.EconomicSchool/GetExam"
+	EconomicSchool_ListExams_FullMethodName                  = "/pb.EconomicSchool/ListExams"
+	EconomicSchool_UpdateExam_FullMethodName                 = "/pb.EconomicSchool/UpdateExam"
+	EconomicSchool_DeleteExam_FullMethodName                 = "/pb.EconomicSchool/DeleteExam"
+	EconomicSchool_GetSignedUrl_FullMethodName               = "/pb.EconomicSchool/GetSignedUrl"
+	EconomicSchool_UpsertUserExam_FullMethodName             = "/pb.EconomicSchool/UpsertUserExam"
+	EconomicSchool_GetUserExam_FullMethodName                = "/pb.EconomicSchool/GetUserExam"
+	EconomicSchool_ListCompletedUserExams_FullMethodName     = "/pb.EconomicSchool/ListCompletedUserExams"
+	EconomicSchool_ListUniversities_FullMethodName           = "/pb.EconomicSchool/ListUniversities"
+	EconomicSchool_GetExamCountByUniversity_FullMethodName   = "/pb.EconomicSchool/GetExamCountByUniversity"
+	EconomicSchool_GetGlobalRanking_FullMethodName           = "/pb.EconomicSchool/GetGlobalRanking"
+	EconomicSchool_GetWeeklyGlobalRanking_FullMethodName     = "/pb.EconomicSchool/GetWeeklyGlobalRanking"
+	EconomicSchool_GetUniversityRanking_FullMethodName       = "/pb.EconomicSchool/GetUniversityRanking"
+	EconomicSchool_GetWeeklyUniversityRanking_FullMethodName = "/pb.EconomicSchool/GetWeeklyUniversityRanking"
 )
 
 // EconomicSchoolClient is the client API for EconomicSchool service.
@@ -60,6 +64,10 @@ type EconomicSchoolClient interface {
 	ListCompletedUserExams(ctx context.Context, in *ListCompletedUserExamsRequest, opts ...grpc.CallOption) (*ListCompletedUserExamsResponse, error)
 	ListUniversities(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*ListUniversitiesResponse, error)
 	GetExamCountByUniversity(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetExamCountByUniversityResponse, error)
+	GetGlobalRanking(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetGlobalRankingResponse, error)
+	GetWeeklyGlobalRanking(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetWeeklyGlobalRankingResponse, error)
+	GetUniversityRanking(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetUniversityRankingResponse, error)
+	GetWeeklyUniversityRanking(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetWeeklyUniversityRankingResponse, error)
 }
 
 type economicSchoolClient struct {
@@ -223,6 +231,42 @@ func (c *economicSchoolClient) GetExamCountByUniversity(ctx context.Context, in 
 	return out, nil
 }
 
+func (c *economicSchoolClient) GetGlobalRanking(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetGlobalRankingResponse, error) {
+	out := new(GetGlobalRankingResponse)
+	err := c.cc.Invoke(ctx, EconomicSchool_GetGlobalRanking_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *economicSchoolClient) GetWeeklyGlobalRanking(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetWeeklyGlobalRankingResponse, error) {
+	out := new(GetWeeklyGlobalRankingResponse)
+	err := c.cc.Invoke(ctx, EconomicSchool_GetWeeklyGlobalRanking_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *economicSchoolClient) GetUniversityRanking(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetUniversityRankingResponse, error) {
+	out := new(GetUniversityRankingResponse)
+	err := c.cc.Invoke(ctx, EconomicSchool_GetUniversityRanking_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *economicSchoolClient) GetWeeklyUniversityRanking(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetWeeklyUniversityRankingResponse, error) {
+	out := new(GetWeeklyUniversityRankingResponse)
+	err := c.cc.Invoke(ctx, EconomicSchool_GetWeeklyUniversityRanking_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // EconomicSchoolServer is the server API for EconomicSchool service.
 // All implementations must embed UnimplementedEconomicSchoolServer
 // for forward compatibility
@@ -244,6 +288,10 @@ type EconomicSchoolServer interface {
 	ListCompletedUserExams(context.Context, *ListCompletedUserExamsRequest) (*ListCompletedUserExamsResponse, error)
 	ListUniversities(context.Context, *emptypb.Empty) (*ListUniversitiesResponse, error)
 	GetExamCountByUniversity(context.Context, *emptypb.Empty) (*GetExamCountByUniversityResponse, error)
+	GetGlobalRanking(context.Context, *emptypb.Empty) (*GetGlobalRankingResponse, error)
+	GetWeeklyGlobalRanking(context.Context, *emptypb.Empty) (*GetWeeklyGlobalRankingResponse, error)
+	GetUniversityRanking(context.Context, *emptypb.Empty) (*GetUniversityRankingResponse, error)
+	GetWeeklyUniversityRanking(context.Context, *emptypb.Empty) (*GetWeeklyUniversityRankingResponse, error)
 	mustEmbedUnimplementedEconomicSchoolServer()
 }
 
@@ -301,6 +349,18 @@ func (UnimplementedEconomicSchoolServer) ListUniversities(context.Context, *empt
 }
 func (UnimplementedEconomicSchoolServer) GetExamCountByUniversity(context.Context, *emptypb.Empty) (*GetExamCountByUniversityResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetExamCountByUniversity not implemented")
+}
+func (UnimplementedEconomicSchoolServer) GetGlobalRanking(context.Context, *emptypb.Empty) (*GetGlobalRankingResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetGlobalRanking not implemented")
+}
+func (UnimplementedEconomicSchoolServer) GetWeeklyGlobalRanking(context.Context, *emptypb.Empty) (*GetWeeklyGlobalRankingResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetWeeklyGlobalRanking not implemented")
+}
+func (UnimplementedEconomicSchoolServer) GetUniversityRanking(context.Context, *emptypb.Empty) (*GetUniversityRankingResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUniversityRanking not implemented")
+}
+func (UnimplementedEconomicSchoolServer) GetWeeklyUniversityRanking(context.Context, *emptypb.Empty) (*GetWeeklyUniversityRankingResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetWeeklyUniversityRanking not implemented")
 }
 func (UnimplementedEconomicSchoolServer) mustEmbedUnimplementedEconomicSchoolServer() {}
 
@@ -621,6 +681,78 @@ func _EconomicSchool_GetExamCountByUniversity_Handler(srv interface{}, ctx conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _EconomicSchool_GetGlobalRanking_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(emptypb.Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EconomicSchoolServer).GetGlobalRanking(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: EconomicSchool_GetGlobalRanking_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EconomicSchoolServer).GetGlobalRanking(ctx, req.(*emptypb.Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _EconomicSchool_GetWeeklyGlobalRanking_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(emptypb.Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EconomicSchoolServer).GetWeeklyGlobalRanking(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: EconomicSchool_GetWeeklyGlobalRanking_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EconomicSchoolServer).GetWeeklyGlobalRanking(ctx, req.(*emptypb.Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _EconomicSchool_GetUniversityRanking_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(emptypb.Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EconomicSchoolServer).GetUniversityRanking(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: EconomicSchool_GetUniversityRanking_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EconomicSchoolServer).GetUniversityRanking(ctx, req.(*emptypb.Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _EconomicSchool_GetWeeklyUniversityRanking_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(emptypb.Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EconomicSchoolServer).GetWeeklyUniversityRanking(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: EconomicSchool_GetWeeklyUniversityRanking_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EconomicSchoolServer).GetWeeklyUniversityRanking(ctx, req.(*emptypb.Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // EconomicSchool_ServiceDesc is the grpc.ServiceDesc for EconomicSchool service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -695,6 +827,22 @@ var EconomicSchool_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetExamCountByUniversity",
 			Handler:    _EconomicSchool_GetExamCountByUniversity_Handler,
+		},
+		{
+			MethodName: "GetGlobalRanking",
+			Handler:    _EconomicSchool_GetGlobalRanking_Handler,
+		},
+		{
+			MethodName: "GetWeeklyGlobalRanking",
+			Handler:    _EconomicSchool_GetWeeklyGlobalRanking_Handler,
+		},
+		{
+			MethodName: "GetUniversityRanking",
+			Handler:    _EconomicSchool_GetUniversityRanking_Handler,
+		},
+		{
+			MethodName: "GetWeeklyUniversityRanking",
+			Handler:    _EconomicSchool_GetWeeklyUniversityRanking_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -87,4 +87,27 @@ Table university_ranking as UR {
   }
 }
 
+Table weekly_global_ranking as WGR {
+  username varchar [ref: > users.username]
+  completed_exams_count int [not null]
+  ranking_date varchar [not null]
+  created_at timestamptz [not null, default: `now()`]
+
+  Indexes {
+      (username, ranking_date) [pk]
+    }
+}
+
+Table weekly_university_ranking as WUR {
+  username varchar [ref: > users.username]
+  university varchar [not null]
+  completed_exams_count int [not null]
+  ranking_date varchar [not null]
+  created_at timestamptz [not null, default: `now()`]
+
+  Indexes {
+    (university, username, ranking_date) [pk]
+  }
+}
+
 
