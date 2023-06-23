@@ -94,30 +94,19 @@ ALTER TABLE "university_ranking" ADD FOREIGN KEY ("username") REFERENCES "users"
 
 -- user
 
-INSERT INTO "users" (
-    "username",
-    "hashed_password",
-    "full_name",
-    "email",
-    "user_type",
-    "profile_image_url",
-    "is_email_verified",
-    "password_changed_at",
-    "created_at",
-    "version"
-) VALUES (
-             'aran',
-             '$2a$10$GRAXD/JFrWwERy/s0J81ke4xod9f95jrIgQ/NeXyNKt894Cd/r/re',
-             'aaaa',
-             'keita_yoshi@icloud.com',
-             1,
-             'aran.jpg',
-             true,
-             '0001-01-01 00:00:00+00',
-             '2023-05-28 00:05:20.738982+00',
-             1
-         );
-
+INSERT INTO "users" ("username","hashed_password","full_name","email","user_type","profile_image_url","is_email_verified","password_changed_at","created_at","version") VALUES ('aran','$2a$10$GRAXD/JFrWwERy/s0J81ke4xod9f95jrIgQ/NeXyNKt894Cd/r/re','aaaa','keita_yoshi@icloud.com',1,'aran.jpg',true,'0001-01-01 00:00:00+00','2023-05-28 00:05:20.738982+00',1);
+INSERT INTO "users" ("username","hashed_password","full_name","email","user_type","profile_image_url","is_email_verified","password_changed_at","created_at","version") VALUES ('aran2','$2a$10$GRAXD/JFrWwERy/s0J81ke4xod9f95jrIgQ/NeXyNKt894Cd/r/re','aaaa','keita_yoshi2@icloud.com',1,'aran.jpg',true,'0001-01-01 00:00:00+00','2023-05-28 00:05:20.738982+00',1);
+INSERT INTO "users" ("username","hashed_password","full_name","email","user_type","profile_image_url","is_email_verified","password_changed_at","created_at","version") VALUES ('aran3','$2a$10$GRAXD/JFrWwERy/s0J81ke4xod9f95jrIgQ/NeXyNKt894Cd/r/re','aaaa','keita_yoshi3@icloud.com',1,'aran.jpg',true,'0001-01-01 00:00:00+00','2023-05-28 00:05:20.738982+00',1);
+INSERT INTO "users" ("username","hashed_password","full_name","email","user_type","profile_image_url","is_email_verified","password_changed_at","created_at","version") VALUES ('aran4','$2a$10$GRAXD/JFrWwERy/s0J81ke4xod9f95jrIgQ/NeXyNKt894Cd/r/re','aaaa','keita_yoshi4@icloud.com',1,'aran.jpg',true,'0001-01-01 00:00:00+00','2023-05-28 00:05:20.738982+00',1);
+INSERT INTO "users" ("username","hashed_password","full_name","email","user_type","profile_image_url","is_email_verified","password_changed_at","created_at","version") VALUES ('aran5','$2a$10$GRAXD/JFrWwERy/s0J81ke4xod9f95jrIgQ/NeXyNKt894Cd/r/re','aaaa','keita_yoshi5@icloud.com',1,'aran.jpg',true,'0001-01-01 00:00:00+00','2023-05-28 00:05:20.738982+00',1);
+INSERT INTO "users" ("username","hashed_password","full_name","email","user_type","profile_image_url","is_email_verified","password_changed_at","created_at","version") VALUES ('aran6','$2a$10$GRAXD/JFrWwERy/s0J81ke4xod9f95jrIgQ/NeXyNKt894Cd/r/re','aaaa','keita_yoshi6@icloud.com',1,'aran.jpg',true,'0001-01-01 00:00:00+00','2023-05-28 00:05:20.738982+00',1);
+INSERT INTO "users" ("username","hashed_password","full_name","email","user_type","profile_image_url","is_email_verified","password_changed_at","created_at","version") VALUES ('aran7','$2a$10$GRAXD/JFrWwERy/s0J81ke4xod9f95jrIgQ/NeXyNKt894Cd/r/re','aaaa','keita_yoshi7@icloud.com',1,'aran.jpg',true,'0001-01-01 00:00:00+00','2023-05-28 00:05:20.738982+00',1);
+INSERT INTO "users" ("username","hashed_password","full_name","email","user_type","profile_image_url","is_email_verified","password_changed_at","created_at","version") VALUES ('aran8','$2a$10$GRAXD/JFrWwERy/s0J81ke4xod9f95jrIgQ/NeXyNKt894Cd/r/re','aaaa','keita_yoshi8@icloud.com',1,'aran.jpg',true,'0001-01-01 00:00:00+00','2023-05-28 00:05:20.738982+00',1);
+INSERT INTO "users" ("username","hashed_password","full_name","email","user_type","profile_image_url","is_email_verified","password_changed_at","created_at","version") VALUES ('aran9','$2a$10$GRAXD/JFrWwERy/s0J81ke4xod9f95jrIgQ/NeXyNKt894Cd/r/re','aaaa','keita_yoshi9@icloud.com',1,'aran.jpg',true,'0001-01-01 00:00:00+00','2023-05-28 00:05:20.738982+00',1);
+INSERT INTO "users" ("username","hashed_password","full_name","email","user_type","profile_image_url","is_email_verified","password_changed_at","created_at","version") VALUES ('aran10','$2a$10$GRAXD/JFrWwERy/s0J81ke4xod9f95jrIgQ/NeXyNKt894Cd/r/re','aaaa','keita_yoshi10@icloud.com',1,'aran.jpg',true,'0001-01-01 00:00:00+00','2023-05-28 00:05:20.738982+00',1);
+INSERT INTO "users" ("username","hashed_password","full_name","email","user_type","profile_image_url","is_email_verified","password_changed_at","created_at","version") VALUES ('aran11','$2a$10$GRAXD/JFrWwERy/s0J81ke4xod9f95jrIgQ/NeXyNKt894Cd/r/re','aaaa','keita_yoshi11@icloud.com',1,'aran.jpg',true,'0001-01-01 00:00:00+00','2023-05-28 00:05:20.738982+00',1);
+INSERT INTO "users" ("username","hashed_password","full_name","email","user_type","profile_image_url","is_email_verified","password_changed_at","created_at","version") VALUES ('aran12','$2a$10$GRAXD/JFrWwERy/s0J81ke4xod9f95jrIgQ/NeXyNKt894Cd/r/re','aaaa','keita_yoshi12@icloud.com',1,'aran.jpg',true,'0001-01-01 00:00:00+00','2023-05-28 00:05:20.738982+00',1);
+INSERT INTO "users" ("username","hashed_password","full_name","email","user_type","profile_image_url","is_email_verified","password_changed_at","created_at","version") VALUES ('aran13','$2a$10$GRAXD/JFrWwERy/s0J81ke4xod9f95jrIgQ/NeXyNKt894Cd/r/re','aaaa','keita_yoshi13@icloud.com',1,'aran.jpg',true,'0001-01-01 00:00:00+00','2023-05-28 00:05:20.738982+00',1);
 
 -- exam
 
@@ -397,3 +386,20 @@ INSERT INTO "exams" ("university", "subject", "year", "question_num", "question_
 INSERT INTO "exams" ("university", "subject", "year", "question_num", "question_pdf_url", "answer_pdf_url", "video_url", "critique_url") VALUES ('yokohama', 'micro', 2022, 2, 'yokohama_2022_2_mi_q.pdf', 'yokohama_2022_2_mi_a.pdf', '', '');
 INSERT INTO "exams" ("university", "subject", "year", "question_num", "question_pdf_url", "answer_pdf_url", "video_url", "critique_url") VALUES ('yokohama', 'micro', 2018, 2, 'yokohama_2018_2_mi_q.pdf', 'yokohama_2018_2_mi_a.pdf', '', '');
 INSERT INTO "exams" ("university", "subject", "year", "question_num", "question_pdf_url", "answer_pdf_url", "video_url", "critique_url") VALUES ('yokohama', 'micro', 2014, 1, 'yokohama_2014_1_mi_q.pdf', 'yokohama_2014_1_mi_a.pdf', '', '');
+
+-- user exam
+
+INSERT INTO "user_exams" ("username", "exam_id", "university", "is_completed", "completed_at") VALUES ('aran', 1, 'kyoto', true, '2023-06-01 00:00:00+00');
+INSERT INTO "user_exams" ("username", "exam_id", "university", "is_completed", "completed_at") VALUES ('aran', 2, 'nagoya', true, '2023-06-02 00:00:00+00');
+INSERT INTO "user_exams" ("username", "exam_id", "university", "is_completed", "completed_at") VALUES ('aran', 3, 'yokohama', true, '2023-06-03 00:00:00+00');
+INSERT INTO "user_exams" ("username", "exam_id", "university", "is_completed", "completed_at") VALUES ('aran', 4, 'kyoto', true, '2023-06-04 00:00:00+00');
+INSERT INTO "user_exams" ("username", "exam_id", "university", "is_completed", "completed_at") VALUES ('aran', 5, 'nagoya', true, '2023-06-05 00:00:00+00');
+INSERT INTO "user_exams" ("username", "exam_id", "university", "is_completed", "completed_at") VALUES ('aran', 6, 'yokohama', true, '2023-06-06 00:00:00+00');
+INSERT INTO "user_exams" ("username", "exam_id", "university", "is_completed", "completed_at") VALUES ('aran', 7, 'kyoto', true, '2023-06-07 00:00:00+00');
+INSERT INTO "user_exams" ("username", "exam_id", "university", "is_completed", "completed_at") VALUES ('aran', 8, 'nagoya', true, '2023-06-08 00:00:00+00');
+INSERT INTO "user_exams" ("username", "exam_id", "university", "is_completed", "completed_at") VALUES ('aran', 9, 'yokohama', true, '2023-06-09 00:00:00+00');
+INSERT INTO "user_exams" ("username", "exam_id", "university", "is_completed", "completed_at") VALUES ('aran2', 10, 'kyoto', true, '2023-06-10 00:00:00+00');
+INSERT INTO "user_exams" ("username", "exam_id", "university", "is_completed", "completed_at") VALUES ('aran2', 11, 'nagoya', true, '2023-06-11 00:00:00+00');
+INSERT INTO "user_exams" ("username", "exam_id", "university", "is_completed", "completed_at") VALUES ('aran2', 12, 'yokohama', true, '2023-06-12 00:00:00+00');
+INSERT INTO "user_exams" ("username", "exam_id", "university", "is_completed", "completed_at") VALUES ('aran3', 13, 'kyoto', true, '2023-06-13 00:00:00+00');
+
