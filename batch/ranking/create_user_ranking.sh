@@ -2,7 +2,7 @@
 
 # Set the date
 DATE_TO=$(date "+%Y%m%d")
-DATE_FROM=$(date -d "$DATE_TO -7 days" "+%Y%m%d")
+DATE_FROM=$(date -D "%Y%m%d" -d "$DATE_TO - 7 days" "+%Y%m%d")
 
 # Set the database connection details
 DB_HOST=$host
