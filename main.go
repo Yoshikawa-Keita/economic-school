@@ -141,7 +141,7 @@ func runGatewayServer(config util.Config, store db.Store, taskDistributor worker
 	// Create a new CORS handler
 	corsHandler := cors.New(cors.Options{
 		AllowedOrigins:   []string{"http://localhost:3000", config.FrontEndSubDomain, config.FrontEndDomain},
-		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"},
 		AllowedHeaders:   []string{"*"},
 		AllowCredentials: true,
 	})
