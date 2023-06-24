@@ -127,15 +127,17 @@ message GetWeeklyGlobalRankingResponse {
 message GlobalRanking {
   string username = 1;
   int32 num_completed_exams = 2;
-  string ranking_date = 3;
-  google.protobuf.Timestamp created_at = 4;
+  int32 ranking = 3;
+  string ranking_date = 4;
+  google.protobuf.Timestamp created_at = 5;
 }
 
 message WeeklyGlobalRanking {
   string username = 1;
   int32 completed_exams_count = 2;
-  string ranking_date = 3;
-  google.protobuf.Timestamp created_at = 4;
+  int32 ranking = 3;
+  string ranking_date = 4;
+  google.protobuf.Timestamp created_at = 5;
 }
 
 message GetUniversityRankingResponse {
@@ -150,15 +152,17 @@ message UniversityRanking {
   string username = 1;
   string university = 2;
   int32 num_completed_exams = 3;
-  string ranking_date = 4;
-  google.protobuf.Timestamp created_at = 5;
+  int32 ranking = 4;
+  string ranking_date = 5;
+  google.protobuf.Timestamp created_at = 6;
 }
 
 message WeeklyUniversityRanking {
   string username = 1;
   string university = 2;
   int32 completed_exams_count = 3;
-  string ranking_date = 4;
-  google.protobuf.Timestamp created_at = 5;
+  int32 ranking = 4;
+  string ranking_date = 5;
+  google.protobuf.Timestamp created_at = 6;
 }
 

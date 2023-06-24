@@ -34,6 +34,7 @@ type Exam struct {
 type GlobalRanking struct {
 	Username          string    `json:"username"`
 	NumCompletedExams int32     `json:"num_completed_exams"`
+	Ranking           int32     `json:"ranking"`
 	RankingDate       string    `json:"ranking_date"`
 	CreatedAt         time.Time `json:"created_at"`
 }
@@ -53,6 +54,7 @@ type UniversityRanking struct {
 	Username          string    `json:"username"`
 	University        string    `json:"university"`
 	NumCompletedExams int32     `json:"num_completed_exams"`
+	Ranking           int32     `json:"ranking"`
 	RankingDate       string    `json:"ranking_date"`
 	CreatedAt         time.Time `json:"created_at"`
 }
@@ -91,6 +93,7 @@ type VerifyEmail struct {
 type WeeklyGlobalRanking struct {
 	Username            string    `json:"username"`
 	CompletedExamsCount int32     `json:"completed_exams_count"`
+	Ranking             int32     `json:"ranking"`
 	RankingDate         string    `json:"ranking_date"`
 	CreatedAt           time.Time `json:"created_at"`
 }
@@ -99,6 +102,7 @@ type WeeklyUniversityRanking struct {
 	Username            string    `json:"username"`
 	University          string    `json:"university"`
 	CompletedExamsCount int32     `json:"completed_exams_count"`
+	Ranking             int32     `json:"ranking"`
 	RankingDate         string    `json:"ranking_date"`
 	CreatedAt           time.Time `json:"created_at"`
 }
