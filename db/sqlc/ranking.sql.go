@@ -10,8 +10,8 @@ import (
 )
 
 const getGlobalRanking = `-- name: GetGlobalRanking :many
-SELECT username, num_completed_exams, ranking_date, created_at FROM global_ranking
-ORDER BY num_completed_exams DESC
+SELECT username, num_completed_exams, ranking, ranking_date, created_at FROM global_ranking
+ORDER BY ranking
 `
 
 func (q *Queries) GetGlobalRanking(ctx context.Context) ([]GlobalRanking, error) {
@@ -26,6 +26,7 @@ func (q *Queries) GetGlobalRanking(ctx context.Context) ([]GlobalRanking, error)
 		if err := rows.Scan(
 			&i.Username,
 			&i.NumCompletedExams,
+			&i.Ranking,
 			&i.RankingDate,
 			&i.CreatedAt,
 		); err != nil {
@@ -43,8 +44,8 @@ func (q *Queries) GetGlobalRanking(ctx context.Context) ([]GlobalRanking, error)
 }
 
 const getUniversityRanking = `-- name: GetUniversityRanking :many
-SELECT username, university, num_completed_exams, ranking_date, created_at FROM university_ranking
-ORDER BY university, num_completed_exams DESC
+SELECT username, university, num_completed_exams, ranking, ranking_date, created_at FROM university_ranking
+ORDER BY university, ranking
 `
 
 func (q *Queries) GetUniversityRanking(ctx context.Context) ([]UniversityRanking, error) {
@@ -60,6 +61,7 @@ func (q *Queries) GetUniversityRanking(ctx context.Context) ([]UniversityRanking
 			&i.Username,
 			&i.University,
 			&i.NumCompletedExams,
+			&i.Ranking,
 			&i.RankingDate,
 			&i.CreatedAt,
 		); err != nil {
@@ -77,8 +79,8 @@ func (q *Queries) GetUniversityRanking(ctx context.Context) ([]UniversityRanking
 }
 
 const getWeeklyGlobalRanking = `-- name: GetWeeklyGlobalRanking :many
-SELECT username, completed_exams_count, ranking_date, created_at FROM weekly_global_ranking
-ORDER BY completed_exams_count DESC
+SELECT username, completed_exams_count, ranking, ranking_date, created_at FROM weekly_global_ranking
+ORDER BY ranking
 `
 
 func (q *Queries) GetWeeklyGlobalRanking(ctx context.Context) ([]WeeklyGlobalRanking, error) {
@@ -93,6 +95,7 @@ func (q *Queries) GetWeeklyGlobalRanking(ctx context.Context) ([]WeeklyGlobalRan
 		if err := rows.Scan(
 			&i.Username,
 			&i.CompletedExamsCount,
+			&i.Ranking,
 			&i.RankingDate,
 			&i.CreatedAt,
 		); err != nil {
@@ -110,8 +113,8 @@ func (q *Queries) GetWeeklyGlobalRanking(ctx context.Context) ([]WeeklyGlobalRan
 }
 
 const getWeeklyUniversityRanking = `-- name: GetWeeklyUniversityRanking :many
-SELECT username, university, completed_exams_count, ranking_date, created_at FROM weekly_university_ranking
-ORDER BY university, completed_exams_count DESC
+SELECT username, university, completed_exams_count, ranking, ranking_date, created_at FROM weekly_university_ranking
+ORDER BY university, ranking
 `
 
 func (q *Queries) GetWeeklyUniversityRanking(ctx context.Context) ([]WeeklyUniversityRanking, error) {
@@ -127,6 +130,7 @@ func (q *Queries) GetWeeklyUniversityRanking(ctx context.Context) ([]WeeklyUnive
 			&i.Username,
 			&i.University,
 			&i.CompletedExamsCount,
+			&i.Ranking,
 			&i.RankingDate,
 			&i.CreatedAt,
 		); err != nil {

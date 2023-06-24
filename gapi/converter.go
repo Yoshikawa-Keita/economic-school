@@ -49,6 +49,7 @@ func convertGlobalRanking(ranking db.GlobalRanking) *pb.GlobalRanking {
 	return &pb.GlobalRanking{
 		Username:          ranking.Username,
 		NumCompletedExams: ranking.NumCompletedExams,
+		Ranking:           ranking.Ranking,
 		RankingDate:       ranking.RankingDate,
 		CreatedAt:         timestamppb.New(ranking.CreatedAt),
 	}
@@ -58,6 +59,7 @@ func convertWeeklyGlobalRanking(ranking db.WeeklyGlobalRanking) *pb.WeeklyGlobal
 	return &pb.WeeklyGlobalRanking{
 		Username:            ranking.Username,
 		CompletedExamsCount: ranking.CompletedExamsCount,
+		Ranking:             ranking.Ranking,
 		RankingDate:         ranking.RankingDate,
 		CreatedAt:           timestamppb.New(ranking.CreatedAt),
 	}
@@ -68,6 +70,7 @@ func convertUniversityRanking(ranking db.UniversityRanking) *pb.UniversityRankin
 		Username:          ranking.Username,
 		University:        ranking.University,
 		NumCompletedExams: ranking.NumCompletedExams,
+		Ranking:           ranking.Ranking,
 		RankingDate:       ranking.RankingDate,
 		CreatedAt:         timestamppb.New(ranking.CreatedAt),
 	}
@@ -78,6 +81,7 @@ func convertWeeklyUniversityRanking(ranking db.WeeklyUniversityRanking) *pb.Week
 		Username:            ranking.Username,
 		University:          ranking.University,
 		CompletedExamsCount: ranking.CompletedExamsCount,
+		Ranking:             ranking.Ranking,
 		RankingDate:         ranking.RankingDate,
 		CreatedAt:           timestamppb.New(ranking.CreatedAt),
 	}
