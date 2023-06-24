@@ -65,6 +65,7 @@ CREATE TABLE "user_exams" (
 CREATE TABLE "global_ranking" (
                                   "username" varchar PRIMARY KEY,
                                   "num_completed_exams" int NOT NULL,
+                                  "ranking" int NOT NULL,
                                   "ranking_date" varchar NOT NULL,
                                   "created_at" timestamptz NOT NULL DEFAULT (now())
 );
@@ -73,6 +74,7 @@ CREATE TABLE "university_ranking" (
                                       "username" varchar,
                                       "university" varchar NOT NULL,
                                       "num_completed_exams" int NOT NULL,
+                                      "ranking" int NOT NULL,
                                       "ranking_date" varchar NOT NULL,
                                       "created_at" timestamptz NOT NULL DEFAULT (now()),
                                       PRIMARY KEY ("university", "username", "ranking_date")
@@ -81,6 +83,7 @@ CREATE TABLE "university_ranking" (
 CREATE TABLE "weekly_global_ranking" (
                                          "username" varchar,
                                          "completed_exams_count" int NOT NULL,
+                                         "ranking" int NOT NULL,
                                          "ranking_date" varchar NOT NULL,
                                          "created_at" timestamptz NOT NULL DEFAULT (now()),
                                          PRIMARY KEY ("username", "ranking_date")
@@ -90,6 +93,7 @@ CREATE TABLE "weekly_university_ranking" (
                                              "username" varchar,
                                              "university" varchar NOT NULL,
                                              "completed_exams_count" int NOT NULL,
+                                             "ranking" int NOT NULL,
                                              "ranking_date" varchar NOT NULL,
                                              "created_at" timestamptz NOT NULL DEFAULT (now()),
                                              PRIMARY KEY ("university", "username", "ranking_date")
