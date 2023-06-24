@@ -50,7 +50,7 @@ psql -h "${DB_HOST}" -p "${DB_PORT}" -U "${DB_USER}" -d "${DB_NAME}" -v ON_ERROR
 INSERT INTO weekly_global_ranking (username, completed_exams_count, ranking, ranking_date)
 SELECT username, COUNT(*), RANK() OVER (ORDER BY COUNT(*) DESC), '$DATE_TO'
 FROM user_exams
-WHERE is_completed = true AND completed_at BETWEEN TO_TIMESTAMP($DATE_FROM, 'YYYYMMDD') AND (TO_TIMESTAMP($DATE_TO, 'YYYYMMDD') + INTERVAL '1 day')
+WHERE is_completed = true AND completed_at BETWEEN TO_TIMESTAMP('$DATE_FROM', 'YYYYMMDD') AND (TO_TIMESTAMP('$DATE_TO', 'YYYYMMDD') + INTERVAL '1 day')
 GROUP BY username
 "
 
@@ -64,6 +64,6 @@ psql -h $DB_HOST -p $DB_PORT -U $DB_USER -d $DB_NAME -v ON_ERROR_STOP=1 -c "
 INSERT INTO weekly_university_ranking (username, university, completed_exams_count, ranking, ranking_date)
 SELECT username, university, COUNT(*), RANK() OVER (PARTITION BY university ORDER BY COUNT(*) DESC), '$DATE_TO'
 FROM user_exams
-WHERE is_completed = true AND completed_at BETWEEN TO_TIMESTAMP($DATE_FROM, 'YYYYMMDD') AND (TO_TIMESTAMP($DATE_TO, 'YYYYMMDD') + INTERVAL '1 day')
+WHERE is_completed = true AND completed_at BETWEEN TO_TIMESTAMP('$DATE_FROM', 'YYYYMMDD') AND (TO_TIMESTAMP('$DATE_TO', 'YYYYMMDD') + INTERVAL '1 day')
 GROUP BY username, university
 "
