@@ -12,6 +12,7 @@ import (
 
 type Querier interface {
 	CreateExam(ctx context.Context, arg CreateExamParams) (Exam, error)
+	CreatePasswordResetEmail(ctx context.Context, arg CreatePasswordResetEmailParams) (PasswordResetEmail, error)
 	CreateSession(ctx context.Context, arg CreateSessionParams) (Session, error)
 	CreateUser(ctx context.Context, arg CreateUserParams) (User, error)
 	CreateVerifyEmail(ctx context.Context, arg CreateVerifyEmailParams) (VerifyEmail, error)
@@ -21,7 +22,8 @@ type Querier interface {
 	GetGlobalRanking(ctx context.Context) ([]GlobalRanking, error)
 	GetSession(ctx context.Context, id uuid.UUID) (Session, error)
 	GetUniversityRanking(ctx context.Context) ([]UniversityRanking, error)
-	GetUser(ctx context.Context, username string) (User, error)
+	GetUserByEmail(ctx context.Context, email string) (User, error)
+	GetUserByUsername(ctx context.Context, username string) (User, error)
 	GetUserExam(ctx context.Context, arg GetUserExamParams) (UserExam, error)
 	GetWeeklyGlobalRanking(ctx context.Context) ([]WeeklyGlobalRanking, error)
 	GetWeeklyUniversityRanking(ctx context.Context) ([]WeeklyUniversityRanking, error)
@@ -37,6 +39,7 @@ type Querier interface {
 	//     AND year = sqlc.narg('year')
 	// ORDER BY exam_id;
 	UpdateExam(ctx context.Context, arg UpdateExamParams) (Exam, error)
+	UpdatePasswordResetEmail(ctx context.Context, arg UpdatePasswordResetEmailParams) (PasswordResetEmail, error)
 	UpdateUser(ctx context.Context, arg UpdateUserParams) (User, error)
 	UpdateVerifyEmail(ctx context.Context, arg UpdateVerifyEmailParams) (VerifyEmail, error)
 	UpsertUserExam(ctx context.Context, arg UpsertUserExamParams) (UserExam, error)
