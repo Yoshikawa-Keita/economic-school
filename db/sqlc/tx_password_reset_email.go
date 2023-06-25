@@ -6,9 +6,9 @@ import (
 )
 
 type PasswordResetEmailTxParams struct {
-	EmailId    int64
-	SecretCode string
-	Password   string
+	EmailId        int64
+	SecretCode     string
+	HashedPassword string
 }
 
 type PasswordResetEmailTxResult struct {
@@ -32,8 +32,8 @@ func (store *SQLStore) PasswordResetEmailTx(ctx context.Context, arg PasswordRes
 
 		result.User, err = q.UpdateUser(ctx, UpdateUserParams{
 			Username: result.PasswordResetEmail.Username,
-			Email: sql.NullString{
-				String: arg.Password,
+			HashedPassword: sql.NullString{
+				String: arg.HashedPassword,
 				Valid:  true,
 			},
 		})

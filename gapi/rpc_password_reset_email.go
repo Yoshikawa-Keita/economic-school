@@ -72,9 +72,9 @@ func (server *Server) PasswordResetEmail(ctx context.Context, req *pb.PasswordRe
 	}
 
 	txResult, err := server.store.PasswordResetEmailTx(ctx, db.PasswordResetEmailTxParams{
-		EmailId:    req.GetEmailId(),
-		SecretCode: req.GetSecretCode(),
-		Password:   hashedPassword,
+		EmailId:        req.GetEmailId(),
+		SecretCode:     req.GetSecretCode(),
+		HashedPassword: hashedPassword,
 	})
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "failed to reset password")
