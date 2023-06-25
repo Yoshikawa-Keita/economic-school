@@ -44,6 +44,7 @@ const (
 	EconomicSchool_GetUserByUsername_FullMethodName          = "/pb.EconomicSchool/GetUserByUsername"
 	EconomicSchool_GetUserByEmail_FullMethodName             = "/pb.EconomicSchool/GetUserByEmail"
 	EconomicSchool_SendPasswordResetEmail_FullMethodName     = "/pb.EconomicSchool/SendPasswordResetEmail"
+	EconomicSchool_PasswordResetEmail_FullMethodName         = "/pb.EconomicSchool/PasswordResetEmail"
 )
 
 // EconomicSchoolClient is the client API for EconomicSchool service.
@@ -74,6 +75,7 @@ type EconomicSchoolClient interface {
 	GetUserByUsername(ctx context.Context, in *GetUserByUsernameParam, opts ...grpc.CallOption) (*User, error)
 	GetUserByEmail(ctx context.Context, in *GetUserByEmailParam, opts ...grpc.CallOption) (*User, error)
 	SendPasswordResetEmail(ctx context.Context, in *SendPasswordResetEmailRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	PasswordResetEmail(ctx context.Context, in *PasswordResetEmailRequest, opts ...grpc.CallOption) (*PasswordResetEmailResponse, error)
 }
 
 type economicSchoolClient struct {
@@ -300,6 +302,15 @@ func (c *economicSchoolClient) SendPasswordResetEmail(ctx context.Context, in *S
 	return out, nil
 }
 
+func (c *economicSchoolClient) PasswordResetEmail(ctx context.Context, in *PasswordResetEmailRequest, opts ...grpc.CallOption) (*PasswordResetEmailResponse, error) {
+	out := new(PasswordResetEmailResponse)
+	err := c.cc.Invoke(ctx, EconomicSchool_PasswordResetEmail_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // EconomicSchoolServer is the server API for EconomicSchool service.
 // All implementations must embed UnimplementedEconomicSchoolServer
 // for forward compatibility
@@ -328,6 +339,7 @@ type EconomicSchoolServer interface {
 	GetUserByUsername(context.Context, *GetUserByUsernameParam) (*User, error)
 	GetUserByEmail(context.Context, *GetUserByEmailParam) (*User, error)
 	SendPasswordResetEmail(context.Context, *SendPasswordResetEmailRequest) (*emptypb.Empty, error)
+	PasswordResetEmail(context.Context, *PasswordResetEmailRequest) (*PasswordResetEmailResponse, error)
 	mustEmbedUnimplementedEconomicSchoolServer()
 }
 
@@ -406,6 +418,9 @@ func (UnimplementedEconomicSchoolServer) GetUserByEmail(context.Context, *GetUse
 }
 func (UnimplementedEconomicSchoolServer) SendPasswordResetEmail(context.Context, *SendPasswordResetEmailRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SendPasswordResetEmail not implemented")
+}
+func (UnimplementedEconomicSchoolServer) PasswordResetEmail(context.Context, *PasswordResetEmailRequest) (*PasswordResetEmailResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PasswordResetEmail not implemented")
 }
 func (UnimplementedEconomicSchoolServer) mustEmbedUnimplementedEconomicSchoolServer() {}
 
@@ -852,6 +867,24 @@ func _EconomicSchool_SendPasswordResetEmail_Handler(srv interface{}, ctx context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _EconomicSchool_PasswordResetEmail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PasswordResetEmailRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EconomicSchoolServer).PasswordResetEmail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: EconomicSchool_PasswordResetEmail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EconomicSchoolServer).PasswordResetEmail(ctx, req.(*PasswordResetEmailRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // EconomicSchool_ServiceDesc is the grpc.ServiceDesc for EconomicSchool service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -954,6 +987,10 @@ var EconomicSchool_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SendPasswordResetEmail",
 			Handler:    _EconomicSchool_SendPasswordResetEmail_Handler,
+		},
+		{
+			MethodName: "PasswordResetEmail",
+			Handler:    _EconomicSchool_PasswordResetEmail_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

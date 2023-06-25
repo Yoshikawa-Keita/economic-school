@@ -1761,6 +1761,116 @@ func (x *SendPasswordResetEmailRequest) GetEmail() string {
 	return ""
 }
 
+type PasswordResetEmailRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	EmailId    int64  `protobuf:"varint,1,opt,name=email_id,json=emailId,proto3" json:"email_id,omitempty"`
+	SecretCode string `protobuf:"bytes,2,opt,name=secret_code,json=secretCode,proto3" json:"secret_code,omitempty"`
+	Password   string `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
+}
+
+func (x *PasswordResetEmailRequest) Reset() {
+	*x = PasswordResetEmailRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_message_economic_school_proto_msgTypes[29]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *PasswordResetEmailRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PasswordResetEmailRequest) ProtoMessage() {}
+
+func (x *PasswordResetEmailRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_message_economic_school_proto_msgTypes[29]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PasswordResetEmailRequest.ProtoReflect.Descriptor instead.
+func (*PasswordResetEmailRequest) Descriptor() ([]byte, []int) {
+	return file_message_economic_school_proto_rawDescGZIP(), []int{29}
+}
+
+func (x *PasswordResetEmailRequest) GetEmailId() int64 {
+	if x != nil {
+		return x.EmailId
+	}
+	return 0
+}
+
+func (x *PasswordResetEmailRequest) GetSecretCode() string {
+	if x != nil {
+		return x.SecretCode
+	}
+	return ""
+}
+
+func (x *PasswordResetEmailRequest) GetPassword() string {
+	if x != nil {
+		return x.Password
+	}
+	return ""
+}
+
+type PasswordResetEmailResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	IsVerified bool `protobuf:"varint,1,opt,name=is_verified,json=isVerified,proto3" json:"is_verified,omitempty"`
+}
+
+func (x *PasswordResetEmailResponse) Reset() {
+	*x = PasswordResetEmailResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_message_economic_school_proto_msgTypes[30]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *PasswordResetEmailResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PasswordResetEmailResponse) ProtoMessage() {}
+
+func (x *PasswordResetEmailResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_message_economic_school_proto_msgTypes[30]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PasswordResetEmailResponse.ProtoReflect.Descriptor instead.
+func (*PasswordResetEmailResponse) Descriptor() ([]byte, []int) {
+	return file_message_economic_school_proto_rawDescGZIP(), []int{30}
+}
+
+func (x *PasswordResetEmailResponse) GetIsVerified() bool {
+	if x != nil {
+		return x.IsVerified
+	}
+	return false
+}
+
 var File_message_economic_school_proto protoreflect.FileDescriptor
 
 var file_message_economic_school_proto_rawDesc = []byte{
@@ -1991,8 +2101,20 @@ var file_message_economic_school_proto_rawDesc = []byte{
 	0x6e, 0x64, 0x50, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x52, 0x65, 0x73, 0x65, 0x74, 0x45,
 	0x6d, 0x61, 0x69, 0x6c, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x14, 0x0a, 0x05, 0x65,
 	0x6d, 0x61, 0x69, 0x6c, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x65, 0x6d, 0x61, 0x69,
-	0x6c, 0x42, 0x14, 0x5a, 0x12, 0x65, 0x63, 0x6f, 0x6e, 0x6f, 0x6d, 0x69, 0x63, 0x2d, 0x73, 0x63,
-	0x68, 0x6f, 0x6f, 0x6c, 0x2f, 0x70, 0x62, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x6c, 0x22, 0x73, 0x0a, 0x19, 0x50, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x52, 0x65, 0x73,
+	0x65, 0x74, 0x45, 0x6d, 0x61, 0x69, 0x6c, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x19,
+	0x0a, 0x08, 0x65, 0x6d, 0x61, 0x69, 0x6c, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03,
+	0x52, 0x07, 0x65, 0x6d, 0x61, 0x69, 0x6c, 0x49, 0x64, 0x12, 0x1f, 0x0a, 0x0b, 0x73, 0x65, 0x63,
+	0x72, 0x65, 0x74, 0x5f, 0x63, 0x6f, 0x64, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a,
+	0x73, 0x65, 0x63, 0x72, 0x65, 0x74, 0x43, 0x6f, 0x64, 0x65, 0x12, 0x1a, 0x0a, 0x08, 0x70, 0x61,
+	0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x70, 0x61,
+	0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x22, 0x3d, 0x0a, 0x1a, 0x50, 0x61, 0x73, 0x73, 0x77, 0x6f,
+	0x72, 0x64, 0x52, 0x65, 0x73, 0x65, 0x74, 0x45, 0x6d, 0x61, 0x69, 0x6c, 0x52, 0x65, 0x73, 0x70,
+	0x6f, 0x6e, 0x73, 0x65, 0x12, 0x1f, 0x0a, 0x0b, 0x69, 0x73, 0x5f, 0x76, 0x65, 0x72, 0x69, 0x66,
+	0x69, 0x65, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08, 0x52, 0x0a, 0x69, 0x73, 0x56, 0x65, 0x72,
+	0x69, 0x66, 0x69, 0x65, 0x64, 0x42, 0x14, 0x5a, 0x12, 0x65, 0x63, 0x6f, 0x6e, 0x6f, 0x6d, 0x69,
+	0x63, 0x2d, 0x73, 0x63, 0x68, 0x6f, 0x6f, 0x6c, 0x2f, 0x70, 0x62, 0x62, 0x06, 0x70, 0x72, 0x6f,
+	0x74, 0x6f, 0x33,
 }
 
 var (
@@ -2007,7 +2129,7 @@ func file_message_economic_school_proto_rawDescGZIP() []byte {
 	return file_message_economic_school_proto_rawDescData
 }
 
-var file_message_economic_school_proto_msgTypes = make([]protoimpl.MessageInfo, 29)
+var file_message_economic_school_proto_msgTypes = make([]protoimpl.MessageInfo, 31)
 var file_message_economic_school_proto_goTypes = []interface{}{
 	(*HealthCheckResponse)(nil),                // 0: pb.HealthCheckResponse
 	(*Exam)(nil),                               // 1: pb.Exam
@@ -2038,25 +2160,27 @@ var file_message_economic_school_proto_goTypes = []interface{}{
 	(*UniversityRanking)(nil),                  // 26: pb.UniversityRanking
 	(*WeeklyUniversityRanking)(nil),            // 27: pb.WeeklyUniversityRanking
 	(*SendPasswordResetEmailRequest)(nil),      // 28: pb.SendPasswordResetEmailRequest
-	(*fieldmaskpb.FieldMask)(nil),              // 29: google.protobuf.FieldMask
-	(*timestamppb.Timestamp)(nil),              // 30: google.protobuf.Timestamp
+	(*PasswordResetEmailRequest)(nil),          // 29: pb.PasswordResetEmailRequest
+	(*PasswordResetEmailResponse)(nil),         // 30: pb.PasswordResetEmailResponse
+	(*fieldmaskpb.FieldMask)(nil),              // 31: google.protobuf.FieldMask
+	(*timestamppb.Timestamp)(nil),              // 32: google.protobuf.Timestamp
 }
 var file_message_economic_school_proto_depIdxs = []int32{
 	1,  // 0: pb.ListExamsResponse.exams:type_name -> pb.Exam
 	1,  // 1: pb.UpdateExamRequest.exam:type_name -> pb.Exam
-	29, // 2: pb.UpdateExamRequest.update_mask:type_name -> google.protobuf.FieldMask
-	30, // 3: pb.UserExam.completed_at:type_name -> google.protobuf.Timestamp
+	31, // 2: pb.UpdateExamRequest.update_mask:type_name -> google.protobuf.FieldMask
+	32, // 3: pb.UserExam.completed_at:type_name -> google.protobuf.Timestamp
 	12, // 4: pb.ListCompletedUserExamsResponse.user_exams:type_name -> pb.UserExam
 	16, // 5: pb.GetExamCountByUniversityResponse.examCountByUniversity:type_name -> pb.ExamCountByUniversity
-	30, // 6: pb.RenewAccessTokenResponse.access_token_expires_at:type_name -> google.protobuf.Timestamp
+	32, // 6: pb.RenewAccessTokenResponse.access_token_expires_at:type_name -> google.protobuf.Timestamp
 	22, // 7: pb.GetGlobalRankingResponse.rankings:type_name -> pb.GlobalRanking
 	23, // 8: pb.GetWeeklyGlobalRankingResponse.rankings:type_name -> pb.WeeklyGlobalRanking
-	30, // 9: pb.GlobalRanking.created_at:type_name -> google.protobuf.Timestamp
-	30, // 10: pb.WeeklyGlobalRanking.created_at:type_name -> google.protobuf.Timestamp
+	32, // 9: pb.GlobalRanking.created_at:type_name -> google.protobuf.Timestamp
+	32, // 10: pb.WeeklyGlobalRanking.created_at:type_name -> google.protobuf.Timestamp
 	26, // 11: pb.GetUniversityRankingResponse.rankings:type_name -> pb.UniversityRanking
 	27, // 12: pb.GetWeeklyUniversityRankingResponse.rankings:type_name -> pb.WeeklyUniversityRanking
-	30, // 13: pb.UniversityRanking.created_at:type_name -> google.protobuf.Timestamp
-	30, // 14: pb.WeeklyUniversityRanking.created_at:type_name -> google.protobuf.Timestamp
+	32, // 13: pb.UniversityRanking.created_at:type_name -> google.protobuf.Timestamp
+	32, // 14: pb.WeeklyUniversityRanking.created_at:type_name -> google.protobuf.Timestamp
 	15, // [15:15] is the sub-list for method output_type
 	15, // [15:15] is the sub-list for method input_type
 	15, // [15:15] is the sub-list for extension type_name
@@ -2418,6 +2542,30 @@ func file_message_economic_school_proto_init() {
 				return nil
 			}
 		}
+		file_message_economic_school_proto_msgTypes[29].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*PasswordResetEmailRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_message_economic_school_proto_msgTypes[30].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*PasswordResetEmailResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	file_message_economic_school_proto_msgTypes[4].OneofWrappers = []interface{}{}
 	type x struct{}
@@ -2426,7 +2574,7 @@ func file_message_economic_school_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_message_economic_school_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   29,
+			NumMessages:   31,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
