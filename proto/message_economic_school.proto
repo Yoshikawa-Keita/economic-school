@@ -170,3 +170,14 @@ message SendPasswordResetEmailRequest {
   string email = 1;
 }
 
+message PasswordResetEmailRequest {
+  int64 email_id = 1;
+  string secret_code = 2;
+  string password = 3;
+}
+
+message PasswordResetEmailResponse {
+  bool is_verified = 1;
+}
+
+

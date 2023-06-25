@@ -242,6 +242,17 @@ service EconomicSchool {
     };
   }
 
+  rpc PasswordResetEmail (PasswordResetEmailRequest) returns (PasswordResetEmailResponse) {
+    option (google.api.http) = {
+      post: "/v1/password_reset_email"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Use this API to reset user's password";
+      summary: "Password reset email";
+    };
+  }
+
 
 
 }
