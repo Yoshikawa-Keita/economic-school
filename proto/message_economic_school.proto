@@ -166,3 +166,7 @@ message WeeklyUniversityRanking {
   google.protobuf.Timestamp created_at = 6;
 }
 
+message SendPasswordResetEmailRequest {
+  string email = 1;
+}
+

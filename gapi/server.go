@@ -37,7 +37,6 @@ func NewServer(config util.Config, store db.Store, taskDistributor worker.TaskDi
 	if err != nil {
 		return nil, err
 	}
-	//fmt.Println(cloudFrontSigner)
 	server := &Server{
 		config:           config,
 		store:            store,

@@ -41,6 +41,9 @@ const (
 	EconomicSchool_GetWeeklyGlobalRanking_FullMethodName     = "/pb.EconomicSchool/GetWeeklyGlobalRanking"
 	EconomicSchool_GetUniversityRanking_FullMethodName       = "/pb.EconomicSchool/GetUniversityRanking"
 	EconomicSchool_GetWeeklyUniversityRanking_FullMethodName = "/pb.EconomicSchool/GetWeeklyUniversityRanking"
+	EconomicSchool_GetUserByUsername_FullMethodName          = "/pb.EconomicSchool/GetUserByUsername"
+	EconomicSchool_GetUserByEmail_FullMethodName             = "/pb.EconomicSchool/GetUserByEmail"
+	EconomicSchool_SendPasswordResetEmail_FullMethodName     = "/pb.EconomicSchool/SendPasswordResetEmail"
 )
 
 // EconomicSchoolClient is the client API for EconomicSchool service.
@@ -68,6 +71,9 @@ type EconomicSchoolClient interface {
 	GetWeeklyGlobalRanking(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetWeeklyGlobalRankingResponse, error)
 	GetUniversityRanking(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetUniversityRankingResponse, error)
 	GetWeeklyUniversityRanking(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetWeeklyUniversityRankingResponse, error)
+	GetUserByUsername(ctx context.Context, in *GetUserByUsernameParam, opts ...grpc.CallOption) (*User, error)
+	GetUserByEmail(ctx context.Context, in *GetUserByEmailParam, opts ...grpc.CallOption) (*User, error)
+	SendPasswordResetEmail(ctx context.Context, in *SendPasswordResetEmailRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type economicSchoolClient struct {
@@ -267,6 +273,33 @@ func (c *economicSchoolClient) GetWeeklyUniversityRanking(ctx context.Context, i
 	return out, nil
 }
 
+func (c *economicSchoolClient) GetUserByUsername(ctx context.Context, in *GetUserByUsernameParam, opts ...grpc.CallOption) (*User, error) {
+	out := new(User)
+	err := c.cc.Invoke(ctx, EconomicSchool_GetUserByUsername_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *economicSchoolClient) GetUserByEmail(ctx context.Context, in *GetUserByEmailParam, opts ...grpc.CallOption) (*User, error) {
+	out := new(User)
+	err := c.cc.Invoke(ctx, EconomicSchool_GetUserByEmail_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *economicSchoolClient) SendPasswordResetEmail(ctx context.Context, in *SendPasswordResetEmailRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, EconomicSchool_SendPasswordResetEmail_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // EconomicSchoolServer is the server API for EconomicSchool service.
 // All implementations must embed UnimplementedEconomicSchoolServer
 // for forward compatibility
@@ -292,6 +325,9 @@ type EconomicSchoolServer interface {
 	GetWeeklyGlobalRanking(context.Context, *emptypb.Empty) (*GetWeeklyGlobalRankingResponse, error)
 	GetUniversityRanking(context.Context, *emptypb.Empty) (*GetUniversityRankingResponse, error)
 	GetWeeklyUniversityRanking(context.Context, *emptypb.Empty) (*GetWeeklyUniversityRankingResponse, error)
+	GetUserByUsername(context.Context, *GetUserByUsernameParam) (*User, error)
+	GetUserByEmail(context.Context, *GetUserByEmailParam) (*User, error)
+	SendPasswordResetEmail(context.Context, *SendPasswordResetEmailRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedEconomicSchoolServer()
 }
 
@@ -361,6 +397,15 @@ func (UnimplementedEconomicSchoolServer) GetUniversityRanking(context.Context, *
 }
 func (UnimplementedEconomicSchoolServer) GetWeeklyUniversityRanking(context.Context, *emptypb.Empty) (*GetWeeklyUniversityRankingResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetWeeklyUniversityRanking not implemented")
+}
+func (UnimplementedEconomicSchoolServer) GetUserByUsername(context.Context, *GetUserByUsernameParam) (*User, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserByUsername not implemented")
+}
+func (UnimplementedEconomicSchoolServer) GetUserByEmail(context.Context, *GetUserByEmailParam) (*User, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserByEmail not implemented")
+}
+func (UnimplementedEconomicSchoolServer) SendPasswordResetEmail(context.Context, *SendPasswordResetEmailRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SendPasswordResetEmail not implemented")
 }
 func (UnimplementedEconomicSchoolServer) mustEmbedUnimplementedEconomicSchoolServer() {}
 
@@ -753,6 +798,60 @@ func _EconomicSchool_GetWeeklyUniversityRanking_Handler(srv interface{}, ctx con
 	return interceptor(ctx, in, info, handler)
 }
 
+func _EconomicSchool_GetUserByUsername_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserByUsernameParam)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EconomicSchoolServer).GetUserByUsername(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: EconomicSchool_GetUserByUsername_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EconomicSchoolServer).GetUserByUsername(ctx, req.(*GetUserByUsernameParam))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _EconomicSchool_GetUserByEmail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserByEmailParam)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EconomicSchoolServer).GetUserByEmail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: EconomicSchool_GetUserByEmail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EconomicSchoolServer).GetUserByEmail(ctx, req.(*GetUserByEmailParam))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _EconomicSchool_SendPasswordResetEmail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SendPasswordResetEmailRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EconomicSchoolServer).SendPasswordResetEmail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: EconomicSchool_SendPasswordResetEmail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EconomicSchoolServer).SendPasswordResetEmail(ctx, req.(*SendPasswordResetEmailRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // EconomicSchool_ServiceDesc is the grpc.ServiceDesc for EconomicSchool service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -843,6 +942,18 @@ var EconomicSchool_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetWeeklyUniversityRanking",
 			Handler:    _EconomicSchool_GetWeeklyUniversityRanking_Handler,
+		},
+		{
+			MethodName: "GetUserByUsername",
+			Handler:    _EconomicSchool_GetUserByUsername_Handler,
+		},
+		{
+			MethodName: "GetUserByEmail",
+			Handler:    _EconomicSchool_GetUserByEmail_Handler,
+		},
+		{
+			MethodName: "SendPasswordResetEmail",
+			Handler:    _EconomicSchool_SendPasswordResetEmail_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -29,6 +29,16 @@ Table verify_emails {
   expired_at timestamptz [not null, default: `now() + interval '24 hours'`]
 }
 
+Table password_reset_emails {
+  id bigserial [pk]
+  username varchar [ref: > U.username, not null]
+  email varchar [not null]
+  secret_code varchar [not null]
+  is_used bool [not null, default: false]
+  created_at timestamptz [not null, default: `now()`]
+  expired_at timestamptz [not null, default: `now() + interval '24 hours'`]
+}
+
 Table email_logs as EL {
   id bigserial [pk]
   email varchar [not null]
