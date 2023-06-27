@@ -5,10 +5,12 @@ import (
 	"database/sql"
 	db "economic-school/db/sqlc"
 	"economic-school/pb"
+	"economic-school/service"
 	"economic-school/util"
 	"economic-school/val"
 	"encoding/base64"
 	"fmt"
+	"github.com/rs/zerolog/log"
 	"google.golang.org/genproto/googleapis/rpc/errdetails"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
@@ -121,4 +123,107 @@ func validateUpdateUserRequest(req *pb.UpdateUserRequest) (violations []*errdeta
 	}
 
 	return violations
+}
+
+func (server *Server) UpdateUserEmail(ctx context.Context, req *pb.UpdateUserEmailRequest) (*pb.UpdateUserEmailResponse, error) {
+	authPayload, err := server.authorizeUser(ctx)
+	if err != nil {
+		return nil, unauthenticatedError(err)
+	}
+
+	violations := validateUpdateUserEmailRequest(req)
+	if violations != nil {
+		return nil, invalidArgumentError(violations)
+	}
+
+	if authPayload.Username != req.GetUsername() {
+		return nil, status.Errorf(codes.PermissionDenied, "cannot update other user's info")
+	}
+
+	user, err := server.store.GetUserByUsername(ctx, req.GetUsername())
+	if err != nil {
+		return nil, fmt.Errorf("user not found")
+	}
+	_, err = server.store.GetUserByEmail(ctx, req.GetEmail())
+	if err == nil {
+		return nil, fmt.Errorf("email already registered")
+	}
+	if user.Email == req.Email {
+		return nil, fmt.Errorf("cannot update to the same email address")
+	}
+
+	message := map[string]string{
+		"EmailType": "CHANGE_EMAIL",
+		"Username":  req.Username,
+		"Email":     req.Email,
+	}
+
+	config, err := util.LoadConfig("..")
+	if err != nil {
+		return nil, fmt.Errorf("failed to load config: %w", err)
+	}
+
+	// Send the message to SQS
+	err = service.SendMessageToSQS(config, config.SQSEmailSendingQueue, message)
+	if err != nil {
+		return nil, fmt.Errorf("failed to send message to SQS: %w", err)
+	}
+	log.Info().Str("email", user.Email).Msg("sending verification message to email-sending-queue")
+
+	rsp := &pb.UpdateUserEmailResponse{
+		User: convertUser(user),
+	}
+	return rsp, nil
+}
+
+func validateUpdateUserEmailRequest(req *pb.UpdateUserEmailRequest) (violations []*errdetails.BadRequest_FieldViolation) {
+	if err := val.ValidateUsername(req.GetUsername()); err != nil {
+		violations = append(violations, fieldViolation("username", err))
+	}
+
+	if req.Email != "" {
+		if err := val.ValidateEmail(req.GetEmail()); err != nil {
+			violations = append(violations, fieldViolation("email", err))
+		}
+	}
+
+	return violations
+}
+
+func (server *Server) VerifyChangedEmail(ctx context.Context, req *pb.VerifyChangedEmailRequest) (*pb.VerifyChangedEmailResponse, error) {
+	authPayload, err := server.authorizeUser(ctx)
+	if err != nil {
+		return nil, unauthenticatedError(err)
+	}
+	if authPayload.Username != req.GetUsername() {
+		return nil, status.Errorf(codes.PermissionDenied, "cannot update other user's info")
+	}
+
+	_, err = server.store.GetUserByUsername(ctx, req.GetUsername())
+	if err != nil {
+		return nil, fmt.Errorf("user not found")
+	}
+
+	arg := db.UpdateUserEmailTxParams{
+		UpdateUserParams: db.UpdateUserParams{
+			Username: req.GetUsername(),
+			Email: sql.NullString{
+				String: req.GetEmail(),
+				Valid:  true,
+			},
+		},
+	}
+
+	_, err = server.store.UpdateUserEmailTx(ctx, arg)
+	if err != nil {
+		if err == sql.ErrNoRows {
+			return nil, status.Errorf(codes.NotFound, "user not found")
+		}
+		return nil, status.Errorf(codes.Internal, "failed to update user: %s", err)
+	}
+
+	rsp := &pb.VerifyChangedEmailResponse{
+		IsVerified: true,
+	}
+	return rsp, nil
 }

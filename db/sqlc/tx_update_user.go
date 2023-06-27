@@ -29,3 +29,25 @@ func (store *SQLStore) UpdateUserTx(ctx context.Context, arg UpdateUserTxParams)
 
 	return result, err
 }
+
+type UpdateUserEmailTxParams struct {
+	UpdateUserParams
+}
+
+type UpdateUserEmailTxResult struct {
+	User User
+}
+
+func (store *SQLStore) UpdateUserEmailTx(ctx context.Context, arg UpdateUserEmailTxParams) (UpdateUserEmailTxResult, error) {
+	var result UpdateUserEmailTxResult
+	err := store.execTx(ctx, func(q *Queries) error {
+		var err error
+		result.User, err = q.UpdateUser(ctx, arg.UpdateUserParams)
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+
+	return result, err
+}

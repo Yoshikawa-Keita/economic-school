@@ -23,6 +23,8 @@ const (
 	EconomicSchool_HealthCheck_FullMethodName                = "/pb.EconomicSchool/HealthCheck"
 	EconomicSchool_CreateUser_FullMethodName                 = "/pb.EconomicSchool/CreateUser"
 	EconomicSchool_UpdateUser_FullMethodName                 = "/pb.EconomicSchool/UpdateUser"
+	EconomicSchool_UpdateUserEmail_FullMethodName            = "/pb.EconomicSchool/UpdateUserEmail"
+	EconomicSchool_VerifyChangedEmail_FullMethodName         = "/pb.EconomicSchool/VerifyChangedEmail"
 	EconomicSchool_LoginUser_FullMethodName                  = "/pb.EconomicSchool/LoginUser"
 	EconomicSchool_RenewAccessToken_FullMethodName           = "/pb.EconomicSchool/RenewAccessToken"
 	EconomicSchool_VerifyEmail_FullMethodName                = "/pb.EconomicSchool/VerifyEmail"
@@ -54,6 +56,8 @@ type EconomicSchoolClient interface {
 	HealthCheck(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*HealthCheckResponse, error)
 	CreateUser(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*CreateUserResponse, error)
 	UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*UpdateUserResponse, error)
+	UpdateUserEmail(ctx context.Context, in *UpdateUserEmailRequest, opts ...grpc.CallOption) (*UpdateUserEmailResponse, error)
+	VerifyChangedEmail(ctx context.Context, in *VerifyChangedEmailRequest, opts ...grpc.CallOption) (*VerifyChangedEmailResponse, error)
 	LoginUser(ctx context.Context, in *LoginUserRequest, opts ...grpc.CallOption) (*LoginUserResponse, error)
 	RenewAccessToken(ctx context.Context, in *RenewAccessTokenRequest, opts ...grpc.CallOption) (*RenewAccessTokenResponse, error)
 	VerifyEmail(ctx context.Context, in *VerifyEmailRequest, opts ...grpc.CallOption) (*VerifyEmailResponse, error)
@@ -107,6 +111,24 @@ func (c *economicSchoolClient) CreateUser(ctx context.Context, in *CreateUserReq
 func (c *economicSchoolClient) UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*UpdateUserResponse, error) {
 	out := new(UpdateUserResponse)
 	err := c.cc.Invoke(ctx, EconomicSchool_UpdateUser_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *economicSchoolClient) UpdateUserEmail(ctx context.Context, in *UpdateUserEmailRequest, opts ...grpc.CallOption) (*UpdateUserEmailResponse, error) {
+	out := new(UpdateUserEmailResponse)
+	err := c.cc.Invoke(ctx, EconomicSchool_UpdateUserEmail_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *economicSchoolClient) VerifyChangedEmail(ctx context.Context, in *VerifyChangedEmailRequest, opts ...grpc.CallOption) (*VerifyChangedEmailResponse, error) {
+	out := new(VerifyChangedEmailResponse)
+	err := c.cc.Invoke(ctx, EconomicSchool_VerifyChangedEmail_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -318,6 +340,8 @@ type EconomicSchoolServer interface {
 	HealthCheck(context.Context, *emptypb.Empty) (*HealthCheckResponse, error)
 	CreateUser(context.Context, *CreateUserRequest) (*CreateUserResponse, error)
 	UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error)
+	UpdateUserEmail(context.Context, *UpdateUserEmailRequest) (*UpdateUserEmailResponse, error)
+	VerifyChangedEmail(context.Context, *VerifyChangedEmailRequest) (*VerifyChangedEmailResponse, error)
 	LoginUser(context.Context, *LoginUserRequest) (*LoginUserResponse, error)
 	RenewAccessToken(context.Context, *RenewAccessTokenRequest) (*RenewAccessTokenResponse, error)
 	VerifyEmail(context.Context, *VerifyEmailRequest) (*VerifyEmailResponse, error)
@@ -355,6 +379,12 @@ func (UnimplementedEconomicSchoolServer) CreateUser(context.Context, *CreateUser
 }
 func (UnimplementedEconomicSchoolServer) UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateUser not implemented")
+}
+func (UnimplementedEconomicSchoolServer) UpdateUserEmail(context.Context, *UpdateUserEmailRequest) (*UpdateUserEmailResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateUserEmail not implemented")
+}
+func (UnimplementedEconomicSchoolServer) VerifyChangedEmail(context.Context, *VerifyChangedEmailRequest) (*VerifyChangedEmailResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method VerifyChangedEmail not implemented")
 }
 func (UnimplementedEconomicSchoolServer) LoginUser(context.Context, *LoginUserRequest) (*LoginUserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method LoginUser not implemented")
@@ -485,6 +515,42 @@ func _EconomicSchool_UpdateUser_Handler(srv interface{}, ctx context.Context, de
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(EconomicSchoolServer).UpdateUser(ctx, req.(*UpdateUserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _EconomicSchool_UpdateUserEmail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateUserEmailRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EconomicSchoolServer).UpdateUserEmail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: EconomicSchool_UpdateUserEmail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EconomicSchoolServer).UpdateUserEmail(ctx, req.(*UpdateUserEmailRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _EconomicSchool_VerifyChangedEmail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(VerifyChangedEmailRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EconomicSchoolServer).VerifyChangedEmail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: EconomicSchool_VerifyChangedEmail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EconomicSchoolServer).VerifyChangedEmail(ctx, req.(*VerifyChangedEmailRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -903,6 +969,14 @@ var EconomicSchool_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateUser",
 			Handler:    _EconomicSchool_UpdateUser_Handler,
+		},
+		{
+			MethodName: "UpdateUserEmail",
+			Handler:    _EconomicSchool_UpdateUserEmail_Handler,
+		},
+		{
+			MethodName: "VerifyChangedEmail",
+			Handler:    _EconomicSchool_VerifyChangedEmail_Handler,
 		},
 		{
 			MethodName: "LoginUser",

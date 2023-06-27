@@ -55,6 +55,28 @@ service EconomicSchool {
     };
   }
 
+  rpc UpdateUserEmail (UpdateUserEmailRequest) returns (UpdateUserEmailResponse) {
+    option (google.api.http) = {
+      patch: "/v1/update_user_email"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Use this API to update user";
+      summary: "Update user";
+    };
+  }
+
+  rpc VerifyChangedEmail (VerifyChangedEmailRequest) returns (VerifyChangedEmailResponse) {
+    option (google.api.http) = {
+      patch: "/v1/verify_changed_email"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Use this API to verify changed email";
+      summary: "Verify changed email";
+    };
+  }
+
   rpc LoginUser (LoginUserRequest) returns (LoginUserResponse) {
     option (google.api.http) = {
       post: "/v1/login_user"

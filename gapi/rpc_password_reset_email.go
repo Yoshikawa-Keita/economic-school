@@ -40,6 +40,7 @@ func (server *Server) SendPasswordResetEmail(ctx context.Context, req *pb.SendPa
 	}
 
 	message := map[string]string{
+		"EmailType":  "CHANGE_PASSWORD",
 		"Username":   user.Username,
 		"Email":      email,
 		"Email_id":   strconv.FormatInt(passwordResetEmail.ID, 10),
