@@ -1,6 +1,6 @@
 -- SQL dump generated using DBML (dbml-lang.org)
 -- Database: PostgreSQL
--- Generated at: 2023-06-24T21:05:40.340Z
+-- Generated at: 2023-06-26T14:37:42.091Z
 
 CREATE TABLE "users" (
   "username" varchar PRIMARY KEY,
@@ -84,7 +84,7 @@ CREATE TABLE "global_ranking" (
 );
 
 CREATE TABLE "university_ranking" (
-  "username" varchar,
+  "username" varchar NOT NULL,
   "university" varchar NOT NULL,
   "num_completed_exams" int NOT NULL,
   "ranking" int NOT NULL,
@@ -94,7 +94,7 @@ CREATE TABLE "university_ranking" (
 );
 
 CREATE TABLE "weekly_global_ranking" (
-  "username" varchar,
+  "username" varchar NOT NULL,
   "completed_exams_count" int NOT NULL,
   "ranking" int NOT NULL,
   "ranking_date" varchar NOT NULL,
@@ -103,7 +103,7 @@ CREATE TABLE "weekly_global_ranking" (
 );
 
 CREATE TABLE "weekly_university_ranking" (
-  "username" varchar,
+  "username" varchar NOT NULL,
   "university" varchar NOT NULL,
   "completed_exams_count" int NOT NULL,
   "ranking" int NOT NULL,
@@ -112,20 +112,20 @@ CREATE TABLE "weekly_university_ranking" (
   PRIMARY KEY ("university", "username", "ranking_date")
 );
 
-ALTER TABLE "verify_emails" ADD FOREIGN KEY ("username") REFERENCES "users" ("username");
+ALTER TABLE "verify_emails" ADD FOREIGN KEY ("username") REFERENCES "users" ("username") ON DELETE CASCADE;
 
-ALTER TABLE "password_reset_emails" ADD FOREIGN KEY ("username") REFERENCES "users" ("username");
+ALTER TABLE "password_reset_emails" ADD FOREIGN KEY ("username") REFERENCES "users" ("username") ON DELETE CASCADE;
 
-ALTER TABLE "sessions" ADD FOREIGN KEY ("username") REFERENCES "users" ("username");
+ALTER TABLE "sessions" ADD FOREIGN KEY ("username") REFERENCES "users" ("username") ON DELETE CASCADE;
 
-ALTER TABLE "user_exams" ADD FOREIGN KEY ("username") REFERENCES "users" ("username");
+ALTER TABLE "user_exams" ADD FOREIGN KEY ("username") REFERENCES "users" ("username") ON DELETE CASCADE;
 
-ALTER TABLE "user_exams" ADD FOREIGN KEY ("exam_id") REFERENCES "exams" ("exam_id");
+ALTER TABLE "user_exams" ADD FOREIGN KEY ("exam_id") REFERENCES "exams" ("exam_id") ON DELETE CASCADE;
 
-ALTER TABLE "global_ranking" ADD FOREIGN KEY ("username") REFERENCES "users" ("username");
+ALTER TABLE "global_ranking" ADD FOREIGN KEY ("username") REFERENCES "users" ("username") ON DELETE CASCADE;
 
-ALTER TABLE "university_ranking" ADD FOREIGN KEY ("username") REFERENCES "users" ("username");
+ALTER TABLE "university_ranking" ADD FOREIGN KEY ("username") REFERENCES "users" ("username") ON DELETE CASCADE;
 
-ALTER TABLE "weekly_global_ranking" ADD FOREIGN KEY ("username") REFERENCES "users" ("username");
+ALTER TABLE "weekly_global_ranking" ADD FOREIGN KEY ("username") REFERENCES "users" ("username") ON DELETE CASCADE;
 
-ALTER TABLE "weekly_university_ranking" ADD FOREIGN KEY ("username") REFERENCES "users" ("username");
+ALTER TABLE "weekly_university_ranking" ADD FOREIGN KEY ("username") REFERENCES "users" ("username") ON DELETE CASCADE;

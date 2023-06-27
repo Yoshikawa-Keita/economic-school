@@ -21,23 +21,25 @@ Table users as U {
 
 Table verify_emails {
   id bigserial [pk]
-  username varchar [ref: > U.username, not null]
+  username varchar [not null]
   email varchar [not null]
   secret_code varchar [not null]
   is_used bool [not null, default: false]
   created_at timestamptz [not null, default: `now()`]
   expired_at timestamptz [not null, default: `now() + interval '24 hours'`]
 }
+Ref: verify_emails.username > users.username [delete: cascade]
 
 Table password_reset_emails {
   id bigserial [pk]
-  username varchar [ref: > U.username, not null]
+  username varchar [not null]
   email varchar [not null]
   secret_code varchar [not null]
   is_used bool [not null, default: false]
   created_at timestamptz [not null, default: `now()`]
   expired_at timestamptz [not null, default: `now() + interval '24 hours'`]
 }
+Ref: password_reset_emails.username > users.username [delete: cascade]
 
 Table email_logs as EL {
   id bigserial [pk]
@@ -48,7 +50,7 @@ Table email_logs as EL {
 
 Table sessions {
   id uuid [pk]
-  username varchar [ref: > U.username, not null]
+  username varchar [not null]
   refresh_token varchar [not null]
   user_agent varchar [not null]
   client_ip varchar [not null]
@@ -56,6 +58,7 @@ Table sessions {
   expires_at timestamptz [not null]
   created_at timestamptz [not null, default: `now()`]
 }
+Ref: sessions.username > users.username [delete: cascade]
 
 Table exams as E {
   exam_id serial [pk]
@@ -71,23 +74,26 @@ Table exams as E {
 }
 
 Table user_exams as UE {
-  username varchar [ref: > users.username, pk]
-  exam_id int [ref: > exams.exam_id, pk]
+  username varchar [pk]
+  exam_id int [pk]
   university varchar [not null]
   is_completed bool [not null, default: true]
   completed_at timestamptz [default: `now()`]
 }
+Ref: user_exams.username > users.username [delete: cascade]
+Ref: user_exams.exam_id > exams.exam_id [delete: cascade]
 
 Table global_ranking as GR {
-  username varchar [ref: > users.username, pk]
+  username varchar [pk]
   num_completed_exams int [not null]
   ranking int [not null]
   ranking_date varchar [not null]
   created_at timestamptz [not null, default: `now()`]
 }
+Ref: global_ranking.username > users.username [delete: cascade]
 
 Table university_ranking as UR {
-  username varchar [ref: > users.username]
+  username varchar [not null]
   university varchar [not null]
   num_completed_exams int [not null]
   ranking int [not null]
@@ -98,9 +104,10 @@ Table university_ranking as UR {
     (university, username, ranking_date) [pk]
   }
 }
+Ref: university_ranking.username > users.username [delete: cascade]
 
 Table weekly_global_ranking as WGR {
-  username varchar [ref: > users.username]
+  username varchar [not null]
   completed_exams_count int [not null]
   ranking int [not null]
   ranking_date varchar [not null]
@@ -110,9 +117,10 @@ Table weekly_global_ranking as WGR {
       (username, ranking_date) [pk]
     }
 }
+Ref: weekly_global_ranking.username > users.username [delete: cascade]
 
 Table weekly_university_ranking as WUR {
-  username varchar [ref: > users.username]
+  username varchar [not null]
   university varchar [not null]
   completed_exams_count int [not null]
   ranking int [not null]
@@ -123,5 +131,4 @@ Table weekly_university_ranking as WUR {
     (university, username, ranking_date) [pk]
   }
 }
-
-
+Ref: weekly_university_ranking.username > users.username [delete: cascade]

@@ -109,23 +109,23 @@ CREATE TABLE "weekly_university_ranking" (
                                              PRIMARY KEY ("university", "username", "ranking_date")
 );
 
-ALTER TABLE "verify_emails" ADD FOREIGN KEY ("username") REFERENCES "users" ("username");
+ALTER TABLE "verify_emails" ADD FOREIGN KEY ("username") REFERENCES "users" ("username") ON DELETE CASCADE;
 
-ALTER TABLE "password_reset_emails" ADD FOREIGN KEY ("username") REFERENCES "users" ("username");
+ALTER TABLE "password_reset_emails" ADD FOREIGN KEY ("username") REFERENCES "users" ("username") ON DELETE CASCADE;
 
-ALTER TABLE "sessions" ADD FOREIGN KEY ("username") REFERENCES "users" ("username");
+ALTER TABLE "sessions" ADD FOREIGN KEY ("username") REFERENCES "users" ("username") ON DELETE CASCADE;
 
-ALTER TABLE "user_exams" ADD FOREIGN KEY ("username") REFERENCES "users" ("username");
+ALTER TABLE "user_exams" ADD FOREIGN KEY ("username") REFERENCES "users" ("username") ON DELETE CASCADE;
 
-ALTER TABLE "user_exams" ADD FOREIGN KEY ("exam_id") REFERENCES "exams" ("exam_id");
+ALTER TABLE "user_exams" ADD FOREIGN KEY ("exam_id") REFERENCES "exams" ("exam_id") ON DELETE CASCADE;
 
-ALTER TABLE "global_ranking" ADD FOREIGN KEY ("username") REFERENCES "users" ("username");
+ALTER TABLE "global_ranking" ADD FOREIGN KEY ("username") REFERENCES "users" ("username") ON DELETE CASCADE;
 
-ALTER TABLE "university_ranking" ADD FOREIGN KEY ("username") REFERENCES "users" ("username");
+ALTER TABLE "university_ranking" ADD FOREIGN KEY ("username") REFERENCES "users" ("username") ON DELETE CASCADE;
 
-ALTER TABLE "weekly_global_ranking" ADD FOREIGN KEY ("username") REFERENCES "users" ("username");
+ALTER TABLE "weekly_global_ranking" ADD FOREIGN KEY ("username") REFERENCES "users" ("username") ON DELETE CASCADE;
 
-ALTER TABLE "weekly_university_ranking" ADD FOREIGN KEY ("username") REFERENCES "users" ("username");
+ALTER TABLE "weekly_university_ranking" ADD FOREIGN KEY ("username") REFERENCES "users" ("username") ON DELETE CASCADE;
 
 --------- 以下で初期データをinsertする
 

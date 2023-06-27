@@ -6,6 +6,7 @@ option go_package = "economic-school/pb";
 
 import "google/protobuf/field_mask.proto";
 import "google/protobuf/timestamp.proto";
+import "user.proto";
 
 message HealthCheckResponse {
   string status = 1;
@@ -177,6 +178,26 @@ message PasswordResetEmailRequest {
 }
 
 message PasswordResetEmailResponse {
+  bool is_verified = 1;
+}
+
+message UpdateUserEmailRequest {
+  string username = 1;
+  string email = 2;
+
+}
+
+message UpdateUserEmailResponse {
+  User user = 1;
+}
+
+message VerifyChangedEmailRequest {
+  string username = 1;
+  string email = 2;
+
+}
+
+message VerifyChangedEmailResponse {
   bool is_verified = 1;
 }
 

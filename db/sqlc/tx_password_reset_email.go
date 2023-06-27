@@ -3,6 +3,7 @@ package db
 import (
 	"context"
 	"database/sql"
+	"time"
 )
 
 type PasswordResetEmailTxParams struct {
@@ -35,6 +36,10 @@ func (store *SQLStore) PasswordResetEmailTx(ctx context.Context, arg PasswordRes
 			HashedPassword: sql.NullString{
 				String: arg.HashedPassword,
 				Valid:  true,
+			},
+			PasswordChangedAt: sql.NullTime{
+				Time:  time.Now(),
+				Valid: true,
 			},
 		})
 		return err

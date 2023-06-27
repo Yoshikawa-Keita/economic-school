@@ -91,6 +91,7 @@ func (server *Server) CreateUser(ctx context.Context, req *pb.CreateUserRequest)
 		return nil, fmt.Errorf("failed to create verify email: %w", err)
 	}
 	message := map[string]string{
+		"EmailType":  "REGISTER",
 		"Username":   user.Username,
 		"Email":      user.Email,
 		"Email_id":   strconv.FormatInt(verifyEmail.ID, 10),
