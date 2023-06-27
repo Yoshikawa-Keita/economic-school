@@ -148,9 +148,6 @@ func (server *Server) UpdateUserEmail(ctx context.Context, req *pb.UpdateUserEma
 	if err == nil {
 		return nil, fmt.Errorf("email already registered")
 	}
-	if user.Email == req.Email {
-		return nil, fmt.Errorf("cannot update to the same email address")
-	}
 
 	message := map[string]string{
 		"EmailType": "CHANGE_EMAIL",
