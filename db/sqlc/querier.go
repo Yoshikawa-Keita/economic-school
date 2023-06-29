@@ -17,6 +17,7 @@ type Querier interface {
 	CreateUser(ctx context.Context, arg CreateUserParams) (User, error)
 	CreateVerifyEmail(ctx context.Context, arg CreateVerifyEmailParams) (VerifyEmail, error)
 	DeleteExam(ctx context.Context, examID int32) error
+	DeleteUser(ctx context.Context, username string) (User, error)
 	GetExam(ctx context.Context, examID int32) (Exam, error)
 	GetExamCountByUniversity(ctx context.Context) ([]GetExamCountByUniversityRow, error)
 	GetGlobalRanking(ctx context.Context) ([]GlobalRanking, error)

@@ -2075,6 +2075,53 @@ func (x *VerifyChangedEmailResponse) GetIsVerified() bool {
 	return false
 }
 
+type DeleteUserRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Username string `protobuf:"bytes,1,opt,name=username,proto3" json:"username,omitempty"`
+}
+
+func (x *DeleteUserRequest) Reset() {
+	*x = DeleteUserRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_message_economic_school_proto_msgTypes[35]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *DeleteUserRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteUserRequest) ProtoMessage() {}
+
+func (x *DeleteUserRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_message_economic_school_proto_msgTypes[35]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteUserRequest.ProtoReflect.Descriptor instead.
+func (*DeleteUserRequest) Descriptor() ([]byte, []int) {
+	return file_message_economic_school_proto_rawDescGZIP(), []int{35}
+}
+
+func (x *DeleteUserRequest) GetUsername() string {
+	if x != nil {
+		return x.Username
+	}
+	return ""
+}
+
 var File_message_economic_school_proto protoreflect.FileDescriptor
 
 var file_message_economic_school_proto_rawDesc = []byte{
@@ -2334,9 +2381,12 @@ var file_message_economic_school_proto_rawDesc = []byte{
 	0x68, 0x61, 0x6e, 0x67, 0x65, 0x64, 0x45, 0x6d, 0x61, 0x69, 0x6c, 0x52, 0x65, 0x73, 0x70, 0x6f,
 	0x6e, 0x73, 0x65, 0x12, 0x1f, 0x0a, 0x0b, 0x69, 0x73, 0x5f, 0x76, 0x65, 0x72, 0x69, 0x66, 0x69,
 	0x65, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08, 0x52, 0x0a, 0x69, 0x73, 0x56, 0x65, 0x72, 0x69,
-	0x66, 0x69, 0x65, 0x64, 0x42, 0x14, 0x5a, 0x12, 0x65, 0x63, 0x6f, 0x6e, 0x6f, 0x6d, 0x69, 0x63,
-	0x2d, 0x73, 0x63, 0x68, 0x6f, 0x6f, 0x6c, 0x2f, 0x70, 0x62, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74,
-	0x6f, 0x33,
+	0x66, 0x69, 0x65, 0x64, 0x22, 0x2f, 0x0a, 0x11, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x55, 0x73,
+	0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x1a, 0x0a, 0x08, 0x75, 0x73, 0x65,
+	0x72, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x75, 0x73, 0x65,
+	0x72, 0x6e, 0x61, 0x6d, 0x65, 0x42, 0x14, 0x5a, 0x12, 0x65, 0x63, 0x6f, 0x6e, 0x6f, 0x6d, 0x69,
+	0x63, 0x2d, 0x73, 0x63, 0x68, 0x6f, 0x6f, 0x6c, 0x2f, 0x70, 0x62, 0x62, 0x06, 0x70, 0x72, 0x6f,
+	0x74, 0x6f, 0x33,
 }
 
 var (
@@ -2351,7 +2401,7 @@ func file_message_economic_school_proto_rawDescGZIP() []byte {
 	return file_message_economic_school_proto_rawDescData
 }
 
-var file_message_economic_school_proto_msgTypes = make([]protoimpl.MessageInfo, 35)
+var file_message_economic_school_proto_msgTypes = make([]protoimpl.MessageInfo, 36)
 var file_message_economic_school_proto_goTypes = []interface{}{
 	(*HealthCheckResponse)(nil),                // 0: pb.HealthCheckResponse
 	(*Exam)(nil),                               // 1: pb.Exam
@@ -2388,27 +2438,28 @@ var file_message_economic_school_proto_goTypes = []interface{}{
 	(*UpdateUserEmailResponse)(nil),            // 32: pb.UpdateUserEmailResponse
 	(*VerifyChangedEmailRequest)(nil),          // 33: pb.VerifyChangedEmailRequest
 	(*VerifyChangedEmailResponse)(nil),         // 34: pb.VerifyChangedEmailResponse
-	(*fieldmaskpb.FieldMask)(nil),              // 35: google.protobuf.FieldMask
-	(*timestamppb.Timestamp)(nil),              // 36: google.protobuf.Timestamp
-	(*User)(nil),                               // 37: pb.User
+	(*DeleteUserRequest)(nil),                  // 35: pb.DeleteUserRequest
+	(*fieldmaskpb.FieldMask)(nil),              // 36: google.protobuf.FieldMask
+	(*timestamppb.Timestamp)(nil),              // 37: google.protobuf.Timestamp
+	(*User)(nil),                               // 38: pb.User
 }
 var file_message_economic_school_proto_depIdxs = []int32{
 	1,  // 0: pb.ListExamsResponse.exams:type_name -> pb.Exam
 	1,  // 1: pb.UpdateExamRequest.exam:type_name -> pb.Exam
-	35, // 2: pb.UpdateExamRequest.update_mask:type_name -> google.protobuf.FieldMask
-	36, // 3: pb.UserExam.completed_at:type_name -> google.protobuf.Timestamp
+	36, // 2: pb.UpdateExamRequest.update_mask:type_name -> google.protobuf.FieldMask
+	37, // 3: pb.UserExam.completed_at:type_name -> google.protobuf.Timestamp
 	12, // 4: pb.ListCompletedUserExamsResponse.user_exams:type_name -> pb.UserExam
 	16, // 5: pb.GetExamCountByUniversityResponse.examCountByUniversity:type_name -> pb.ExamCountByUniversity
-	36, // 6: pb.RenewAccessTokenResponse.access_token_expires_at:type_name -> google.protobuf.Timestamp
+	37, // 6: pb.RenewAccessTokenResponse.access_token_expires_at:type_name -> google.protobuf.Timestamp
 	22, // 7: pb.GetGlobalRankingResponse.rankings:type_name -> pb.GlobalRanking
 	23, // 8: pb.GetWeeklyGlobalRankingResponse.rankings:type_name -> pb.WeeklyGlobalRanking
-	36, // 9: pb.GlobalRanking.created_at:type_name -> google.protobuf.Timestamp
-	36, // 10: pb.WeeklyGlobalRanking.created_at:type_name -> google.protobuf.Timestamp
+	37, // 9: pb.GlobalRanking.created_at:type_name -> google.protobuf.Timestamp
+	37, // 10: pb.WeeklyGlobalRanking.created_at:type_name -> google.protobuf.Timestamp
 	26, // 11: pb.GetUniversityRankingResponse.rankings:type_name -> pb.UniversityRanking
 	27, // 12: pb.GetWeeklyUniversityRankingResponse.rankings:type_name -> pb.WeeklyUniversityRanking
-	36, // 13: pb.UniversityRanking.created_at:type_name -> google.protobuf.Timestamp
-	36, // 14: pb.WeeklyUniversityRanking.created_at:type_name -> google.protobuf.Timestamp
-	37, // 15: pb.UpdateUserEmailResponse.user:type_name -> pb.User
+	37, // 13: pb.UniversityRanking.created_at:type_name -> google.protobuf.Timestamp
+	37, // 14: pb.WeeklyUniversityRanking.created_at:type_name -> google.protobuf.Timestamp
+	38, // 15: pb.UpdateUserEmailResponse.user:type_name -> pb.User
 	16, // [16:16] is the sub-list for method output_type
 	16, // [16:16] is the sub-list for method input_type
 	16, // [16:16] is the sub-list for extension type_name
@@ -2843,6 +2894,18 @@ func file_message_economic_school_proto_init() {
 				return nil
 			}
 		}
+		file_message_economic_school_proto_msgTypes[35].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*DeleteUserRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	file_message_economic_school_proto_msgTypes[4].OneofWrappers = []interface{}{}
 	type x struct{}
@@ -2851,7 +2914,7 @@ func file_message_economic_school_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_message_economic_school_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   35,
+			NumMessages:   36,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

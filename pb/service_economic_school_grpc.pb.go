@@ -25,6 +25,7 @@ const (
 	EconomicSchool_UpdateUser_FullMethodName                 = "/pb.EconomicSchool/UpdateUser"
 	EconomicSchool_UpdateUserEmail_FullMethodName            = "/pb.EconomicSchool/UpdateUserEmail"
 	EconomicSchool_VerifyChangedEmail_FullMethodName         = "/pb.EconomicSchool/VerifyChangedEmail"
+	EconomicSchool_DeleteUser_FullMethodName                 = "/pb.EconomicSchool/DeleteUser"
 	EconomicSchool_LoginUser_FullMethodName                  = "/pb.EconomicSchool/LoginUser"
 	EconomicSchool_RenewAccessToken_FullMethodName           = "/pb.EconomicSchool/RenewAccessToken"
 	EconomicSchool_VerifyEmail_FullMethodName                = "/pb.EconomicSchool/VerifyEmail"
@@ -58,6 +59,7 @@ type EconomicSchoolClient interface {
 	UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*UpdateUserResponse, error)
 	UpdateUserEmail(ctx context.Context, in *UpdateUserEmailRequest, opts ...grpc.CallOption) (*UpdateUserEmailResponse, error)
 	VerifyChangedEmail(ctx context.Context, in *VerifyChangedEmailRequest, opts ...grpc.CallOption) (*VerifyChangedEmailResponse, error)
+	DeleteUser(ctx context.Context, in *DeleteUserRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	LoginUser(ctx context.Context, in *LoginUserRequest, opts ...grpc.CallOption) (*LoginUserResponse, error)
 	RenewAccessToken(ctx context.Context, in *RenewAccessTokenRequest, opts ...grpc.CallOption) (*RenewAccessTokenResponse, error)
 	VerifyEmail(ctx context.Context, in *VerifyEmailRequest, opts ...grpc.CallOption) (*VerifyEmailResponse, error)
@@ -129,6 +131,15 @@ func (c *economicSchoolClient) UpdateUserEmail(ctx context.Context, in *UpdateUs
 func (c *economicSchoolClient) VerifyChangedEmail(ctx context.Context, in *VerifyChangedEmailRequest, opts ...grpc.CallOption) (*VerifyChangedEmailResponse, error) {
 	out := new(VerifyChangedEmailResponse)
 	err := c.cc.Invoke(ctx, EconomicSchool_VerifyChangedEmail_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *economicSchoolClient) DeleteUser(ctx context.Context, in *DeleteUserRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, EconomicSchool_DeleteUser_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -342,6 +353,7 @@ type EconomicSchoolServer interface {
 	UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error)
 	UpdateUserEmail(context.Context, *UpdateUserEmailRequest) (*UpdateUserEmailResponse, error)
 	VerifyChangedEmail(context.Context, *VerifyChangedEmailRequest) (*VerifyChangedEmailResponse, error)
+	DeleteUser(context.Context, *DeleteUserRequest) (*emptypb.Empty, error)
 	LoginUser(context.Context, *LoginUserRequest) (*LoginUserResponse, error)
 	RenewAccessToken(context.Context, *RenewAccessTokenRequest) (*RenewAccessTokenResponse, error)
 	VerifyEmail(context.Context, *VerifyEmailRequest) (*VerifyEmailResponse, error)
@@ -385,6 +397,9 @@ func (UnimplementedEconomicSchoolServer) UpdateUserEmail(context.Context, *Updat
 }
 func (UnimplementedEconomicSchoolServer) VerifyChangedEmail(context.Context, *VerifyChangedEmailRequest) (*VerifyChangedEmailResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method VerifyChangedEmail not implemented")
+}
+func (UnimplementedEconomicSchoolServer) DeleteUser(context.Context, *DeleteUserRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteUser not implemented")
 }
 func (UnimplementedEconomicSchoolServer) LoginUser(context.Context, *LoginUserRequest) (*LoginUserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method LoginUser not implemented")
@@ -551,6 +566,24 @@ func _EconomicSchool_VerifyChangedEmail_Handler(srv interface{}, ctx context.Con
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(EconomicSchoolServer).VerifyChangedEmail(ctx, req.(*VerifyChangedEmailRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _EconomicSchool_DeleteUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteUserRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(EconomicSchoolServer).DeleteUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: EconomicSchool_DeleteUser_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(EconomicSchoolServer).DeleteUser(ctx, req.(*DeleteUserRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -977,6 +1010,10 @@ var EconomicSchool_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "VerifyChangedEmail",
 			Handler:    _EconomicSchool_VerifyChangedEmail_Handler,
+		},
+		{
+			MethodName: "DeleteUser",
+			Handler:    _EconomicSchool_DeleteUser_Handler,
 		},
 		{
 			MethodName: "LoginUser",
