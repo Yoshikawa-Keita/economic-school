@@ -201,4 +201,6 @@ message VerifyChangedEmailResponse {
   bool is_verified = 1;
 }
 
-
+message DeleteUserRequest {
+  string username = 1;
+}

@@ -58,6 +58,28 @@ func (q *Queries) CreateUser(ctx context.Context, arg CreateUserParams) (User, e
 	return i, err
 }
 
+const deleteUser = `-- name: DeleteUser :one
+DELETE FROM users WHERE username = $1 RETURNING username, hashed_password, full_name, email, user_type, profile_image_url, is_email_verified, password_changed_at, created_at, version
+`
+
+func (q *Queries) DeleteUser(ctx context.Context, username string) (User, error) {
+	row := q.db.QueryRowContext(ctx, deleteUser, username)
+	var i User
+	err := row.Scan(
+		&i.Username,
+		&i.HashedPassword,
+		&i.FullName,
+		&i.Email,
+		&i.UserType,
+		&i.ProfileImageUrl,
+		&i.IsEmailVerified,
+		&i.PasswordChangedAt,
+		&i.CreatedAt,
+		&i.Version,
+	)
+	return i, err
+}
+
 const getUserByEmail = `-- name: GetUserByEmail :one
 SELECT username, hashed_password, full_name, email, user_type, profile_image_url, is_email_verified, password_changed_at, created_at, version FROM users
 WHERE email = $1 LIMIT 1

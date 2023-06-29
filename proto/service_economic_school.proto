@@ -77,6 +77,17 @@ service EconomicSchool {
     };
   }
 
+  rpc DeleteUser(DeleteUserRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      post: "/v1/delete_user"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Use this API to delete user";
+      summary: "Delete user";
+    };
+  }
+
   rpc LoginUser (LoginUserRequest) returns (LoginUserResponse) {
     option (google.api.http) = {
       post: "/v1/login_user"
