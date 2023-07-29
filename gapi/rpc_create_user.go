@@ -41,7 +41,7 @@ func (server *Server) CreateUser(ctx context.Context, req *pb.CreateUserRequest)
 			Username:        req.GetUsername(),
 			HashedPassword:  hashedPassword,
 			FullName:        req.GetFullName(),
-			UserType:        1,
+			UserType:        2,
 			Email:           req.GetEmail(),
 			ProfileImageUrl: profileImageUrl,
 		},
