@@ -35,7 +35,10 @@ func main() {
 		log.Fatal().Err(err).Msg("cannot load configuration")
 	}
 	if config.Environment == "development" {
+		zerolog.SetGlobalLevel(zerolog.InfoLevel)
 		log.Logger = log.Output(zerolog.ConsoleWriter{Out: os.Stderr})
+	} else {
+		zerolog.SetGlobalLevel(zerolog.WarnLevel)
 	}
 	dbname := os.Getenv("dbname")
 	username := os.Getenv("username")
